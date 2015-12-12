@@ -1,4 +1,4 @@
-# FresherNote
+# The DeathSTARter
 
 [Heroku link][heroku] **NB:** This should be a link to your production site
 
@@ -6,19 +6,18 @@
 
 ## Minimum Viable Product
 
-FresherNote is a web application inspired by Evernote built using Ruby on Rails
-and React.js. FresherNote allows users to:
+The DeathSTARter is a web application inspired by Kickstarter for the citizens of the Star Wars universe. FresherNote allows users to:
 
 <!-- This is a Markdown checklist. Use it to keep track of your progress! -->
 
 - [ ] Create an account
 - [ ] Log in / Log out
-- [ ] Create, read, edit, and delete notes
-- [ ] Organize notes within Notebooks
-- [ ] Tag notes with multiple tags and search notes by tag
-- [ ] Search through notes for blocks of text
-- [ ] Apply complex styling to notes while editing
-- [ ] Set reminders on notes
+- [ ] Create, read, edit, and delete projects
+- [ ] Place project in category and search projects by category
+- [ ] View, comment on, and back a project
+- [ ] Add photos and videos to projects
+- [ ] Launch Project
+- [ ] Keep track of funding and funders
 
 ## Design Docs
 * [View Wireframes][view]
