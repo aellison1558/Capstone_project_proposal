@@ -1,32 +1,24 @@
 # Schema Information
 
-## notes
+## projects
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 title       | string    | not null
-body        | text      | not null
-author_id   | integer   | not null, foreign key (references users), indexed
-notebook_id | integer   | not null, foreign key (references notebooks), indexed
-archived    | boolean   | not null, default: false
+description | text      | not null
+creator_id  | integer   | not null, foreign key (references users), indexed
+goal        | integer   | not null,
+live        | boolean   | not null, default: false
+complete    | boolean   | not null, default: false
 
-## notebooks
+## backings
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-author_id   | integer   | not null, foreign key (references users), indexed
-title       | string    | not null
-description | string    | 
-
-## reminders
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-user_id     | integer   | not null, foreign key (references users), indexed
-note_id     | string    | not null, foreign key (references notes), indexed
-date        | datetime  | not null
-type        | string    | not null
-prev_id     | integer   | foreign key (references reminders), indexed
+backer_id   | integer   | not null, foreign key (references users),
+indexed, unique [project_id]
+project_id  | integer   | not null, foreign key (references projects),
+amount      | integer   | not null
 
 ## tags
 column name | data type | details
@@ -39,8 +31,34 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 name        | string    | not null
-note_id     | integer   | not null, foreign key (references notes), indexed, unique [tag_id]
+project_id  | integer   | not null, foreign key (references projects), indexed, unique [tag_id]
 tag_id      | integer   | not null, foreign key (references tags), indexed
+
+##updates
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+body        | text      | not null
+
+#comments
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+commentable | reference | for polymorphic association,
+indexed
+author_id   | integer   | not null, foreign key (references users),
+indexed
+body        | text      | not null
+
+#likes
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+likeable    | reference | for polymorphic association,
+indexed, unique [liker_id]
+liker_id    | integer   | not null, foreign key (references users),
+indexed
+
 
 ## users
 column name     | data type | details
