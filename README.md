@@ -28,43 +28,48 @@ The DeathSTARter is a web application inspired by Kickstarter for the citizens o
 
 ## Implementation Timeline
 
-### Phase 1: User Authentication, Note Model and JSON API (1.5 days)
+### Phase 1: User Authentication, Projects Model and JSON API (1.5 days)
 
 In Phase 1, I will begin by implementing user signup and authentication (using
 BCrypt). There will be a basic landing page after signup that will contain the
 container for the application's root React component. Before building out the
-front end, I will begin by setting up a full JSON API for Notes.
+front end, I will begin by setting up a full JSON API for Projects.
 
 [Details][phase-one]
 
-### Phase 2: Flux Architecture and Note CRUD (2.5 days)
+### Phase 2: Flux Architecture and Project CRUD (2.5 days)
 
 Phase 2 is focused on setting up Flux, the React Router, and the React view
 structure for the main application. After the basic Flux architecture has been
-set up, a Note store will be implemented and a set of actions corresponding to
+set up, a Project store will be implemented and a set of actions corresponding to
 the needed CRUD functionality created. Once this is done, I will create React
-views for the Notes `Index`, `IndexItem` and `Form`. At the end of Phase 2,
-Notes can be created, read, edited and destroyed in the browser. Notes should
+views for the Projects `Index`, `IndexItem` and `Form`. At the end of Phase 2,
+Projects can be created, read, edited and destroyed in the browser. Projects should
 save to the database when the form loses focus or is left idle after editing.
 Lastly, while constructing the views I will start using basic bootstrap for
 styling.
 
 [Details][phase-two]
 
-### Phase 3: Notebooks and Tags (2 days)
+### Phase 3: Categories, Tags, Updates, Comments, Backings (2 days)
 
-Phase 3 adds organization to the Notes. Notes belong to a Notebook, which has
-its own `Index` view. Create JSON API for Notebooks. Notes can also now be
+Phase 3 adds user interaction and organization to Projects. Projects belong to a Category, which has
+its own `Index` view. Create JSON API for Categories.
+
+Creators can add updates to their projects, and users can comment on either projects or updates (or other comments).  
+
+Users can back many projects and projects can have many backers.  Projects should display backers and total funding.
+
+Projects can also now be
 tagged with multiple tags. Users can bring up notes in a separate `SearchIndex`
 view by searching for their tags. Once the tag search is implemented, I will
-extend this to a fuzzy search through every Note's content.
+extend this to a fuzzy search through every Projects's content.
 
 [Details][phase-three]
 
-### Phase 4: Allow Complex Styling in Notes (1 day)
+### Phase 4: User Profiles, Images (1 day)
 
-Using the react-quill library (based on Quill.js), allow for complex styling of
-notes.
+Users should have a profile page, showing profile pictures, created projects, and backed projects.  Using (third party API), creators should be able to add images to their projects and updates.
 
 [Details][phase-four]
 

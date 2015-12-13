@@ -2,43 +2,61 @@
 
 ## Rails
 ### Models
-* Notebook
+* Backing
+* Category
+* Comment
 * Tag
 * Tagging
+* Update
 
 ### Controllers
-* Api::NotebooksController (create, destroy, index, show, update)
+* Api::UpdatesController (create, destroy, index)
+* Api::CommentsController (create, destroy, index)
 
 ### Views
-* notebooks/index.json.jbuilder
-* notebooks/show.json.jbuilder
-* tags/show.json.jbuilder
+* updates/index.json.jbuilder
+* comments/index.json.jbuilder
 
 ## Flux
 ### Views (React Components)
-* NotebooksIndex
-  - NotebookIndexItem
-* NotebookForm
+* UpdatesIndex
+  - UpdateIndexItem
+* UpdateForm
+* CommentsIndex
+  - CommentIndexItem
+* CommentForm
 * SearchIndex
 
 ### Stores
-* Notebook
+* Update
+* Comment
 
 ### Actions
-* ApiActions.receiveAllNotebooks -> triggered by ApiUtil
-* ApiActions.receiveSingleNotebook
-* ApiActions.deleteNotebook
-* NotebookActions.fetchAllNotebooks -> triggers ApiUtil
-* NotebookActions.fetchSingleNotebook
-* NotebookActions.createNotebook
-* NotebookActions.editNotebook
-* NotebookActions.destroyNotebook
+* ApiActions.receiveAllUpdates -> triggered by ApiUtil
+* ApiActions.receiveSingleUpdate
+* ApiActions.deleteUpdate
+* UpdateActions.fetchAllUpdates -> triggers ApiUtil
+* UpdateActions.fetchSingleUpdate
+* UpdateActions.createUpdate
+* UpdateActions.destroyUpdate
+
+* ApiActions.receiveAllComments -> triggered by ApiUtil
+* ApiActions.receiveSingleComment
+* ApiActions.deleteComment
+* CommentActions.fetchAllComments -> triggers ApiUtil
+* CommentActions.fetchSingleComment
+* CommentActions.createComment
+* CommentActions.destroyComment
 
 ### ApiUtil
-* ApiUtil.fetchAllNotebooks
-* ApiUtil.fetchSingleNotebook
-* ApiUtil.createNotebook
-* ApiUtil.editNotebook
-* ApiUtil.destroyNotebook
+* ApiUtil.fetchAllUpdates
+* ApiUtil.fetchSingleUpdate
+* ApiUtil.createUpdate
+* ApiUtil.destroyUpdate
+
+* ApiUtil.fetchAllComments
+* ApiUtil.fetchSingleComment
+* ApiUtil.createComment
+* ApiUtil.destroyComment
 
 ## Gems/Libraries

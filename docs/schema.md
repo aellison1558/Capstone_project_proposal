@@ -7,9 +7,25 @@ id          | integer   | not null, primary key
 title       | string    | not null
 description | text      | not null
 creator_id  | integer   | not null, foreign key (references users), indexed
+category_id | integer   | not null, foreign key (references categories),
+indexed
 goal        | integer   | not null,
 live        | boolean   | not null, default: false
 complete    | boolean   | not null, default: false
+
+## images
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+url         | string    | not null
+imageable   | reference | polymorphic association,
+indexed
+
+## categories
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+name        | string    | not null
 
 ## backings
 column name | data type | details
