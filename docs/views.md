@@ -1,19 +1,26 @@
 # View Wireframes
 
+## Root/Navbar
+![root-and-navbar]
+
 ## New User
 ![new-user]
 
 ## New Session
 ![new-session]
 
-## NotesIndex / NoteIndexItem / NoteForm
-![notes]
+## Profile Page
+![user-show]
 
-## NotebooksIndex / NotebookIndexItem
-![notebooks]
+## Categories Index
+![Categories-index]
 
-## NoteBookForm
-![notebook-form]
+## Category Show/Project Index/Project Index Item
+![category-show]
+
+## Project Show/Comment Index/Comment Index Item/Backings Form/Comment Form
+![project-show]
+
 
 ## Component Heirarchy
 ![component-heirarchy]
