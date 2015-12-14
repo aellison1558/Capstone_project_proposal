@@ -5,13 +5,15 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 title       | string    | not null
+summary     | string    |
 description | text      | not null
 creator_id  | integer   | not null, foreign key (references users), indexed
 category_id | integer   | not null, foreign key (references categories),
 indexed
-goal        | integer   | not null,
-live        | boolean   | not null, default: false
-complete    | boolean   | not null, default: false
+goal_amt    | integer   | not null,
+current_amt | integer   |
+start_date  | date      | not null,
+end_date    | date      | not null,
 
 ## images
 column name | data type | details
@@ -36,25 +38,7 @@ indexed, unique [project_id]
 project_id  | integer   | not null, foreign key (references projects),
 amount      | integer   | not null
 
-## tags
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-name        | string    | not null
 
-## taggings
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-name        | string    | not null
-project_id  | integer   | not null, foreign key (references projects), indexed, unique [tag_id]
-tag_id      | integer   | not null, foreign key (references tags), indexed
-
-##updates
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-body        | text      | not null
 
 #comments
 column name | data type | details
@@ -66,14 +50,6 @@ author_id   | integer   | not null, foreign key (references users),
 indexed
 body        | text      | not null
 
-#likes
-column name | data type | details
-------------|-----------|-----------------------
-id          | integer   | not null, primary key
-likeable    | reference | for polymorphic association,
-indexed, unique [liker_id]
-liker_id    | integer   | not null, foreign key (references users),
-indexed
 
 
 ## users
@@ -83,3 +59,22 @@ id              | integer   | not null, primary key
 username        | string    | not null, indexed, unique
 password_digest | string    | not null
 session_token   | string    | not null, indexed, unique
+
+
+
+#BONUS
+
+##updates
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+body        | text      | not null
+
+#likes
+column name | data type | details
+------------|-----------|-----------------------
+id          | integer   | not null, primary key
+likeable    | reference | for polymorphic association,
+indexed, unique [liker_id]
+liker_id    | integer   | not null, foreign key (references users),
+indexed

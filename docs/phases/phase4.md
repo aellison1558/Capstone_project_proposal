@@ -2,6 +2,7 @@
 
 ## Rails
 ### Models
+* ProfilePicture
 * Image
 
 ### Controllers
@@ -10,14 +11,14 @@
 
 ## Flux
 ### Views (React Components)
+* users/UserProfile.jsx
 * refactor project and update views to display images
-* ImageForm
+* Integrate Cloudinary API into user, project, and update forms
 
 ### Stores
-* possibly image?
 
 ### Actions
-* might be better just grab images along with projects and updates in the backend
+
 
 ## Gems/Libraries
-* (some image library)
+* Cloudinary

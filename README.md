@@ -15,7 +15,7 @@ The DeathSTARter is a web application inspired by Kickstarter for the citizens o
 - [ ] Create, read, edit, and delete projects
 - [ ] Place project in category and search projects by category
 - [ ] View, comment on, and back a project
-- [ ] Add photos and videos to projects
+- [ ] Add photos to projects
 - [ ] Launch Project
 - [ ] Keep track of funding and funders
 
@@ -51,12 +51,12 @@ styling.
 
 [Details][phase-two]
 
-### Phase 3: Categories, Tags, Updates, Comments, Backings (2 days)
+### Phase 3: Categories, Comments, Backings (2 days)
 
 Phase 3 adds user interaction and organization to Projects. Projects belong to a Category, which has
 its own `Index` view. Create JSON API for Categories.
 
-Creators can add updates to their projects, and users can comment on either projects or updates (or other comments).  
+Users can comment on projects.  
 
 Users can back many projects and projects can have many backers.  Projects should display backers and total funding.
 
@@ -67,34 +67,26 @@ extend this to a fuzzy search through every Projects's content.
 
 [Details][phase-three]
 
-### Phase 4: User Profiles, Images (1 day)
+### Phase 4: User Profiles, Images (2 days)
 
-Users should have a profile page, showing profile pictures, created projects, and backed projects.  Using (third party API), creators should be able to add images to their projects and updates.
+Users should have a profile page, profile pictures, created projects, and backed projects.  Using (third party API), creators should be able to add images to their projects and updates.
 
 [Details][phase-four]
 
-### Phase 5: Reminders and Garbage Collection (1 day)
 
-Phase 5 introduces two new features. First, users can set reminders on notes
-which will at the time they are set for prompt the user to review and edit the
-given note. In addition, I will implement a feature that asks users to review
-notes once they reach a certain age and ask whether they should be kept,
-archived, or deleted.
+### Phase 5: Theme, Styling Cleanup, and Seeding (1 day)
 
-[Details][phase-five]
-
-### Phase 6: Styling Cleanup and Seeding (1 day)
-
-Bootstrap will have been used to keep things organized up until now, but in
-Phase 6 I will add styling flourishes and make modals out of some elements (like
-the NotebookForm).
+In this phase we go from Kickstarter to TheDeathSTARter.  I'll style and seed appropriately!
 
 ### Bonus Features (TBD)
 - [ ] Prettify transitions
-- [ ] Use javascript library for cleaner tag selection
-- [ ] Changelogs for Notes
-- [ ] Pagination / infinite scroll for Notes Index
+- [ ] Likes
+- [ ] Multiple Images
+- [ ] Videos
+- [ ] Pagination / infinite scroll for Projects Index
 - [ ] Multiple sessions
+- [ ] Creators can add updates to Projects
+- [ ] Users can comment on updates, reply to other comments
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md
