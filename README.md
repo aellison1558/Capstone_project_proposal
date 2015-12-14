@@ -2,8 +2,7 @@
 
 [Heroku link][heroku] **NB:** This should be a link to your production site
 
-[heroku]: thedeathstarter.herokuapp.com
-
+[heroku]: https://thedeathstarter.herokuapp.com/
 ## Minimum Viable Product
 
 The DeathSTARter is a web application inspired by Kickstarter for the citizens of the Star Wars universe. FresherNote allows users to:
