@@ -6,7 +6,8 @@ var React = require('react'),
     Router = ReactRouter.Router,
     Route = ReactRouter.Route,
     IndexRoute = ReactRouter.IndexRoute
-    ProjectIndex = require('./components/projects/ProjectIndex'),
+    CategoryIndex = require('./components/categories/CategoryIndex'),
+    CategoryShow = require('./components/categories/CategoryShow'),
     ProjectShow = require('./components/projects/ProjectShow'),
     ProjectForm = require('./components/projects/ProjectForm');
 
@@ -24,9 +25,10 @@ var React = require('react'),
 
 var routes = (
   <Route path="/" component={App}>
-
-    
+    <Route path='categories' component={CategoryIndex} />
+    <Route path='categories/:categoryId' component={CategoryShow} />
     <Route path="projects/new" component={ProjectForm} />
+    <Route path="projects/:projectId" component={ProjectShow}></Route>
   </Route>
 );
 

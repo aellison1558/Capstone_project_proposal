@@ -1,6 +1,14 @@
-var ProjectActions = require('../actions/ProjectActions');
+var ProjectActions = require('../actions/ProjectActions'),
+    CategoryActions = require('../actions/CategoryActions');
 
 module.exports = {
+  fetchAllCategories: function() {
+    $.get('/api/categories', {}, function(categories) {
+      CategoryActions.receiveAllCategories(categories);
+    })
+
+  },
+
   fetchAllProjects: function(categoryId){
     var url = '/api/categories/' + categoryId + '/projects';
 

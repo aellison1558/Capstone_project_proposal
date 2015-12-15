@@ -6,9 +6,10 @@ var React = require('react'),
 module.exports = React.createClass({
   render: function(){
     var project = this.props.project;
+    var url = '/projects/' + project.id
     return(
       <li>
-        <h3><Link to={'/'}>{project.title}</Link></h3>
+        <h3><Link to={url}>{project.title}</Link></h3>
         <div>{project.summary}</div>
       </li>
     );
