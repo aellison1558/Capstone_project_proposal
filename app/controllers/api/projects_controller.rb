@@ -51,6 +51,6 @@ class Api::ProjectsController < ApplicationController
   end
 
   def validate_user
-    redirect_to root_url if @project.user_id != current_user.id
+    redirect_to root_url if @project.creator_id != current_user.id
   end
 end

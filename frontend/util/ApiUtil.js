@@ -1,25 +1,23 @@
-
+var ApiActions = require('../actions/ApiActions');
 
 module.exports = {
   fetchAllProjects: function(categoryId){
     var url = '/api/categories/' + categoryId + '/projects';
     $.get(url, {}, function(projects){
-      // ApiActions.receiveAllProjects(projects);
-      console.log(projects);
+      ApiActions.receiveAllProjects(projects);
     })
   },
 
   fetchProject: function(projectId){
     var url = '/api/projects/' + projectId;
     $.get(url, {}, function(project){
-      // ApiActions.receiveProject(project);
-      console.log(project);
+      ApiActions.receiveProject(project);
     })
   },
 
   createProject: function(project){
     $.post('/api/projects', {project: project}, function(project){
-      console.log(project);
+      ApiActions.receiveProject(project);
     })
   },
 
@@ -30,7 +28,7 @@ module.exports = {
       data: {project: project},
       dataType: 'json',
       success: function(updatedProject){
-        console.log(updatedProject);
+        ApiActions.receiveProject(updatedProject);
       }
     })
   },
@@ -42,8 +40,8 @@ module.exports = {
       url: url,
       method: "DELETE",
       success: function(){
-        location.href = '/'
-        console.log("Great shot kid, that was one in a million!");
+        ApiActions.destroyProject(projectId);
+        location.href = '/';
       }
     })
   }
