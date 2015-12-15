@@ -1,0 +1,25 @@
+<h1>Sign Up!</h1>
+
+<%= render 'shared/errors' %>
+
+<form class="form-group" action=<%= session_url %> method="post">
+  <%= auth_token %>
+
+  <label for="email">
+    Email:
+    <input type="string" name="user[email]">
+  </label>
+    <br/>
+
+  <label for="password">
+    Password:
+    <input type="password" name="user[password]">
+  </label>
+    <br/>
+
+  <input type="submit" value="Sign in!">
+
+</form>
+<% if current_user %>
+<%= button_to "Sign Out", session_url, method: "delete" %>
+<% end %>
