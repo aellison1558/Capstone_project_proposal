@@ -1,5 +1,7 @@
 class Api::ProjectsController < ApplicationController
   def index
+    @category = Category.includes(:projects).find(params[:category_id])
+    @projects = @category.projects
   end
 
   def show
@@ -17,7 +19,7 @@ class Api::ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    redirect_to root_url
+    render :show
   end
 
   def update

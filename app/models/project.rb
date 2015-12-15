@@ -17,7 +17,7 @@
 #
 
 class Project < ActiveRecord::Base
-  validates
+  validates(
       :title,
       :description,
       :goal_amt,
@@ -27,6 +27,8 @@ class Project < ActiveRecord::Base
       :creator_id,
       :category_id,
       presence: true
+      )
 
   belongs_to :creator, class_name: :user
+  belongs_to :category
 end
