@@ -5,7 +5,7 @@
 [heroku]: https://thedeathstarter.herokuapp.com/
 ## Minimum Viable Product
 
-The DeathSTARter is a web application inspired by Kickstarter for the citizens of the Star Wars universe. FresherNote allows users to:
+The DeathSTARter is a web application inspired by Kickstarter for the citizens of the Star Wars universe. The DeathSTARter allows users to:
 
 - [X] Create an account
 - [X] Log in / Log out
