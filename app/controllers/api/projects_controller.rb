@@ -1,4 +1,6 @@
 class Api::ProjectsController < ApplicationController
+  before_action :require_sign_in, except: [:index, :show]
+
   def index
     @category = Category.includes(:projects).find(params[:category_id])
     @projects = @category.projects
@@ -18,12 +20,18 @@ class Api::ProjectsController < ApplicationController
 
   def destroy
     @project = Project.find(params[:id])
+
+    validate_user
+
     @project.destroy
     render :show
   end
 
   def update
     @project = Project.find(params[:id])
+
+    validate_user
+
     @project.update(project_params)
     render :show
   end
@@ -40,5 +48,9 @@ class Api::ProjectsController < ApplicationController
       :end_date,
       :category_id
       )
+  end
+
+  def validate_user
+    redirect_to root_url if @project.user_id != current_user.id
   end
 end
