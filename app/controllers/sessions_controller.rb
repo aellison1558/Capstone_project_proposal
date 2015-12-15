@@ -1,12 +1,18 @@
-class SessionController < ApplicationController
+class SessionsController < ApplicationController
+
+  def new
+  end
+
   def create
     @user = User.find_by_credentials(email, password)
 
     if @user
       sign_in(@user)
+      redirect_to root_url
     else
+      flash.now[:errors] = ["Invalid email/password combination"]
+      render :new
     end
-    redirect_to root_url
   end
 
   def destroy

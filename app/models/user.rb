@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
 
+  has_many :projects, foreign_key: "creator_id"
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
 

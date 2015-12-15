@@ -27,5 +27,6 @@ class Project < ActiveRecord::Base
       :creator_id,
       :category_id,
       presence: true
-  
+
+  belongs_to :creator, class_name: :user
 end
