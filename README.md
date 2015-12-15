@@ -7,8 +7,8 @@
 
 The DeathSTARter is a web application inspired by Kickstarter for the citizens of the Star Wars universe. FresherNote allows users to:
 
-- [ ] Create an account
-- [ ] Log in / Log out
+- [X] Create an account
+- [X] Log in / Log out
 - [ ] Create, read, edit, and delete projects
 - [ ] Place project in category and search projects by category
 - [ ] View, comment on, and back a project
@@ -57,10 +57,7 @@ Users can comment on projects.
 
 Users can back many projects and projects can have many backers.  Projects should display backers and total funding.
 
-Projects can also now be
-tagged with multiple tags. Users can bring up notes in a separate `SearchIndex`
-view by searching for their tags. Once the tag search is implemented, I will
-extend this to a fuzzy search through every Projects's content.
+Users will be able to search for projects by project title.  Once this is implemented, I will extend to a fuzzy search of project summary/description.
 
 [Details][phase-three]
 

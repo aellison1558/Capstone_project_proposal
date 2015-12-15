@@ -41,15 +41,19 @@ ProjectStore.destroyProject = function(project) {
 };
 
 ProjectStore.__onDispatch = function(payload) {
+
   switch(payload.actionType) {
+
     case ProjectConstants.RECEIVE_PROJECTS:
       ProjectStore.resetProjects(payload.projects);
       ProjectStore.__emitChange();
       break;
+
     case ProjectConstants.RECEIVE_PROJECT:
       ProjectStore.updateProject(payload.project);
       ProjectStore.__emitChange();
       break;
+      
     case ProjectConstants.DESTROY_PROJECT:
       ProjectStore.destroyProject(payload.projectId);
       ProjectStore.__emitChange();

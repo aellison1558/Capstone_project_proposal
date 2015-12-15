@@ -1,46 +1,50 @@
-var ApiActions = require('../actions/ApiActions');
+var ProjectActions = require('../actions/ProjectActions');
 
 module.exports = {
   fetchAllProjects: function(categoryId){
     var url = '/api/categories/' + categoryId + '/projects';
+
     $.get(url, {}, function(projects){
-      ApiActions.receiveAllProjects(projects);
+      ProjectActions.receiveAllProjects(projects);
     })
   },
 
   fetchProject: function(projectId){
     var url = '/api/projects/' + projectId;
+
     $.get(url, {}, function(project){
-      ApiActions.receiveProject(project);
+      ProjectActions.receiveProject(project);
     })
   },
 
   createProject: function(project){
     $.post('/api/projects', {project: project}, function(project){
-      ApiActions.receiveProject(project);
+      ProjectActions.receiveProject(project);
     })
   },
 
   updateProject: function(projectId, project){
+    var url = '/api/projects/' + projectId;
+
     $.ajax({
-      url: '/api/projects/' + projectId,
+      url: url,
       method: "PATCH",
       data: {project: project},
       dataType: 'json',
       success: function(updatedProject){
-        ApiActions.receiveProject(updatedProject);
+        ProjectActions.receiveProject(updatedProject);
       }
     })
   },
 
   destroyProject: function(projectId){
-    var url = '/api/projects/' + projectId
-    console.log(url);
+    var url = '/api/projects/' + projectId;
+
     $.ajax({
       url: url,
       method: "DELETE",
       success: function(){
-        ApiActions.destroyProject(projectId);
+        ProjectActions.destroyProject(projectId);
         location.href = '/';
       }
     })
