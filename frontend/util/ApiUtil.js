@@ -1,11 +1,11 @@
 var ProjectActions = require('../actions/ProjectActions'),
     CategoryActions = require('../actions/CategoryActions'),
-    UserActions = require('../actions/UserActions');
+    SessionActions = require('../actions/SessionActions');
 
 module.exports = {
   checkSignIn: function() {
     $.get('/session', {}, function(currentUser) {
-      UserActions.receiveUser(currentUser);
+      SessionActions.receiveUser(currentUser);
     })
   },
 
@@ -15,7 +15,7 @@ module.exports = {
       url: url,
       method: "DELETE",
       success: function(){
-        UserActions.clearUser();
+        SessionActions.clearUser();
       }
     })
   },
@@ -31,6 +31,12 @@ module.exports = {
     var url = '/api/categories/' + categoryId + '/projects';
 
     $.get(url, {}, function(projects){
+      ProjectActions.receiveAllProjects(projects);
+    })
+  },
+
+  fetchEveryProject: function(){
+    $.get('/api/projects', {}, function(projects){
       ProjectActions.receiveAllProjects(projects);
     })
   },

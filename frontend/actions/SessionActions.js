@@ -1,18 +1,19 @@
 var Dispatcher = require('../dispatcher/Dispatcher'),
-    UserConstants = require('../constants/UserConstants');
+    SessionConstants = require('../constants/SessionConstants');
 
 
 module.exports = {
+  
   receiveUser: function(user) {
     Dispatcher.dispatch({
-      actionType: UserConstants.RECEIVE_USER,
+      actionType: SessionConstants.RECEIVE_USER,
       user: user
     })
   },
 
   clearUser: function() {
     Dispatcher.dispatch({
-      actionType: UserConstants.CLEAR_USER
+      actionType: SessionConstants.CLEAR_USER
     })
   }
 };

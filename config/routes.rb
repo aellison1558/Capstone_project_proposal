@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       resources :projects, only: [:index]
     end
 
-    resources :projects, except: [:index]
+    resources :projects
     resources :backings, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
   end

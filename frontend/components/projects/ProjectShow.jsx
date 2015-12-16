@@ -3,13 +3,14 @@ var React = require('react'),
     ProjectStore = require('../../stores/ProjectStore'),
     Link = require('react-router').Link,
     BackingsForm = require('../BackingsForm'),
-    UserStore = require('../../stores/UserStore'),
+    SessionStore = require('../../stores/SessionStore'),
     CommentsIndex = require('../comments/CommentsIndex'),
     CommentForm = require('../comments/CommentForm');
 
 module.exports = React.createClass({
   getInitialState: function() {
-    return { project: ProjectStore.find(parseInt(this.props.params.projectId)) };
+    return { project: ProjectStore.find(parseInt(this.props.params.projectId))
+      };
   },
 
   listeners: [],
@@ -20,7 +21,7 @@ module.exports = React.createClass({
 
   componentDidMount: function() {
     this.listeners.push(ProjectStore.addListener(this._updateState));
-    ApiUtil.fetchProject(this.state.project.id)
+    ApiUtil.fetchProject(this.state.project.id);
   },
 
   componentWillUnmount: function() {
@@ -39,12 +40,13 @@ module.exports = React.createClass({
     var url = '/categories/' + project.category_id;
     var backingForm;
 
+
     if (this._checkBacking()) {
       backingForm = <button onClick={this.undoBacking}>Withdraw Support</button>
     } else {
       backingForm = <BackingsForm project={project}/>
     }
-
+    
     return(
       <div>
         <Link to={url}>Back to Projects List</Link>
@@ -104,7 +106,7 @@ module.exports = React.createClass({
   _checkBacking: function(){
     var project = this.state.project;
     var backings = this.state.project.backings;
-    var currentUser = UserStore.user();
+    var currentUser = SessionStore.currentUser();
 
     var backingFound = this._findBacking()
 
@@ -114,11 +116,11 @@ module.exports = React.createClass({
   _findBacking: function() {
     var project = this.state.project;
     var backings = this.state.project.backings;
-    var currentUser = UserStore.user();
+    var currentUser = SessionStore.currentUser();
 
     return backings.find(function(backing){
       return backing.backer_id === currentUser.id
     });
-  }
+  },
 
 });

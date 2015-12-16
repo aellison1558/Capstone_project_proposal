@@ -2,8 +2,12 @@ class Api::ProjectsController < ApplicationController
   before_action :require_sign_in, except: [:index, :show]
 
   def index
-    @category = Category.includes(:projects).find(params[:category_id])
-    @projects = @category.projects
+    if params[:category_id]
+      @category = Category.includes(:projects).find(params[:category_id])
+      @projects = @category.projects
+    else
+      @projects = Project.all
+    end
   end
 
   def show
