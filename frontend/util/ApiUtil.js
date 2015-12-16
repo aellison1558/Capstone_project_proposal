@@ -1,7 +1,25 @@
 var ProjectActions = require('../actions/ProjectActions'),
-    CategoryActions = require('../actions/CategoryActions');
+    CategoryActions = require('../actions/CategoryActions'),
+    UserActions = require('../actions/UserActions');
 
 module.exports = {
+  checkSignIn: function() {
+    $.get('/session', {}, function(currentUser) {
+      UserActions.receiveUser(currentUser);
+    })
+  },
+
+  signOut: function() {
+    var url = '/session/'
+    $.ajax({
+      url: url,
+      method: "DELETE",
+      success: function(){
+        UserActions.clearUser();
+      }
+    })
+  },
+
   fetchAllCategories: function() {
     $.get('/api/categories', {}, function(categories) {
       CategoryActions.receiveAllCategories(categories);

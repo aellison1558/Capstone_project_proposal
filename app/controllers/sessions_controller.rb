@@ -15,9 +15,13 @@ class SessionsController < ApplicationController
     end
   end
 
+  def show
+    @user = current_user
+  end
+
   def destroy
     sign_out
-    redirect_to root_url
+    render :show
   end
 
   private

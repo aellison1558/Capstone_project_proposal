@@ -1,12 +1,42 @@
 var React = require('react'),
-    Link = require('react-router').Link;
+    Link = require('react-router').Link,
+    UserStore = require('../stores/UserStore'),
+    ApiUtil = require('../util/ApiUtil');
+
 
 module.exports = React.createClass({
-  logOut: function(e) {
+  getInitialState: function(){
+    return { currentUser: UserStore.user() }
+  },
 
+  listeners: [],
+
+  _updateState: function(){
+    this.setState({ currentUser: UserStore.user() })
+  },
+
+  componentDidMount: function(){
+    this.listeners.push(UserStore.addListener(this._updateState));
+    ApiUtil.checkSignIn();
+  },
+
+  logOut: function(e) {
+    ApiUtil.signOut();
   },
 
   render: function() {
+    var signInSignOut;
+    if (this.state.currentUser) {
+      signInSignOut = [
+        <li>Signed in as {this.state.currentUser.username}</li>,
+        <li><button onClick={this.logOut}>Log Out</button></li>
+      ]
+    } else {
+      signInSignOut = [
+        <li><a href="/users/new">Sign Up</a></li>,
+        <li><a href="/session/new">Log In</a></li>
+      ]
+    }
     return(
       <nav className="nav">
         <ul className="nav nav-tabs">
@@ -21,10 +51,10 @@ module.exports = React.createClass({
               </div>
             </form>
           </li>
-          <li><a href="/users/new">Sign Up</a></li>
-          <li><a href="/session/new">Log In</a></li>
+          {signInSignOut}
         </ul>
       </nav>
     )
+
   }
 });
