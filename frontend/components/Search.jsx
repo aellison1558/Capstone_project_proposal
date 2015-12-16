@@ -1,7 +1,8 @@
 var React = require('react'),
     LinkStateMixin = require('react-addons-linked-state-mixin'),
     Link = require('react-router').Link,
-    Modal = require('react-bootstrap').Modal;
+    Modal = require('react-bootstrap').Modal,
+    Fuse = require('fuse.js');
 
 var Search = React.createClass({
   mixins: [LinkStateMixin],
@@ -24,21 +25,24 @@ var Search = React.createClass({
   },
 
   matches: function () {
-    var matches = [];
-    if(this.state.inputVal.length === 0) {
-      return null;
-    }
-
     var projects = this.props.projects;
+    var projectsArray = [];
     for (key in projects) {
-      var sub = projects[key].title.slice(0, this.state.inputVal.length);
-
-      if(sub.toLowerCase() === this.state.inputVal.toLowerCase()){
-        matches.push(projects[key]);
+      if (projects.hasOwnProperty(key)) {
+        projectsArray.push(projects[key]);
       }
     }
 
-    return matches;
+    var options = {
+      caseSensitive: false,
+      includeScore: false,
+      shouldSort: true,
+      threshold: 0.3,
+      keys: ['title', 'summary', 'description']
+    }
+
+    var fuse = new Fuse(projectsArray, options)
+    return fuse.search(this.state.inputVal);
   },
 
   render: function(){
