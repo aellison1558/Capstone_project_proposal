@@ -14,7 +14,7 @@ The DeathSTARter is a web application inspired by Kickstarter for the citizens o
 - [X] View, comment on, and back a project
 - [ ] Add photos to projects
 - [ ] Launch Project
-- [ ] Keep track of funding and funders
+- [X] Keep track of funding and funders
 
 ## Design Docs
 * [View Wireframes][view]
