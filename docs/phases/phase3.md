@@ -7,36 +7,30 @@
 * Comment
 
 ### Controllers
-* Api::CommentsController (create, destroy, index)
+* Api::CommentsController (create, destroy)
+* Api::BackingsController (create, destroy)
 
 ### Views
-* comments/index.json.jbuilder
+* comments/show.json.jbuilder
+* backings/show.json.jbuilder
 
 ## Flux
 ### Views (React Components)
 
+* BackingsForm
 * CommentsIndex
   - CommentIndexItem
 * CommentForm
 * SearchIndex
 
 ### Stores
-* Comment
 
 ### Actions
 
-* ApiActions.receiveAllComments -> triggered by ApiUtil
-* ApiActions.receiveSingleComment
-* ApiActions.deleteComment
-* CommentActions.fetchAllComments -> triggers ApiUtil
-* CommentActions.fetchSingleComment
-* CommentActions.createComment
-* CommentActions.destroyComment
-
 ### ApiUtil
 
-* ApiUtil.fetchAllComments
-* ApiUtil.fetchSingleComment
+* ApiUtil.createBacking
+* ApiUtil.destroyBacking
 * ApiUtil.createComment
 * ApiUtil.destroyComment
 

@@ -3,7 +3,9 @@ var React = require('react'),
     ProjectStore = require('../../stores/ProjectStore'),
     Link = require('react-router').Link,
     BackingsForm = require('../BackingsForm'),
-    UserStore = require('../../stores/UserStore');
+    UserStore = require('../../stores/UserStore'),
+    CommentsIndex = require('../comments/CommentsIndex'),
+    CommentForm = require('../comments/CommentForm');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -40,7 +42,7 @@ module.exports = React.createClass({
     if (this._checkBacking()) {
       backingForm = <button onClick={this.undoBacking}>Withdraw Support</button>
     } else {
-      backingForm = <BackingsForm projectId={project.id}/>
+      backingForm = <BackingsForm project={project}/>
     }
 
     return(
@@ -68,6 +70,12 @@ module.exports = React.createClass({
           Project Description:
           {project.description}
         </p>
+
+        <div>
+          Comments: ({project.comments.length})
+          <CommentsIndex comments={project.comments} />
+          <CommentForm project={project} />
+        </div>
       </div>
     )
   },

@@ -29,7 +29,6 @@ module.exports = React.createClass({
         summary: "",
         description: "",
         goal_amt: 0,
-        current_amt: 0,
         start_date: new Date(),
         end_date: new Date(),
         category_id: 0,
@@ -179,7 +178,6 @@ module.exports = React.createClass({
       summary: this.state.summary,
       description: this.state.description,
       goal_amt: this.state.goal_amt,
-      current_amt: this.state.current_amt,
       start_date: this.state.start_date,
       end_date: this.state.end_date,
       category_id: this.state.category_id

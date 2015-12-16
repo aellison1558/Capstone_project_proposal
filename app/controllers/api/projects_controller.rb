@@ -7,7 +7,7 @@ class Api::ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.includes(:backings).find(params[:id])
+    @project = Project.includes(:backings, :comments).find(params[:id])
   end
 
   def create
@@ -45,7 +45,6 @@ class Api::ProjectsController < ApplicationController
       :summary,
       :description,
       :goal_amt,
-      :current_amt,
       :start_date,
       :end_date,
       :category_id

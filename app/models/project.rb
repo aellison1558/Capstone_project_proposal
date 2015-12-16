@@ -7,7 +7,6 @@
 #  summary     :string
 #  description :text             not null
 #  goal_amt    :integer          not null
-#  current_amt :integer          not null
 #  start_date  :date             not null
 #  end_date    :date             not null
 #  creator_id  :integer          not null
@@ -21,7 +20,6 @@ class Project < ActiveRecord::Base
       :title,
       :description,
       :goal_amt,
-      :current_amt,
       :start_date,
       :end_date,
       :creator_id,
@@ -34,4 +32,6 @@ class Project < ActiveRecord::Base
 
   has_many :backings
   has_many :backers, through: :backings
+
+  has_many :comments
 end

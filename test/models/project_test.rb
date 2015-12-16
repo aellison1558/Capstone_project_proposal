@@ -7,7 +7,6 @@
 #  summary     :string
 #  description :text             not null
 #  goal_amt    :integer          not null
-#  current_amt :integer          not null
 #  start_date  :date             not null
 #  end_date    :date             not null
 #  creator_id  :integer          not null

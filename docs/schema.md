@@ -40,7 +40,7 @@ amount      | integer   | not null
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-commentable | reference | for polymorphic association, indexed
+project_id  | integer   | not null, foreign key (references projects)
 author_id   | integer   | not null, foreign key (references users), indexed
 body        | text      | not null
 

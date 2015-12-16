@@ -90,5 +90,22 @@ module.exports = {
         ProjectActions.receiveProject(project);
       }
     })
+  },
+
+  createComment: function(comment){
+    $.post('/api/comments', {comment: comment}, function(project){
+      ProjectActions.receiveProject(project);
+    })
+  },
+
+  destroyComment: function(commentId){
+    var url = '/api/comments/' + commentId;
+    $.ajax({
+      url: url,
+      method: "DELETE",
+      success: function(project){
+        ProjectActions.receiveProject(project);
+      }
+    })
   }
 }
