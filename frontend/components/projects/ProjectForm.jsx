@@ -1,28 +1,27 @@
 var React = require('react'),
     ApiUtil = require('../../util/ApiUtil'),
     LinkStateMixin = require('react-addons-linked-state-mixin'),
-    Link = require('react-router').Link;;
     CategoryStore = require('../../stores/CategoryStore'),
     ProjectStore = require('../../stores/ProjectStore');
 
 module.exports = React.createClass({
+  //setup
   mixins: [LinkStateMixin],
 
   getInitialState: function() {
+    var initialState = {};
+
     if (this.props.params.projectId) {
       var project = ProjectStore.find(this.props.params.projectId)
-      initialState = {
-        title: project.title,
-        summary: project.summary,
-        description: project.description,
-        goal_amt: project.goal_amt,
-        current_amt: project.current_amt,
-        start_date: project.start_date,
-        end_date: project.end_date,
-        category_id: project.category_id,
-        categories: CategoryStore.all(),
-        errors: ""
-      }
+
+      for (key in project) {
+        if (project.hasOwnProperty(key)) {
+          initialState[key] = project[key];
+        }
+      };
+
+      initialState['categories'] = CategoryStore.all();
+      initialState['errors'] = "";
     }
     else {
       initialState = {
@@ -38,42 +37,27 @@ module.exports = React.createClass({
         errors: ""
       }
     }
+
     return initialState;
   },
 
   listeners: [],
 
-  _updateState: function() {
-    this.setState({ categories: CategoryStore.all() });
-  },
 
   componentDidMount: function() {
     this.listeners.push(CategoryStore.addListener(this._updateState));
     ApiUtil.fetchAllCategories();
   },
 
+  //handlers
+
   submitHandler: function(e) {
     e.preventDefault();
 
-    var project = {
-      title: this.state.title,
-      summary: this.state.summary,
-      description: this.state.description,
-      goal_amt: this.state.goal_amt,
-      current_amt: this.state.current_amt,
-      start_date: this.state.start_date,
-      end_date: this.state.end_date,
-      category_id: this.state.category_id
+    var project = this._stateProjectProperties();
 
-    }
+    if (this._validProperties()) {
 
-    if (this.state.title &&
-        this.state.description &&
-        this.state.category_id &&
-        this.state.goal_amt &&
-        this.state.start_date &&
-        this.state.end_date
-    ) {
       if (this.props.params.projectId) {
         ApiUtil.updateProject(this.props.params.projectId, project);
         this.props.history.push('/projects/' + this.props.params.projectId);
@@ -81,14 +65,19 @@ module.exports = React.createClass({
         ApiUtil.createProject(project);
         this.props.history.push('/categories/' + this.state.category_id);
       }
+
     } else {
+
       this.setState({errors: "something went wrong"})
+
     }
   },
 
   selectHandler: function(e) {
     this.setState({category_id: e.target.value})
   },
+
+  //render
 
   render: function(){
     var current_val
@@ -164,5 +153,43 @@ module.exports = React.createClass({
         </form>
       </div>
     )
+  },
+
+  //helper functions
+
+  _updateState: function() {
+    this.setState({ categories: CategoryStore.all() });
+  },
+
+  _validProperties: function() {
+    var start = new Date(this.state.start_date);
+    var end = new Date(this.state.end_date);
+    var elapsed = Date.parse(end) - Date.parse(start)
+    if (
+        this.state.title &&
+        this.state.description &&
+        this.state.category_id &&
+        this.state.goal_amt &&
+        this.state.start_date &&
+        this.state.end_date &&
+        (elapsed > 0)
+      ) {
+        return true
+      } else {
+        return false
+      }
+  },
+
+  _stateProjectProperties: function(){
+    return{
+      title: this.state.title,
+      summary: this.state.summary,
+      description: this.state.description,
+      goal_amt: this.state.goal_amt,
+      current_amt: this.state.current_amt,
+      start_date: this.state.start_date,
+      end_date: this.state.end_date,
+      category_id: this.state.category_id
+    }
   }
 });

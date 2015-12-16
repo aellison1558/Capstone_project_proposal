@@ -1,7 +1,6 @@
 var React = require('react'),
     ProjectStore = require('../../stores/ProjectStore'),
     ApiUtil = require('../../util/ApiUtil'),
-    Link = require('react-router').Link,
     ProjectIndexItem = require('./ProjectIndexItem');
 
 module.exports = React.createClass({
@@ -29,6 +28,7 @@ module.exports = React.createClass({
   render: function() {
     var items = []
     var projects = this.state.projects;
+    
     for (key in projects) {
       if (projects.hasOwnProperty(key)) {
         items.push(<ProjectIndexItem key={key} editButtonHandler={this.props.editButtonHandler} project={projects[key]}/>);

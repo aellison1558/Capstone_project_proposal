@@ -1,6 +1,7 @@
 var React = require('react'),
     ApiUtil = require('../../util/ApiUtil'),
-    ProjectStore = require('../../stores/ProjectStore');
+    ProjectStore = require('../../stores/ProjectStore'),
+    Link = require('react-router').Link;
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -24,20 +25,13 @@ module.exports = React.createClass({
     })
   },
 
-  _calcTimeLeft: function() {
-    var project = this.state.project;
-    var start = new Date(project.start_date);
-    var end = new Date(project.end_date);
-    var elapsed = Date.parse(end) - Date.parse(start)
-    elapsed = elapsed / 1000 / 60 / 60 / 24;
-    return (elapsed)
-  },
-
   render: function() {
     var project = this.state.project;
+    var url = '/categories/' + project.category_id;
 
     return(
       <div>
+        <Link to={url}>Back to Projects List</Link>
         <h3>{project.title}</h3>
         Project Summary:
         <div>{project.summary}</div>
@@ -58,5 +52,14 @@ module.exports = React.createClass({
         </p>
       </div>
     )
+  },
+
+  _calcTimeLeft: function() {
+    var project = this.state.project;
+    var start = new Date(project.start_date);
+    var end = new Date(project.end_date);
+    var elapsed = Date.parse(end) - Date.parse(start)
+    elapsed = elapsed / 1000 / 60 / 60 / 24;
+    return (elapsed)
   }
 });
