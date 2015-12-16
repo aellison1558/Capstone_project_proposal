@@ -9,15 +9,19 @@ var React = require('react'),
     CategoryIndex = require('./components/categories/CategoryIndex'),
     CategoryShow = require('./components/categories/CategoryShow'),
     ProjectShow = require('./components/projects/ProjectShow'),
-    ProjectForm = require('./components/projects/ProjectForm');
+    ProjectForm = require('./components/projects/ProjectForm'),
+    Root = require('./components/Root'),
+    Navbar = require('./components/Navbar');
 
 
     var App = React.createClass({
       render: function(){
         return(
           <div>
-            <header><h1>The DeathSTARter</h1></header>
-            {this.props.children}
+            <header><h3><Navbar /></h3></header>
+            <div className='content'>
+              {this.props.children}
+            </div>
           </div>
         )
       }
@@ -25,9 +29,11 @@ var React = require('react'),
 
 var routes = (
   <Route path="/" component={App}>
+    <IndexRoute component={Root} />
     <Route path='categories' component={CategoryIndex} />
     <Route path='categories/:categoryId' component={CategoryShow} />
     <Route path="projects/new" component={ProjectForm} />
+    <Route path="projects/:projectId/edit" component={ProjectForm} />
     <Route path="projects/:projectId" component={ProjectShow}></Route>
   </Route>
 );

@@ -6,4 +6,6 @@ json.extract! project,
               :goal_amt,
               :current_amt,
               :start_date,
-              :end_date
+              :end_date,
+              :category_id,
+              :creator_id

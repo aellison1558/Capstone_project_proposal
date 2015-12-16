@@ -7,6 +7,23 @@ module.exports = React.createClass({
     return { project: ProjectStore.find(parseInt(this.props.params.projectId)) };
   },
 
+  listeners: [],
+
+  _updateState: function() {
+    this.setState({ project: ProjectStore.find(parseInt(this.props.params.projectId)) });
+  },
+
+  componentDidMount: function() {
+    this.listeners.push(ProjectStore.addListener(this._updateState));
+    ApiUtil.fetchProject(this.state.project.id)
+  },
+
+  componentWillUnmount: function() {
+    this.listeners.forEach(function(listener) {
+      listener.remove();
+    })
+  },
+
   _calcTimeLeft: function() {
     var project = this.state.project;
     var start = new Date(project.start_date);

@@ -31,7 +31,7 @@ module.exports = React.createClass({
     var projects = this.state.projects;
     for (key in projects) {
       if (projects.hasOwnProperty(key)) {
-        items.push(<ProjectIndexItem key={key} project={projects[key]}/>);
+        items.push(<ProjectIndexItem key={key} editButtonHandler={this.props.editButtonHandler} project={projects[key]}/>);
       }
     };
 

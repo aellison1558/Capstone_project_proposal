@@ -13,3 +13,22 @@
  *= require_tree .
  *= require_self
  */
+
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+.content{
+  margin: 0;
+  height: 100vh;
+  background-color: #f0fcfc;
+}
+
+.nav{
+  margin: 0;
+}
+
+.project-form{
+  width: 75vw;
+  margin: auto;
+  text-align: center;
+}
