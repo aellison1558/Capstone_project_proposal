@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     end
 
     resources :projects, except: [:index]
+
+    resources :backings, only: [:create, :destroy]
   end
 end

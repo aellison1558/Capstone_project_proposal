@@ -73,5 +73,22 @@ module.exports = {
         ProjectActions.receiveAllProjects(projects);
       }
     })
+  },
+
+  createBacking: function(backing){
+    $.post('/api/backings', {backing: backing}, function(project){
+      ProjectActions.receiveProject(project);
+    })
+  },
+
+  destroyBacking: function(backingId){
+    var url = '/api/backings/' + backingId;
+    $.ajax({
+      url: url,
+      method: "DELETE",
+      success: function(project){
+        ProjectActions.receiveProject(project);
+      }
+    })
   }
 }

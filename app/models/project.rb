@@ -31,4 +31,7 @@ class Project < ActiveRecord::Base
 
   belongs_to :creator, class_name: :user
   belongs_to :category
+
+  has_many :backings
+  has_many :backers, through: :backings
 end

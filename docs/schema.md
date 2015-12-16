@@ -8,10 +8,8 @@ title       | string    | not null
 summary     | string    |
 description | text      | not null
 creator_id  | integer   | not null, foreign key (references users), indexed
-category_id | integer   | not null, foreign key (references categories),
-indexed
+category_id | integer   | not null, foreign key (references categories), indexed
 goal_amt    | integer   | not null,
-current_amt | integer   |
 start_date  | date      | not null,
 end_date    | date      | not null,
 
@@ -20,8 +18,7 @@ column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
 url         | string    | not null
-imageable   | reference | polymorphic association,
-indexed
+imageable   | reference | polymorphic association, indexed
 
 ## categories
 column name | data type | details
@@ -33,8 +30,7 @@ name        | string    | not null
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-backer_id   | integer   | not null, foreign key (references users),
-indexed, unique [project_id]
+backer_id   | integer   | not null, foreign key (references users), indexed, unique [project_id]
 project_id  | integer   | not null, foreign key (references projects),
 amount      | integer   | not null
 
@@ -44,10 +40,8 @@ amount      | integer   | not null
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-commentable | reference | for polymorphic association,
-indexed
-author_id   | integer   | not null, foreign key (references users),
-indexed
+commentable | reference | for polymorphic association, indexed
+author_id   | integer   | not null, foreign key (references users), indexed
 body        | text      | not null
 
 
@@ -74,7 +68,5 @@ body        | text      | not null
 column name | data type | details
 ------------|-----------|-----------------------
 id          | integer   | not null, primary key
-likeable    | reference | for polymorphic association,
-indexed, unique [liker_id]
-liker_id    | integer   | not null, foreign key (references users),
-indexed
+likeable    | reference | for polymorphic association, indexed, unique [liker_id]
+liker_id    | integer   | not null, foreign key (references users), indexed

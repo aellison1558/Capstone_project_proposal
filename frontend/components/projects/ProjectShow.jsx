@@ -1,7 +1,9 @@
 var React = require('react'),
     ApiUtil = require('../../util/ApiUtil'),
     ProjectStore = require('../../stores/ProjectStore'),
-    Link = require('react-router').Link;
+    Link = require('react-router').Link,
+    BackingsForm = require('../BackingsForm'),
+    UserStore = require('../../stores/UserStore');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -25,9 +27,21 @@ module.exports = React.createClass({
     })
   },
 
+  undoBacking: function() {
+    var backing = this._findBacking();
+    ApiUtil.destroyBacking(backing.id);
+  },
+
   render: function() {
     var project = this.state.project;
     var url = '/categories/' + project.category_id;
+    var backingForm;
+
+    if (this._checkBacking()) {
+      backingForm = <button onClick={this.undoBacking}>Withdraw Support</button>
+    } else {
+      backingForm = <BackingsForm projectId={project.id}/>
+    }
 
     return(
       <div>
@@ -38,7 +52,11 @@ module.exports = React.createClass({
 
         <div>
           Funding:
-          {project.current_amt} out of {project.goal_amt}
+          {this._calcFunding()} out of {project.goal_amt}
+          <br/>
+          {project.backings.length} Backers
+          <br/>
+          {backingForm}
         </div>
 
         <div>
@@ -61,5 +79,38 @@ module.exports = React.createClass({
     var elapsed = Date.parse(end) - Date.parse(start)
     elapsed = elapsed / 1000 / 60 / 60 / 24;
     return (elapsed)
+  },
+
+  _calcFunding: function() {
+    var project = this.state.project;
+    var backings = this.state.project.backings;
+    var current_funding = 0;
+
+    backings.forEach(function(backing) {
+      current_funding += backing.amount;
+    })
+
+    return current_funding;
+  },
+
+  _checkBacking: function(){
+    var project = this.state.project;
+    var backings = this.state.project.backings;
+    var currentUser = UserStore.user();
+
+    var backingFound = this._findBacking()
+
+    return backingFound ? true : false;
+  },
+
+  _findBacking: function() {
+    var project = this.state.project;
+    var backings = this.state.project.backings;
+    var currentUser = UserStore.user();
+
+    return backings.find(function(backing){
+      return backing.backer_id === currentUser.id
+    });
   }
+
 });

@@ -1,4 +1,4 @@
-json.extract! project,
+json.extract! @project,
               :id,
               :title,
               :summary,

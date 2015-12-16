@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
 
   has_many :projects, foreign_key: "creator_id"
 
+  has_many :backings, foreign_key: "backer_id"
+
+  has_many :backed_projects, through: :backings
+
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
 
