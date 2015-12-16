@@ -2,6 +2,10 @@ var React = require('react'),
     Link = require('react-router').Link;
 
 module.exports = React.createClass({
+  logOut: function(e) {
+
+  },
+
   render: function() {
     return(
       <nav className="nav">
@@ -10,10 +14,10 @@ module.exports = React.createClass({
           <li><Link className="navbar-link" to='/categories'>Discover</Link></li>
           <li><Link className="navbar-link" to='/projects/new'>Start a Project</Link></li>
           <li>
-            <form class="navbar-form navbar-left" role="search">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Search"/>
-                <button type="submit" class="btn btn-default">Submit</button>
+            <form className="navbar-form navbar-left" role="search">
+              <div className="form-group">
+                <input type="text" className="form-control" placeholder="Search"/>
+                <button type="submit" className="btn btn-default">Submit</button>
               </div>
             </form>
           </li>
