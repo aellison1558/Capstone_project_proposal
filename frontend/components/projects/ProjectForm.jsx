@@ -98,7 +98,6 @@ module.exports = React.createClass({
                 <option key={0} value="" disabled={true}>Select Project Category</option>
                 {categories}
               </select>
-            <br/>
           </div>
 
           <div className="form-group" >
@@ -106,7 +105,6 @@ module.exports = React.createClass({
               Title:
             </label>
             <input type="string" className="form-control" valueLink={this.linkState('title')}/>
-            <br/>
           </div>
 
           <div className="form-group" >
@@ -114,7 +112,6 @@ module.exports = React.createClass({
               Summary:
             </label>
             <input type="string" className="form-control" valueLink={this.linkState('summary')}/>
-            <br/>
           </div>
 
           <div className="form-group" >
@@ -122,7 +119,6 @@ module.exports = React.createClass({
               Description:
             </label>
             <textarea className="form-control" rows="10" valueLink={this.linkState('description')}></textarea>
-            <br/>
           </div>
 
           <div className="form-group" >
@@ -130,7 +126,6 @@ module.exports = React.createClass({
               Funding Goal:
             </label>
             <input className="form-control" type="number" valueLink={this.linkState('goal_amt')}/>
-            <br/>
           </div>
 
           <div className="form-group" >
@@ -138,7 +133,6 @@ module.exports = React.createClass({
               Funding Start Date:
             </label>
             <input type="date" className="form-control" valueLink={this.linkState('start_date')}/>
-            <br/>
           </div>
 
           <div className="form-group" >
@@ -146,7 +140,6 @@ module.exports = React.createClass({
               Funding End Date:
             </label>
             <input type="date" className="form-control" valueLink={this.linkState('end_date')}/>
-            <br/>
           </div>
 
           <input type='submit' value="Create Project" />
