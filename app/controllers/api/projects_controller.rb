@@ -24,7 +24,9 @@ class Api::ProjectsController < ApplicationController
     validate_user
 
     @project.destroy
-    render :show
+    @category = Category.includes(:projects).find(@project.category_id)
+    @projects = @category.projects
+    render :index
   end
 
   def update

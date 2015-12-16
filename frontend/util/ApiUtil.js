@@ -51,9 +51,8 @@ module.exports = {
     $.ajax({
       url: url,
       method: "DELETE",
-      success: function(){
-        ProjectActions.destroyProject(projectId);
-        location.href = '/';
+      success: function(projects){
+        ProjectActions.receiveAllProjects(projects);
       }
     })
   }

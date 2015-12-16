@@ -34,12 +34,6 @@ ProjectStore.updateProject = function(project) {
   _projects[project.id] = project;
 };
 
-ProjectStore.destroyProject = function(project) {
-  if (_projects[project.id]) {
-    delete _project[project.id];
-  }
-};
-
 ProjectStore.__onDispatch = function(payload) {
 
   switch(payload.actionType) {
@@ -53,11 +47,7 @@ ProjectStore.__onDispatch = function(payload) {
       ProjectStore.updateProject(payload.project);
       ProjectStore.__emitChange();
       break;
-      
-    case ProjectConstants.DESTROY_PROJECT:
-      ProjectStore.destroyProject(payload.projectId);
-      ProjectStore.__emitChange();
-      break;
+
   }
 };
 

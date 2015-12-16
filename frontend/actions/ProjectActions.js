@@ -16,10 +16,4 @@ module.exports = {
     })
   },
 
-  destroyProject: function(projectId) {
-    Dispatcher.dispatch({
-      actionType: ProjectConstants.DESTROY_PROJECT,
-      projectId:  projectId
-    })
-  }
 };
