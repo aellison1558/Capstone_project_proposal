@@ -16,4 +16,11 @@ module.exports = {
     })
   },
 
+  receiveEveryProject: function(projects) {
+    Dispatcher.dispatch({
+      actionType: ProjectConstants.RECEIVE_EVERY_PROJECT,
+      projects: projects
+    })
+  }
+
 };

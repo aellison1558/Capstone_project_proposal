@@ -37,7 +37,7 @@ module.exports = {
 
   fetchEveryProject: function(){
     $.get('/api/projects', {}, function(projects){
-      ProjectActions.receiveAllProjects(projects);
+      ProjectActions.receiveEveryProject(projects);
     })
   },
 

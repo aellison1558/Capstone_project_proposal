@@ -3,14 +3,14 @@ var React = require('react'),
     SessionStore = require('../stores/SessionStore'),
     ApiUtil = require('../util/ApiUtil'),
     Search = require('./Search'),
-    ProjectStore = require('../stores/ProjectStore');
+    ProjectSearchStore = require('../stores/ProjectSearchStore');
 
 
 module.exports = React.createClass({
   getInitialState: function(){
     return {
       currentUser: SessionStore.currentUser(),
-      projects: ProjectStore.all()
+      projects: ProjectSearchStore.all()
     }
   },
 
@@ -19,15 +19,21 @@ module.exports = React.createClass({
   _updateState: function(){
     this.setState({
       currentUser: SessionStore.currentUser(),
-      projects: ProjectStore.all()
+      projects: ProjectSearchStore.all()
     })
   },
 
   componentDidMount: function(){
     this.listeners.push(SessionStore.addListener(this._updateState));
-    this.listeners.push(ProjectStore.addListener(this._updateState));
+    this.listeners.push(ProjectSearchStore.addListener(this._updateState));
     ApiUtil.checkSignIn();
     ApiUtil.fetchEveryProject();
+  },
+
+  componentWillUnmount: function(){
+    listeners.forEach(function(listener) {
+      listener.remove();
+    })
   },
 
   logOut: function(e) {
