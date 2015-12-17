@@ -35,6 +35,10 @@ module.exports = React.createClass({
     })
   },
 
+  componentWillReceiveProps: function(newProps) {
+    this.setState({ project: ProjectStore.find(parseInt(newProps.params.projectId)) })
+  },
+
   undoBacking: function() {
     var backing = this._findBacking();
     ApiUtil.destroyBacking(backing.id);
