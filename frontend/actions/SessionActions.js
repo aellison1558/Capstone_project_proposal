@@ -3,7 +3,7 @@ var Dispatcher = require('../dispatcher/Dispatcher'),
 
 
 module.exports = {
-  
+
   receiveUser: function(user) {
     Dispatcher.dispatch({
       actionType: SessionConstants.RECEIVE_USER,

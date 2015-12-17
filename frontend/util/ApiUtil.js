@@ -1,10 +1,17 @@
 var ProjectActions = require('../actions/ProjectActions'),
     CategoryActions = require('../actions/CategoryActions'),
-    SessionActions = require('../actions/SessionActions');
+    SessionActions = require('../actions/SessionActions'),
+    UserActions = require('../actions/UserActions');
 
 module.exports = {
   checkSignIn: function() {
     $.get('/session', {}, function(currentUser) {
+      SessionActions.receiveUser(currentUser);
+    })
+  },
+
+  signIn: function(email, password) {
+    $.post('/session/', {email: email, password: password}, function(currentUser){
       SessionActions.receiveUser(currentUser);
     })
   },
@@ -16,6 +23,50 @@ module.exports = {
       method: "DELETE",
       success: function(){
         SessionActions.clearUser();
+      }
+    })
+  },
+
+  fetchAllUsers: function() {
+    $.get('/users', {}, function(users) {
+      UserActions.receiveAllUsers(users);
+    })
+  },
+
+  fetchUser: function(id) {
+    var url = '/users/' + id;
+    $.get(url, {}, function(user) {
+      UserActions.receiveUser(user);
+    })
+  },
+
+  createUser: function(user) {
+    $.post('/users', {user: user}, function(user){
+      UserActions.receiveUser(user);
+    })
+  },
+
+  updateUser: function(id) {
+    var url = '/users/' + id;
+
+    $.ajax({
+      url: url,
+      method: "PATCH",
+      data: {user: user},
+      dataType: 'json',
+      success: function(updatedUser){
+        UserActions.receiveUser(updatedUser);
+      }
+    })
+  },
+
+  destroyUser: function(id) {
+    var url = '/users/' + id;
+    $.ajax({
+      url: url,
+      method: "DELETE",
+      success: function(users){
+        UserActions.receiveAllUsers(users);
       }
     })
   },
@@ -118,6 +169,25 @@ module.exports = {
   addProjectImage: function(image){
     $.post('/api/images', {image: image}, function(project){
       ProjectActions.receiveProject(project);
+    })
+  },
+
+  uploadProfilePicture: function(image) {
+    $.post('/api/images', {image: image}, function(user){
+      UserActions.receiveUser(user);
+    })
+  },
+
+  changeProfilePicture: function(imageId, image){
+    var url = '/api/images/' + imageId;
+    $.ajax({
+      url: url,
+      method: "DELETE",
+      success: function(){
+        $.post('/api/images', {image: image}, function(user){
+          UserActions.receiveUser(user);
+        })
+      }
     })
   }
 }

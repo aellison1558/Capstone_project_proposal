@@ -14,6 +14,18 @@ class Api::ImagesController < ApplicationController
     end
   end
 
+  def destroy
+    @image = Image.find(params[:id])
+    @image.destroy
+    @parent = @image.imageable
+
+    if @parent.is_a?(Project)
+      render :project
+    else
+      render :user
+    end
+  end
+
   private
   def image_params
     params.require('image').permit(:imageable_id, :imageable_type, :image_public_id)

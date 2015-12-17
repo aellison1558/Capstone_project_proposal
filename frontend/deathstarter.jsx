@@ -11,7 +11,8 @@ var React = require('react'),
     ProjectShow = require('./components/projects/ProjectShow'),
     ProjectForm = require('./components/projects/ProjectForm'),
     Root = require('./components/Root'),
-    Navbar = require('./components/Navbar');
+    Navbar = require('./components/Navbar'),
+    UserShow = require('./components/users/UserShow');
 
 
     var App = React.createClass({
@@ -35,6 +36,7 @@ var routes = (
     <Route path="projects/new" component={ProjectForm} />
     <Route path="projects/:projectId/edit" component={ProjectForm} />
     <Route path="projects/:projectId" component={ProjectShow}></Route>
+    <Route path="users/:userId" component={UserShow}></Route>
   </Route>
 );
 

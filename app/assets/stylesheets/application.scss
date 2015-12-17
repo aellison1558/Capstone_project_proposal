@@ -16,16 +16,44 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ a {
+   margin: 0;
+   border: 0;
+   padding: 0;
+   outline: 0;
+   box-sizing: inherit;
+   font: inherit;
+   text-decoration: inherit;
+   text-align: inherit;
+   color: inherit;
+   background: transparent;
+ }
+ 
+body{
+  background: url(background.jpg);
+  margin: 0px;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
 
 .content{
-  margin: 0;
+  margin-left: 5%;
+  margin-right: 5%;
   height: 100vh;
-  background-color: #f0fcfc;
+  background: rgba(255,255,255,0.5);
+  opacity: 50%;
+  border-radius: 5%;
 }
 
 .nav{
+  color: rgb(178,170,167);
+  background-color: black;
   padding: 0;
-  margin: 0;
+  margin: 10;
+  border: 1px solid #ccc;
 }
 
 .project-form{

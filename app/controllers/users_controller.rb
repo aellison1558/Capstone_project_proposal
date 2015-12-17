@@ -16,11 +16,24 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       sign_in(@user)
-      redirect_to root_url
+      render :show
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new
     end
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.update(user_params)
+    render :show
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    @users = User.all
+    render :index
   end
 
   private

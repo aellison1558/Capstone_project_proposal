@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 
     if @user
       sign_in(@user)
-      redirect_to root_url
+      render :show
     else
       flash.now[:errors] = ["Invalid email/password combination"]
       render :new
@@ -26,10 +26,10 @@ class SessionsController < ApplicationController
 
   private
   def email
-    params[:user][:email]
+    params[:email]
   end
 
   def password
-    params[:user][:password]
+    params[:password]
   end
 end

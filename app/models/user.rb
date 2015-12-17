@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 
   has_many :comments, foreign_key: "author_id"
 
-  has_one :profile_picture, as: :imageable
+  has_one :profile_picture, class_name: :Image, as: :imageable
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)

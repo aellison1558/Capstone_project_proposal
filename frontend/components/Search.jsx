@@ -59,7 +59,7 @@ var Search = React.createClass({
       <div>
         <form className="navbar-form navbar-left" role="search" onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <input type="text" className="form-control" placeholder="Search" valueLink={this.linkState('inputVal')}/>
+            <input type="text" className="form-control" placeholder="Search Projects" valueLink={this.linkState('inputVal')}/>
             <button type="submit" className="btn btn-default">Submit</button>
           </div>
         </form>

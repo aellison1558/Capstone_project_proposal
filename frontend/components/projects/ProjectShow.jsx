@@ -6,7 +6,8 @@ var React = require('react'),
     SessionStore = require('../../stores/SessionStore'),
     CommentsIndex = require('../comments/CommentsIndex'),
     CommentForm = require('../comments/CommentForm'),
-    ProjectImage = require('./ProjectImageCarousel');
+    ProjectImage = require('./ProjectImageCarousel'),
+    SignInForm = require('../SignInForm');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -46,9 +47,21 @@ module.exports = React.createClass({
   },
 
   imageButton: function(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    cloudinary.openUploadWidget(window.CloudinaryOptions, function(error, result) {
+    var options = {};
+
+    for (key in window.CloudinaryOptions) {
+      if (window.CloudinaryOptions.hasOwnProperty(key)) {
+        options[key] = window.CloudinaryOptions[key]
+      }
+    };
+
+    options['multiple'] = false;
+    options['cropping'] = 'server';
+    options['cropping_aspect_ratio'] = 0.75;
+
+    cloudinary.openUploadWidget(options, function(error, result) {
       if (!error) {
         var image = {
           imageable_id: this.state.project.id,
@@ -74,7 +87,7 @@ module.exports = React.createClass({
         backingForm = <BackingsForm project={project}/>
       }
     } else {
-      backingForm = <button onClick={function(){location.href = '/session/new'}.bind(this)}>Back Project</button>
+      backingForm = <div><SignInForm /> to Back</div>
     }
 
     return(

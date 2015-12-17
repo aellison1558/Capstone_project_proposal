@@ -11,17 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217165312) do
+ActiveRecord::Schema.define(version: 20151217223904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "backings", force: :cascade do |t|
-    t.integer  "backer_id",  null: false
-    t.integer  "project_id", null: false
-    t.integer  "amount",     null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "backer_id",            null: false
+    t.integer  "project_id",           null: false
+    t.integer  "amount",     limit: 8, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   add_index "backings", ["backer_id", "project_id"], name: "index_backings_on_backer_id_and_project_id", unique: true, using: :btree
@@ -56,16 +56,16 @@ ActiveRecord::Schema.define(version: 20151217165312) do
   add_index "images", ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
 
   create_table "projects", force: :cascade do |t|
-    t.string   "title",       null: false
+    t.string   "title",                 null: false
     t.string   "summary"
-    t.text     "description", null: false
-    t.integer  "goal_amt",    null: false
-    t.date     "start_date",  null: false
-    t.date     "end_date",    null: false
-    t.integer  "creator_id",  null: false
-    t.integer  "category_id", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "description",           null: false
+    t.integer  "goal_amt",    limit: 8, null: false
+    t.date     "start_date",            null: false
+    t.date     "end_date",              null: false
+    t.integer  "creator_id",            null: false
+    t.integer  "category_id",           null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   add_index "projects", ["category_id"], name: "index_projects_on_category_id", using: :btree
