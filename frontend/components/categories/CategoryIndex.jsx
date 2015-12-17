@@ -28,14 +28,15 @@ module.exports = React.createClass({
   render: function() {
     var items = this.state.categories.map(function(category) {
       var url = "/categories/" + category.id;
-      return <li key={category.id} ><Link to={url}>{category.name}</Link></li>
+      return <Link className="category-index-item" key={category.id} to={url}>{category.name}</Link>
     });
 
     return(
-      <div>
-        <ul>
+      <div className="category-index-pane">
+        <div className="category-index">
+          <h3>Categories:</h3>
           {items}
-        </ul>
+        </div>
       </div>
     )
   }

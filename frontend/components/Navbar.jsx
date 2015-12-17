@@ -44,13 +44,13 @@ module.exports = React.createClass({
     var signInSignOut;
     if (this.state.currentUser) {
       signInSignOut = [
-        <li key={4}>Signed in as {this.state.currentUser.username}</li>,
-        <li key={5}><button onClick={this.logOut}>Log Out</button></li>
+        <li key={5} className='navbar-right'><button className='btn btn-nav' onClick={this.logOut}>Log Out</button></li>,
+        <li key={4} className='navbar-text navbar-right'>Signed in as: {this.state.currentUser.username}</li>
       ]
     } else {
       signInSignOut = [
-        <li key={4}><a href="/users/new">Sign Up</a></li>,
-        <li key={5}><a href="/session/new">Log In</a></li>
+        <li key={4} className='navbar-right'><a className="navbar-link" href="/users/new">Sign Up</a></li>,
+        <li key={5} className='navbar-right'><a className="navbar-link" href="/session/new">Log In</a></li>
       ]
     }
     return(

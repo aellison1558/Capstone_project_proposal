@@ -34,7 +34,23 @@
   text-align: center;
 }
 
-.search-results{
+.category-index-pane{
+  padding-left: 20vw;
+  padding-right: 30vw;
+  padding-top: 5vh
+}
+
+.category-index{
+  position: relative;
+  width: 68vw;
+  text-align: center;
+}
+
+.category-index-item{
+  margin: 1vw;
+  border: 1px solid black;
+  border-radius: 10%;
   float: left;
-  width: 10vw;
+  width: 20vw;
+  height: 10vw;
 }
