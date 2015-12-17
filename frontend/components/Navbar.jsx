@@ -61,7 +61,7 @@ module.exports = React.createClass({
     return(
       <nav className="nav">
         <ul className="nav nav-tabs">
-          <li key={0}><Link className="navbar-brand" to='/'>The DeathSTARter</Link></li>
+          <li key={0}><Link className="navbar-brand" to='/'><img src='' alt="TheDeathSTARter"/></Link></li>
           <li key={1}><Link className="navbar-link" to='/categories'>Discover</Link></li>
           <li key={2}><Link className="navbar-link" to='/projects/new'>Start a Project</Link></li>
           <li key={3}><Search projects={this.state.projects}/></li>
