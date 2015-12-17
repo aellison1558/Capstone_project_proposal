@@ -9,6 +9,7 @@ var React = require('react'),
 
 module.exports = React.createClass({
   getInitialState: function() {
+    ApiUtil.fetchProject(this.props.params.projectId);
     return { project: ProjectStore.find(parseInt(this.props.params.projectId))
       };
   },
@@ -19,9 +20,13 @@ module.exports = React.createClass({
     this.setState({ project: ProjectStore.find(parseInt(this.props.params.projectId)) });
   },
 
+  componentWillMount: function() {
+    ApiUtil.fetchEveryProject();
+  },
+
   componentDidMount: function() {
     this.listeners.push(ProjectStore.addListener(this._updateState));
-    ApiUtil.fetchProject(this.state.project.id);
+    ApiUtil.fetchProject(this.props.params.projectId);
   },
 
   componentWillUnmount: function() {
@@ -40,13 +45,17 @@ module.exports = React.createClass({
     var url = '/categories/' + project.category_id;
     var backingForm;
 
+    if (SessionStore.currentUser()) {
 
-    if (this._checkBacking()) {
-      backingForm = <button onClick={this.undoBacking}>Withdraw Support</button>
+      if (this._checkBacking()) {
+        backingForm = <button onClick={this.undoBacking}>Withdraw Support</button>
+      } else {
+        backingForm = <BackingsForm project={project}/>
+      }
     } else {
-      backingForm = <BackingsForm project={project}/>
+      backingForm = <button onClick={function(){location.href = '/session/new'}.bind(this)}>Back Project</button>
     }
-    
+
     return(
       <div>
         <Link to={url}>Back to Projects List</Link>

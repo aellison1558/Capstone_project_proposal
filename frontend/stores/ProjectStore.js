@@ -48,6 +48,11 @@ ProjectStore.__onDispatch = function(payload) {
       ProjectStore.__emitChange();
       break;
 
+      case ProjectConstants.RECEIVE_EVERY_PROJECT:
+        ProjectStore.resetProjects(payload.projects);
+        ProjectStore.__emitChange();
+        break;
+
   }
 };
 

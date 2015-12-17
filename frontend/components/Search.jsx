@@ -50,7 +50,7 @@ var Search = React.createClass({
 
     if (this.matches()) {
       items = this.matches().map(function(project){
-        var url = '/api/projects/' + project.id;
+        var url = '/projects/' + project.id;
         return <li key={project.id}><Link to={url}>{project.title}</Link></li>
       })
     }
