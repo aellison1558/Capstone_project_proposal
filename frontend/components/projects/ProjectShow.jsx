@@ -5,7 +5,8 @@ var React = require('react'),
     BackingsForm = require('../BackingsForm'),
     SessionStore = require('../../stores/SessionStore'),
     CommentsIndex = require('../comments/CommentsIndex'),
-    CommentForm = require('../comments/CommentForm');
+    CommentForm = require('../comments/CommentForm'),
+    ProjectImage = require('./ProjectImageCarousel');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -44,6 +45,22 @@ module.exports = React.createClass({
     ApiUtil.destroyBacking(backing.id);
   },
 
+  imageButton: function(e) {
+    e.preventDefault()
+
+    cloudinary.openUploadWidget(window.CloudinaryOptions, function(error, result) {
+      if (!error) {
+        var image = {
+          imageable_id: this.state.project.id,
+          imageable_type: "Project",
+          image_public_id: result[0].public_id
+        };
+        ApiUtil.addProjectImage(image);
+      }
+    }.bind(this))
+  },
+
+
   render: function() {
     var project = this.state.project;
     var url = '/categories/' + project.category_id;
@@ -61,36 +78,50 @@ module.exports = React.createClass({
     }
 
     return(
-      <div>
+      <div className="project-show-pane">
         <Link to={url}>Back to Projects List</Link>
-        <h3>{project.title}</h3>
-        Project Summary:
-        <div>{project.summary}</div>
+        <header>
+          <h3>{project.title}</h3>
 
-        <div>
-          Funding:
-          {this._calcFunding()} out of {project.goal_amt}
-          <br/>
-          {project.backings.length} Backers
-          <br/>
-          {backingForm}
-        </div>
+          <div className="row">
+            <ProjectImage className="col-xs-2" images={project.images} />
 
-        <div>
-          Campaign:
-          {this._calcTimeLeft()} days left!
-        </div>
+            <div className="col-xs-2">
+              <h5>Project Summary:</h5>
+              <div>{project.summary}</div>
 
-        <p>
-          Project Description:
+              <div>
+                <h5>Funding:</h5>
+                {this._calcFunding()} out of {project.goal_amt}
+                <br/>
+                {project.backings.length} Backers
+                <br/>
+                {backingForm}
+              </div>
+
+              <div>
+                <h5>Campaign:</h5>
+                {this._calcTimeLeft()} days left!
+              </div>
+            </div>
+          </div>
+
+          <div className="form-group row" >
+            <button className='btn btn-primary' onClick={this.imageButton}>Upload Image</button>
+          </div>
+
+        </header>
+
+        <content className="project-body">
+          <h4>Project Description:</h4>
           {project.description}
-        </p>
 
-        <div>
-          Comments: ({project.comments.length})
-          <CommentsIndex comments={project.comments} />
-          <CommentForm project={project} />
-        </div>
+          <div>
+            <h4>Comments: ({project.comments.length})</h4>
+            <CommentsIndex comments={project.comments} />
+            <CommentForm project={project} />
+          </div>
+        </content>
       </div>
     )
   },

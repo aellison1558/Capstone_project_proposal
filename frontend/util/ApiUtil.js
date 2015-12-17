@@ -113,5 +113,11 @@ module.exports = {
         ProjectActions.receiveProject(project);
       }
     })
+  },
+
+  addProjectImage: function(image){
+    $.post('/api/images', {image: image}, function(project){
+      ProjectActions.receiveProject(project);
+    })
   }
 }

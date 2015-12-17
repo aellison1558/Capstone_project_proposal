@@ -76,6 +76,7 @@ module.exports = React.createClass({
     this.setState({category_id: e.target.value})
   },
 
+
   //render
 
   render: function(){

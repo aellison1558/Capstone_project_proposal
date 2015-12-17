@@ -11,7 +11,7 @@ module.exports = React.createClass({
   render: function() {
     var createdAt = new Date(this.props.comment.created_at);
     var time = createdAt.toTimeString() + " on " + createdAt.toDateString();
-    console.log(this.props.comment.author_id);
+    
     return(
       <li>
         {this.props.comment.body}

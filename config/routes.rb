@@ -12,5 +12,6 @@ Rails.application.routes.draw do
     resources :projects
     resources :backings, only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
+    resources :images, only: [:create, :destroy]
   end
 end

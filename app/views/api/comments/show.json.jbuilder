@@ -9,4 +9,5 @@ json.extract! @project,
               :category_id,
               :creator_id,
               :backings,
-              :comments
+              :comments,
+              :images
