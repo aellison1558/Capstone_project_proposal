@@ -20,7 +20,7 @@ var React = require('react'),
         return(
           <div>
             <header><h3><Navbar /></h3></header>
-            <div className='content'>
+            <div className='content group'>
               {this.props.children}
             </div>
           </div>

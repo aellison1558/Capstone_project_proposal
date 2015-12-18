@@ -80,7 +80,7 @@ module.exports = React.createClass({
     }
 
     return(
-      <div>
+      <div className="user-profile-pane">
         <h3>{username}</h3>
         <img src={url} alt="Profile picture" />
         <button className='btn btn-primary' onClick={this.imageButton}>Change Profile Picture</button>

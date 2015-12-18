@@ -11,17 +11,8 @@ var Search = React.createClass({
     return { inputVal: "", showModal: false };
   },
 
-  handleSubmit: function(e) {
-    e.preventDefault()
-    this.open();
-  },
-
-  close: function() {
-    this.setState({ showModal: false });
-  },
-
-  open: function() {
-    this.setState({ showModal: true });
+  clearSearch: function(e) {
+    this.setState({inputVal: ""});
   },
 
   matches: function () {
@@ -60,21 +51,12 @@ var Search = React.createClass({
         <form className="navbar-form navbar-left" role="search" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <input type="text" className="form-control" placeholder="Search Projects" valueLink={this.linkState('inputVal')}/>
-            <button type="submit" className="btn btn-default">Submit</button>
           </div>
         </form>
-        <Modal show={this.state.showModal} onHide={this.close}>
 
-          <Modal.Header closeButton>
-            <Modal.Title>Search Results:</Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            <ul>
-              {items}
-            </ul>
-          </Modal.Body>
-        </Modal>
+        <ul onClick={this.clearSearch}  className="search-results">
+          {items}
+        </ul>
       </div>
     )
   }
