@@ -86,65 +86,67 @@ module.exports = React.createClass({
     });
 
     return(
-      <div className="project-form">
-        <div>{this.state.errors}</div>
+      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={300}>
+        <div className="project-form">
+          <div>{this.state.errors}</div>
 
-        <form onSubmit={this.submitHandler}>
-          <div className="form-group" >
-            <label>
-              Category:
-            </label>
-              <select className="form-control" onChange={this.selectHandler} value={this.state.category_id}>
-                <option key={0} value="" disabled={true}>Select Project Category</option>
-                {categories}
-              </select>
-          </div>
+          <form onSubmit={this.submitHandler}>
+            <div className="form-group" >
+              <label>
+                Category:
+              </label>
+                <select className="form-control" onChange={this.selectHandler} value={this.state.category_id}>
+                  <option key={0} value="" disabled={true}>Select Project Category</option>
+                  {categories}
+                </select>
+            </div>
 
-          <div className="form-group" >
-            <label>
-              Title:
-            </label>
-            <input type="string" className="form-control" valueLink={this.linkState('title')}/>
-          </div>
+            <div className="form-group" >
+              <label>
+                Title:
+              </label>
+              <input type="string" className="form-control" valueLink={this.linkState('title')}/>
+            </div>
 
-          <div className="form-group" >
-            <label>
-              Summary:
-            </label>
-            <input type="string" className="form-control" valueLink={this.linkState('summary')}/>
-          </div>
+            <div className="form-group" >
+              <label>
+                Summary:
+              </label>
+              <input type="string" className="form-control" valueLink={this.linkState('summary')}/>
+            </div>
 
-          <div className="form-group" >
-            <label>
-              Description:
-            </label>
-            <textarea className="form-control" rows="10" valueLink={this.linkState('description')}></textarea>
-          </div>
+            <div className="form-group" >
+              <label>
+                Description:
+              </label>
+              <textarea className="form-control" rows="10" valueLink={this.linkState('description')}></textarea>
+            </div>
 
-          <div className="form-group" >
-            <label>
-              Funding Goal:
-            </label>
-            <input className="form-control" type="number" valueLink={this.linkState('goal_amt')}/>
-          </div>
+            <div className="form-group" >
+              <label>
+                Funding Goal:
+              </label>
+              <input className="form-control" type="number" valueLink={this.linkState('goal_amt')}/>
+            </div>
 
-          <div className="form-group" >
-            <label>
-              Funding Start Date:
-            </label>
-            <input type="date" className="form-control" valueLink={this.linkState('start_date')}/>
-          </div>
+            <div className="form-group" >
+              <label>
+                Funding Start Date:
+              </label>
+              <input type="date" className="form-control" valueLink={this.linkState('start_date')}/>
+            </div>
 
-          <div className="form-group" >
-            <label>
-              Funding End Date:
-            </label>
-            <input type="date" className="form-control" valueLink={this.linkState('end_date')}/>
-          </div>
+            <div className="form-group" >
+              <label>
+                Funding End Date:
+              </label>
+              <input type="date" className="form-control" valueLink={this.linkState('end_date')}/>
+            </div>
 
-          <input type='submit' value="Create Project" />
-        </form>
-      </div>
+            <input className='submit' type='submit' value="Create Project" />
+          </form>
+        </div>
+      </ReactCSSTransitionGroup>
     )
   },
 

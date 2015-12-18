@@ -1,7 +1,8 @@
 var React = require('react'),
     CategoryStore = require('../../stores/CategoryStore'),
     ApiUtil = require('../../util/ApiUtil'),
-    Link = require('react-router').Link;
+    Link = require('react-router').Link,
+    ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -32,12 +33,16 @@ module.exports = React.createClass({
     });
 
     return(
-      <div className="category-index-pane">
-        <div className="category-index">
-          <h3>Categories:</h3>
-          {items}
+
+      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={300}>
+        <div key='category-index-pane' className="category-index-pane">
+          <div className="category-index">
+            <h3>Categories:</h3>
+            {items}
+          </div>
         </div>
-      </div>
+
+      </ReactCSSTransitionGroup>
     )
   }
 });

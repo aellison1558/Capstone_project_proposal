@@ -11,9 +11,12 @@ module.exports = React.createClass({
 
   render: function() {
     return(
-      <div>
-        <ProjectIndex editButtonHandler={this.editButtonHandler} categoryId={this.props.params.categoryId} />
-      </div>
+
+      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={300}>
+        <div>
+          <ProjectIndex editButtonHandler={this.editButtonHandler} categoryId={this.props.params.categoryId} />
+        </div>
+      </ReactCSSTransitionGroup>
     )
   }
 });

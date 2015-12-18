@@ -42,16 +42,22 @@ var React = require('react'),
 
         return(
           <div>
-            <header id='header'><Navbar /></header>
-            
+            <ReactCSSTransitionGroup transitionName="slide" transitionAppear={true} transitionAppearTimeout={1000}>
+              <header id='header'><Navbar /></header>
+            </ReactCSSTransitionGroup>
+
             <div key='content' className={this.state.contentClass}>
               {this.props.children}
             </div>
-            <footer id="footer" className="bottom group"></footer>
+
+            <ReactCSSTransitionGroup transitionName="slide" transitionAppear={true} transitionAppearTimeout={1000}>
+              <footer id="footer" className="bottom group"></footer>
+            </ReactCSSTransitionGroup>
           </div>
         )
       }
     });
+
 
 var routes = (
   <Route path="/" component={App}>

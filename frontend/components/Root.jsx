@@ -5,10 +5,13 @@ module.exports = React.createClass({
 
   render: function() {
     return(
-      <Jumbotron className='welcome'>
-        <h1>Welcome to the DeathSTARter</h1>
-        <p>Funding the common good of the Empire</p>
-      </Jumbotron>
+
+      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={300}>
+        <Jumbotron className='welcome'>
+          <h1>Welcome to the DeathSTARter</h1>
+          <p>Funding the common good of the Empire</p>
+        </Jumbotron>
+      </ReactCSSTransitionGroup>
     )
   }
 });

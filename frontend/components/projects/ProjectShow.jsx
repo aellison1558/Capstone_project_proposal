@@ -113,55 +113,57 @@ module.exports = React.createClass({
     }
 
     return(
-      <div className="project-show-pane">
-        <Link to={url}>Back to Projects List</Link>
-        <header>
-          <h3>{project.title}</h3>
+      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={300}>
+        <div className="project-show-pane">
+          <Link to={url}>Back to Projects List</Link>
+          <header>
+            <h3>{project.title}</h3>
 
-          <div className="row">
-            <ProjectImage className="col-xs-2" images={project.images} />
+            <div className="row">
+              <ProjectImage className="col-xs-2" images={project.images} />
 
-            <div className="col-xs-2">
-              <h5>Project Summary:</h5>
-              <div>{project.summary}</div>
+              <div className="col-xs-2">
+                <h5>Project Summary:</h5>
+                <div>{project.summary}</div>
 
-              <div>
-                <h5>Funding:</h5>
-                {this._calcFunding()} out of {project.goal_amt}
-                <br/>
-                {project.backings.length} Backers
-                <br/>
-                {backingForm}
-              </div>
+                <div>
+                  <h5>Funding:</h5>
+                  {this._calcFunding()} out of {project.goal_amt}
+                  <br/>
+                  {project.backings.length} Backers
+                  <br/>
+                  {backingForm}
+                </div>
 
-              <div>
-                <h5>Campaign:</h5>
-                {this._calcTimeLeft()} days left!
-              </div>
+                <div>
+                  <h5>Campaign:</h5>
+                  {this._calcTimeLeft()} days left!
+                </div>
 
-              <div>
-                By: {user.username}
+                <div>
+                  By: {user.username}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="form-group row" >
-            <button className='btn btn-primary' onClick={this.imageButton}>Upload Image</button>
-          </div>
+            <div className="form-group row" >
+              <button className='btn btn-primary' onClick={this.imageButton}>Upload Image</button>
+            </div>
 
-        </header>
+          </header>
 
-        <content className="project-body">
-          <h4>Project Description:</h4>
-          {project.description}
+          <content className="project-body">
+            <h4>Project Description:</h4>
+            {project.description}
 
-          <div className='project-comments'>
-            <h4>Comments: ({project.comments.length})</h4>
-            <CommentsIndex comments={project.comments} />
-            {commentForm}
-          </div>
-        </content>
-      </div>
+            <div className='project-comments'>
+              <h4>Comments: ({project.comments.length})</h4>
+              <CommentsIndex comments={project.comments} />
+              {commentForm}
+            </div>
+          </content>
+        </div>
+      </ReactCSSTransitionGroup>
     )
   },
 

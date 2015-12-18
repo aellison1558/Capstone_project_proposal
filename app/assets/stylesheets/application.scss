@@ -55,10 +55,52 @@ body{
   transition: background-color 3s, color 3s;
 }
 
+.contentfade-appear {
+  opacity: 0.01;
+}
+
+.contentfade-appear.contentfade-appear-active {
+  opacity: 1;
+  transition: opacity 1s ease-in;
+}
+
+.slide-appear {
+  transform: translateX(-100vw);
+}
+
+.slide-appear.slide-appear-active {
+  transform: translateX(0px);
+  transition: transform 1s ease-in;
+}
+
+
+.contentfade-enter {
+  opacity: 0.01;
+}
+
+.contentfade-enter.contentfade-enter-active {
+  opacity: 1;
+  transition: opacity 2000ms ease-in;
+}
+
+.contentfade-leave {
+  opacity: 1;
+}
+
+.contentfade-leave.contentfade-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
 .content .form-control{
   color: rgba(255,255,255,1);
   background-color: rgba(223, 60, 103, 0.8);
 }
+
+.nav .form-control{
+  background-color: rgba(255, 255, 255, 1);
+}
+
 .content button{
   color: rgba(255,255,255,1);
   background-color: rgba(223, 60, 103, 0.8);

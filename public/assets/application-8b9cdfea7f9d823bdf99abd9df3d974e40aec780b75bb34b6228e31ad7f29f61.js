@@ -11747,16 +11747,24 @@ return jQuery;
 	      'div',
 	      null,
 	      React.createElement(
-	        'header',
-	        { id: 'header' },
-	        React.createElement(Navbar, null)
+	        ReactCSSTransitionGroup,
+	        { transitionName: 'slide', transitionAppear: true, transitionAppearTimeout: 1000 },
+	        React.createElement(
+	          'header',
+	          { id: 'header' },
+	          React.createElement(Navbar, null)
+	        )
 	      ),
 	      React.createElement(
 	        'div',
 	        { key: 'content', className: this.state.contentClass },
 	        this.props.children
 	      ),
-	      React.createElement('footer', { id: 'footer', className: 'bottom group' })
+	      React.createElement(
+	        ReactCSSTransitionGroup,
+	        { transitionName: 'slide', transitionAppear: true, transitionAppearTimeout: 1000 },
+	        React.createElement('footer', { id: 'footer', className: 'bottom group' })
+	      )
 	    );
 	  }
 	});
@@ -43215,7 +43223,8 @@ return jQuery;
 	var React = __webpack_require__(1),
 	    CategoryStore = __webpack_require__(241),
 	    ApiUtil = __webpack_require__(159),
-	    Link = __webpack_require__(189).Link;
+	    Link = __webpack_require__(189).Link,
+	    ReactCSSTransitionGroup = __webpack_require__(510);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -43252,17 +43261,21 @@ return jQuery;
 	    });
 
 	    return React.createElement(
-	      'div',
-	      { className: 'category-index-pane' },
+	      ReactCSSTransitionGroup,
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 300 },
 	      React.createElement(
 	        'div',
-	        { className: 'category-index' },
+	        { key: 'category-index-pane', className: 'category-index-pane' },
 	        React.createElement(
-	          'h3',
-	          null,
-	          'Categories:'
-	        ),
-	        items
+	          'div',
+	          { className: 'category-index' },
+	          React.createElement(
+	            'h3',
+	            null,
+	            'Categories:'
+	          ),
+	          items
+	        )
 	      )
 	    );
 	  }
@@ -43318,9 +43331,13 @@ return jQuery;
 
 	  render: function () {
 	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(ProjectIndex, { editButtonHandler: this.editButtonHandler, categoryId: this.props.params.categoryId })
+	      ReactCSSTransitionGroup,
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 300 },
+	      React.createElement(
+	        'div',
+	        null,
+	        React.createElement(ProjectIndex, { editButtonHandler: this.editButtonHandler, categoryId: this.props.params.categoryId })
+	      )
 	    );
 	  }
 	});
@@ -43565,105 +43582,109 @@ return jQuery;
 	    }
 
 	    return React.createElement(
-	      'div',
-	      { className: 'project-show-pane' },
+	      ReactCSSTransitionGroup,
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 300 },
 	      React.createElement(
-	        Link,
-	        { to: url },
-	        'Back to Projects List'
-	      ),
-	      React.createElement(
-	        'header',
-	        null,
+	        'div',
+	        { className: 'project-show-pane' },
 	        React.createElement(
-	          'h3',
-	          null,
-	          project.title
+	          Link,
+	          { to: url },
+	          'Back to Projects List'
 	        ),
 	        React.createElement(
-	          'div',
-	          { className: 'row' },
-	          React.createElement(ProjectImage, { className: 'col-xs-2', images: project.images }),
+	          'header',
+	          null,
+	          React.createElement(
+	            'h3',
+	            null,
+	            project.title
+	          ),
 	          React.createElement(
 	            'div',
-	            { className: 'col-xs-2' },
-	            React.createElement(
-	              'h5',
-	              null,
-	              'Project Summary:'
-	            ),
+	            { className: 'row' },
+	            React.createElement(ProjectImage, { className: 'col-xs-2', images: project.images }),
 	            React.createElement(
 	              'div',
-	              null,
-	              project.summary
-	            ),
-	            React.createElement(
-	              'div',
-	              null,
+	              { className: 'col-xs-2' },
 	              React.createElement(
 	                'h5',
 	                null,
-	                'Funding:'
+	                'Project Summary:'
 	              ),
-	              this._calcFunding(),
-	              ' out of ',
-	              project.goal_amt,
-	              React.createElement('br', null),
-	              project.backings.length,
-	              ' Backers',
-	              React.createElement('br', null),
-	              backingForm
-	            ),
-	            React.createElement(
-	              'div',
-	              null,
 	              React.createElement(
-	                'h5',
+	                'div',
 	                null,
-	                'Campaign:'
+	                project.summary
 	              ),
-	              this._calcTimeLeft(),
-	              ' days left!'
-	            ),
+	              React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                  'h5',
+	                  null,
+	                  'Funding:'
+	                ),
+	                this._calcFunding(),
+	                ' out of ',
+	                project.goal_amt,
+	                React.createElement('br', null),
+	                project.backings.length,
+	                ' Backers',
+	                React.createElement('br', null),
+	                backingForm
+	              ),
+	              React.createElement(
+	                'div',
+	                null,
+	                React.createElement(
+	                  'h5',
+	                  null,
+	                  'Campaign:'
+	                ),
+	                this._calcTimeLeft(),
+	                ' days left!'
+	              ),
+	              React.createElement(
+	                'div',
+	                null,
+	                'By: ',
+	                user.username
+	              )
+	            )
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'form-group row' },
 	            React.createElement(
-	              'div',
-	              null,
-	              'By: ',
-	              user.username
+	              'button',
+	              { className: 'btn btn-primary', onClick: this.imageButton },
+	              'Upload Image'
 	            )
 	          )
 	        ),
 	        React.createElement(
-	          'div',
-	          { className: 'form-group row' },
-	          React.createElement(
-	            'button',
-	            { className: 'btn btn-primary', onClick: this.imageButton },
-	            'Upload Image'
-	          )
-	        )
-	      ),
-	      React.createElement(
-	        'content',
-	        { className: 'project-body' },
-	        React.createElement(
-	          'h4',
-	          null,
-	          'Project Description:'
-	        ),
-	        project.description,
-	        React.createElement(
-	          'div',
-	          { className: 'project-comments' },
+	          'content',
+	          { className: 'project-body' },
 	          React.createElement(
 	            'h4',
 	            null,
-	            'Comments: (',
-	            project.comments.length,
-	            ')'
+	            'Project Description:'
 	          ),
-	          React.createElement(CommentsIndex, { comments: project.comments }),
-	          commentForm
+	          project.description,
+	          React.createElement(
+	            'div',
+	            { className: 'project-comments' },
+	            React.createElement(
+	              'h4',
+	              null,
+	              'Comments: (',
+	              project.comments.length,
+	              ')'
+	            ),
+	            React.createElement(CommentsIndex, { comments: project.comments }),
+	            commentForm
+	          )
 	        )
 	      )
 	    );
@@ -61468,96 +61489,100 @@ return jQuery;
 	    });
 
 	    return React.createElement(
-	      'div',
-	      { className: 'project-form' },
+	      ReactCSSTransitionGroup,
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 300 },
 	      React.createElement(
 	        'div',
-	        null,
-	        this.state.errors
-	      ),
-	      React.createElement(
-	        'form',
-	        { onSubmit: this.submitHandler },
+	        { className: 'project-form' },
 	        React.createElement(
 	          'div',
-	          { className: 'form-group' },
+	          null,
+	          this.state.errors
+	        ),
+	        React.createElement(
+	          'form',
+	          { onSubmit: this.submitHandler },
 	          React.createElement(
-	            'label',
-	            null,
-	            'Category:'
-	          ),
-	          React.createElement(
-	            'select',
-	            { className: 'form-control', onChange: this.selectHandler, value: this.state.category_id },
+	            'div',
+	            { className: 'form-group' },
 	            React.createElement(
-	              'option',
-	              { key: 0, value: '', disabled: true },
-	              'Select Project Category'
+	              'label',
+	              null,
+	              'Category:'
 	            ),
-	            categories
-	          )
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'form-group' },
-	          React.createElement(
-	            'label',
-	            null,
-	            'Title:'
+	            React.createElement(
+	              'select',
+	              { className: 'form-control', onChange: this.selectHandler, value: this.state.category_id },
+	              React.createElement(
+	                'option',
+	                { key: 0, value: '', disabled: true },
+	                'Select Project Category'
+	              ),
+	              categories
+	            )
 	          ),
-	          React.createElement('input', { type: 'string', className: 'form-control', valueLink: this.linkState('title') })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'form-group' },
 	          React.createElement(
-	            'label',
-	            null,
-	            'Summary:'
+	            'div',
+	            { className: 'form-group' },
+	            React.createElement(
+	              'label',
+	              null,
+	              'Title:'
+	            ),
+	            React.createElement('input', { type: 'string', className: 'form-control', valueLink: this.linkState('title') })
 	          ),
-	          React.createElement('input', { type: 'string', className: 'form-control', valueLink: this.linkState('summary') })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'form-group' },
 	          React.createElement(
-	            'label',
-	            null,
-	            'Description:'
+	            'div',
+	            { className: 'form-group' },
+	            React.createElement(
+	              'label',
+	              null,
+	              'Summary:'
+	            ),
+	            React.createElement('input', { type: 'string', className: 'form-control', valueLink: this.linkState('summary') })
 	          ),
-	          React.createElement('textarea', { className: 'form-control', rows: '10', valueLink: this.linkState('description') })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'form-group' },
 	          React.createElement(
-	            'label',
-	            null,
-	            'Funding Goal:'
+	            'div',
+	            { className: 'form-group' },
+	            React.createElement(
+	              'label',
+	              null,
+	              'Description:'
+	            ),
+	            React.createElement('textarea', { className: 'form-control', rows: '10', valueLink: this.linkState('description') })
 	          ),
-	          React.createElement('input', { className: 'form-control', type: 'number', valueLink: this.linkState('goal_amt') })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'form-group' },
 	          React.createElement(
-	            'label',
-	            null,
-	            'Funding Start Date:'
+	            'div',
+	            { className: 'form-group' },
+	            React.createElement(
+	              'label',
+	              null,
+	              'Funding Goal:'
+	            ),
+	            React.createElement('input', { className: 'form-control', type: 'number', valueLink: this.linkState('goal_amt') })
 	          ),
-	          React.createElement('input', { type: 'date', className: 'form-control', valueLink: this.linkState('start_date') })
-	        ),
-	        React.createElement(
-	          'div',
-	          { className: 'form-group' },
 	          React.createElement(
-	            'label',
-	            null,
-	            'Funding End Date:'
+	            'div',
+	            { className: 'form-group' },
+	            React.createElement(
+	              'label',
+	              null,
+	              'Funding Start Date:'
+	            ),
+	            React.createElement('input', { type: 'date', className: 'form-control', valueLink: this.linkState('start_date') })
 	          ),
-	          React.createElement('input', { type: 'date', className: 'form-control', valueLink: this.linkState('end_date') })
-	        ),
-	        React.createElement('input', { type: 'submit', value: 'Create Project' })
+	          React.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            React.createElement(
+	              'label',
+	              null,
+	              'Funding End Date:'
+	            ),
+	            React.createElement('input', { type: 'date', className: 'form-control', valueLink: this.linkState('end_date') })
+	          ),
+	          React.createElement('input', { className: 'submit', type: 'submit', value: 'Create Project' })
+	        )
 	      )
 	    );
 	  },
@@ -61604,17 +61629,21 @@ return jQuery;
 
 	  render: function () {
 	    return React.createElement(
-	      Jumbotron,
-	      { className: 'welcome' },
+	      ReactCSSTransitionGroup,
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 300 },
 	      React.createElement(
-	        'h1',
-	        null,
-	        'Welcome to the DeathSTARter'
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
-	        'Funding the common good of the Empire'
+	        Jumbotron,
+	        { className: 'welcome' },
+	        React.createElement(
+	          'h1',
+	          null,
+	          'Welcome to the DeathSTARter'
+	        ),
+	        React.createElement(
+	          'p',
+	          null,
+	          'Funding the common good of the Empire'
+	        )
 	      )
 	    );
 	  }
@@ -62686,37 +62715,41 @@ return jQuery;
 	    }
 
 	    return React.createElement(
-	      'div',
-	      { className: 'user-profile-pane' },
+	      ReactCSSTransitionGroup,
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 300 },
 	      React.createElement(
-	        'h3',
-	        null,
-	        username
-	      ),
-	      React.createElement('img', { src: url, alt: 'Profile picture' }),
-	      React.createElement(
-	        'button',
-	        { className: 'btn btn-primary', onClick: this.imageButton },
-	        'Change Profile Picture'
-	      ),
-	      React.createElement(
-	        'h4',
-	        null,
-	        numProjects
-	      ),
-	      'Created Projects',
-	      React.createElement(
-	        'h4',
-	        null,
-	        numBackings
-	      ),
-	      'Backed Projects',
-	      React.createElement(
-	        'h4',
-	        null,
-	        numComments
-	      ),
-	      'Comments'
+	        'div',
+	        { className: 'user-profile-pane' },
+	        React.createElement(
+	          'h3',
+	          null,
+	          username
+	        ),
+	        React.createElement('img', { src: url, alt: 'Profile picture' }),
+	        React.createElement(
+	          'button',
+	          { className: 'btn btn-primary', onClick: this.imageButton },
+	          'Change Profile Picture'
+	        ),
+	        React.createElement(
+	          'h4',
+	          null,
+	          numProjects
+	        ),
+	        'Created Projects',
+	        React.createElement(
+	          'h4',
+	          null,
+	          numBackings
+	        ),
+	        'Backed Projects',
+	        React.createElement(
+	          'h4',
+	          null,
+	          numComments
+	        ),
+	        'Comments'
+	      )
 	    );
 	  }
 	});
