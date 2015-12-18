@@ -45,23 +45,52 @@ body{
   background-attachment: fixed;
 }
 
+.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+  background-color: red;
+  transition: background-color .5s, ease-in;
+}
+
+
+
 .content{
   margin-left: 5%;
   margin-right: 5%;
   height: 100%;
-  background: rgba(255,255,255,0.5);
+  background: rgba(45,76,135,0.5);
+  color: rgba(242, 242, 242, 0.7);
+
   border-radius: 5%;
   position: relative;
+  transition: background-color 3s, color 3s;
+}
+
+.content .form-control{
+  color: rgba(255,255,255,1);
+  background-color: rgba(223, 60, 103, 0.8);
+}
+
+.light{
+  background-color: rgba(0, 153, 255, 0.5);
+  color: rgba(255,255,255,0.7);
 }
 
 .navbar-brand{
   display: inline-block;
   height: 85px;
   width: 115px;
-  margin-bottom: 20px;
-  margin-right: 10px;
+  margin: 0px;
+  position: relative;
+  top: 10;
 }
 
+.navbar-brand img{
+  position: relative;
+  top: -25px;
+}
 
 
 .nav{
@@ -71,7 +100,7 @@ body{
 }
 
 .nav form{
-  margin-top: 3vh;
+  margin-top: 4vh;
 }
 
 .nav a{
@@ -79,9 +108,14 @@ body{
 }
 
 .nav button{
-  margin-right: 5px;
+  margin-right: 1vw;
   margin-top: 2.5vh;
   line-height: 2;
+}
+
+.nav div, .nav li, .nav a{
+  margin-right: 5px;
+  margin-left: 10px;
 }
 
 .project-form{
@@ -139,13 +173,19 @@ body{
   text-align: center;
 }
 
+
 .search-results{
+  display: none;
   position: absolute;
   left: 20px;
   top: 50px;
   background-color: white;
   z-index: 1;
   width: 180px;
+}
+
+.appears{
+  display: inline;
 }
 
 .welcome{
@@ -156,3 +196,29 @@ body{
   list-style-type: square;
   color: red;
 }
+
+
+#user-show {
+  margin-top: 1vh;
+  display: inline-block;
+}
+
+// .arrow-down {
+// 	width: 0;
+// 	height: 0;
+// 	border-left: 35vw solid transparent;
+// 	border-right: 35vw solid transparent;
+// 	border-top: 20vh solid rgba(45,76,135,0.5);
+//   margin-left: 10vw;
+//   margin-right: 10vw;
+//   transition: border-top 3s;
+// }
+//
+// .arrow-light {
+//   border-top: 20vh solid rgba(0, 153, 255, 0.5);
+// }
+//
+// .hologram {
+//   margin-left: 35vw;
+//   margin-right: 37vw;
+// }

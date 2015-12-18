@@ -12,17 +12,46 @@ var React = require('react'),
     ProjectForm = require('./components/projects/ProjectForm'),
     Root = require('./components/Root'),
     Navbar = require('./components/Navbar'),
-    UserShow = require('./components/users/UserShow');
+    UserShow = require('./components/users/UserShow'),
+    ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 
     var App = React.createClass({
+      getInitialState: function(){
+        return {contentClass: 'content group', arrowClass: ""}
+      },
+
+      componentDidMount: function(){
+        this.intervals = [];
+        this.intervals.push(setInterval(this.toggleClass, 1000));
+      },
+
+      componentWillUnmount: function(){
+        this.intervals.forEach(clearInterval);
+      },
+
+      toggleClass: function(){
+        if (this.state.contentClass === 'content group') {
+          this.setState({contentClass: 'content group light', arrowClass: "arrow-light"});
+        } else {
+          this.setState({contentClass: 'content group', arrowClass: ''});
+        }
+      },
+
       render: function(){
+        var arrowClass = 'arrow-down ' + this.state.arrowClass
+        var content = (
+          <div key='content' className={this.state.contentClass}>
+            {this.props.children}
+          </div>
+        )
         return(
           <div>
             <header><h3><Navbar /></h3></header>
-            <div className='content group'>
-              {this.props.children}
-            </div>
+            <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
+              {content}
+            </ReactCSSTransitionGroup>
+
           </div>
         )
       }

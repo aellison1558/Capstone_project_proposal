@@ -33,28 +33,33 @@ var Search = React.createClass({
     }
 
     var fuse = new Fuse(projectsArray, options)
-    return fuse.search(this.state.inputVal);
+    if (fuse.search(this.state.inputVal)[0]) {
+      return fuse.search(this.state.inputVal);
+    } else {
+      return false;
+    }
   },
 
   render: function(){
-    var items = "no matches";
-
+    var items = <li>no matches</li>;
+    var ulClass = "";
     if (this.matches()) {
+      ulClass = "appears";
       items = this.matches().map(function(project){
         var url = '/projects/' + project.id;
-        return <li key={project.id}><Link to={url}>{project.title}</Link></li>
+        return <li className="search-result" key={project.id}><Link to={url}>{project.title}</Link></li>
       })
     }
 
     return(
-      <div>
+      <div className='search-field'>
         <form className="navbar-form navbar-left" role="search" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <input type="text" className="form-control" placeholder="Search Projects" valueLink={this.linkState('inputVal')}/>
           </div>
         </form>
 
-        <ul onClick={this.clearSearch}  className="search-results">
+        <ul onClick={this.clearSearch}  className={"search-results " + ulClass}>
           {items}
         </ul>
       </div>

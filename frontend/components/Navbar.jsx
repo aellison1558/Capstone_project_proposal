@@ -48,11 +48,11 @@ module.exports = React.createClass({
     var startProjectUrl
     if (this.state.currentUser) {
       var url = '/users/' + this.state.currentUser.id;
-      startProjectUrl = <Link className="navbar-link" to={startProjectUrl}>Start a Project</Link>
+      startProjectUrl = <Link className="navbar-link" to='projects/new'>Start a Project</Link>
 
       signInSignOut = [
         <li key={5} className='navbar-right'><button className='btn btn-nav' onClick={this.logOut}>Log Out</button></li>,
-        <li key={4} className='navbar-text navbar-right'>Signed in as: <Link to={url}>{this.state.currentUser.username}</Link></li>
+        <li key={4} className='navbar-text navbar-right'>Signed in as: <Link id='user-show' to={url}>{this.state.currentUser.username}</Link></li>
       ]
     } else {
       startProjectUrl = <div className='navbar-link'><SignInForm text="Log in to Create Project"/></div>
@@ -62,8 +62,8 @@ module.exports = React.createClass({
       ]
     }
     return(
-      <nav className="nav">
-      <div key={0}><Link className="navbar-brand" to='/'><img src={window.imagePath} alt="TheDeathSTARter"/></Link></div>
+      <nav className="nav group">
+      <div key={0}><Link className="navbar-brand" to='/'><img src={window.logo} /></Link></div>
         <ul className="nav nav-tabs">
           <li key={1}><Link className="navbar-link" to='/categories'>Discover</Link></li>
           <li key={2}>{startProjectUrl}</li>
