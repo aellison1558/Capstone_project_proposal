@@ -21,7 +21,7 @@ Category.create([
   {name: 'Superweapons'},
   {name: 'Imperial Army'},
   {name: 'Imperial Navy'},
-  {name: 'Technology'}
+  {name: 'Technology'},
   {name: 'Economy'},
   {name: 'Civil Infrastructure'},
   {name: 'Exploration'},
