@@ -11735,36 +11735,28 @@ return jQuery;
 
 	  toggleClass: function () {
 	    if (this.state.contentClass === 'content group') {
-	      this.setState({ contentClass: 'content group light', arrowClass: "arrow-light" });
+	      this.setState({ contentClass: 'content group light' });
 	    } else {
-	      this.setState({ contentClass: 'content group', arrowClass: '' });
+	      this.setState({ contentClass: 'content group' });
 	    }
 	  },
 
 	  render: function () {
-	    var arrowClass = 'arrow-down ' + this.state.arrowClass;
-	    var content = React.createElement(
-	      'div',
-	      { key: 'content', className: this.state.contentClass },
-	      this.props.children
-	    );
+
 	    return React.createElement(
 	      'div',
 	      null,
 	      React.createElement(
 	        'header',
-	        null,
-	        React.createElement(
-	          'h3',
-	          null,
-	          React.createElement(Navbar, null)
-	        )
+	        { id: 'header' },
+	        React.createElement(Navbar, null)
 	      ),
 	      React.createElement(
-	        ReactCSSTransitionGroup,
-	        { transitionName: 'example', transitionEnterTimeout: 500, transitionLeaveTimeout: 300 },
-	        content
-	      )
+	        'div',
+	        { key: 'content', className: this.state.contentClass },
+	        this.props.children
+	      ),
+	      React.createElement('footer', { id: 'footer', className: 'bottom group' })
 	    );
 	  }
 	});
@@ -43525,8 +43517,24 @@ return jQuery;
 	  },
 
 	  render: function () {
-	    var project = this.state.project;
-	    var url = '/categories/' + project.category_id;
+	    var project = this.state.project || {
+	      title: "",
+	      summary: "",
+	      description: "",
+	      creator_id: 0,
+	      category_id: 0,
+	      images: [],
+	      backings: [],
+	      comments: [],
+	      start_date: new Date(),
+	      end_date: new Date()
+	    };
+	    var url;
+	    if (project) {
+	      url = '/categories/' + project.category_id;
+	    } else {
+	      url = '/';
+	    }
 	    var backingForm;
 	    var user = this.state.users.find(function (user) {
 	      return user.id === project.creator_id;
@@ -43646,7 +43654,7 @@ return jQuery;
 	        project.description,
 	        React.createElement(
 	          'div',
-	          null,
+	          { className: 'project-comments' },
 	          React.createElement(
 	            'h4',
 	            null,
@@ -43662,7 +43670,18 @@ return jQuery;
 	  },
 
 	  _calcTimeLeft: function () {
-	    var project = this.state.project;
+	    var project = this.state.project || {
+	      title: "",
+	      summary: "",
+	      description: "",
+	      creator_id: 0,
+	      category_id: 0,
+	      images: [],
+	      backings: [],
+	      comments: [],
+	      start_date: new Date(),
+	      end_date: new Date()
+	    };
 	    var start = new Date(project.start_date);
 	    var end = new Date(project.end_date);
 	    var elapsed = Date.parse(end) - Date.parse(start);
@@ -43671,8 +43690,19 @@ return jQuery;
 	  },
 
 	  _calcFunding: function () {
-	    var project = this.state.project;
-	    var backings = this.state.project.backings;
+	    var project = this.state.project || {
+	      title: "",
+	      summary: "",
+	      description: "",
+	      creator_id: 0,
+	      category_id: 0,
+	      images: [],
+	      backings: [],
+	      comments: [],
+	      start_date: new Date(),
+	      end_date: new Date()
+	    };
+	    var backings = project.backings;
 	    var current_funding = 0;
 
 	    backings.forEach(function (backing) {
@@ -43683,8 +43713,19 @@ return jQuery;
 	  },
 
 	  _checkBacking: function () {
-	    var project = this.state.project;
-	    var backings = this.state.project.backings;
+	    var project = this.state.project || {
+	      title: "",
+	      summary: "",
+	      description: "",
+	      creator_id: 0,
+	      category_id: 0,
+	      images: [],
+	      backings: [],
+	      comments: [],
+	      start_date: new Date(),
+	      end_date: new Date()
+	    };
+	    var backings = project.backings;
 	    var currentUser = SessionStore.currentUser();
 
 	    var backingFound = this._findBacking();
@@ -43694,7 +43735,7 @@ return jQuery;
 
 	  _findBacking: function () {
 	    var project = this.state.project;
-	    var backings = this.state.project.backings;
+	    var backings = project.backings;
 	    var currentUser = SessionStore.currentUser();
 
 	    return backings.find(function (backing) {
@@ -61715,7 +61756,7 @@ return jQuery;
 	            { href: '#', className: 'audio' },
 	            React.createElement(
 	              'audio',
-	              { id: 'swmusic', controls: true, autoplay: true },
+	              { id: 'swmusic', controls: true, autoPlay: true },
 	              React.createElement('source', { src: 'http://res.cloudinary.com/dhcnfmydo/video/upload/v1450469890/Star_Wars_-_Imperial_march_xoyf3w.mp3' })
 	            )
 	          )
