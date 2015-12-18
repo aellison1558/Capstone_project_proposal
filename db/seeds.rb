@@ -16,3 +16,15 @@ end_date: Date.new,
 category_id: 1,
 creator_id: 1
 )
+
+Category.create([
+  {name: 'Superweapons'},
+  {name: 'Imperial Army'},
+  {name: 'Imperial Navy'},
+  {name: 'Technology'}
+  {name: 'Economy'},
+  {name: 'Civil Infrastructure'},
+  {name: 'Exploration'},
+  {name: "Mysteries of the Force"},
+  {name: "Private Projects"}
+])

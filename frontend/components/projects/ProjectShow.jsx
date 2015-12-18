@@ -141,7 +141,7 @@ module.exports = React.createClass({
 
           <div>
             <h4>Comments: ({project.comments.length})</h4>
-            <CommentsIndex user={user} comments={project.comments} />
+            <CommentsIndex comments={project.comments} />
             {commentForm}
           </div>
         </content>
