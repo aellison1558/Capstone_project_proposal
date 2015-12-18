@@ -1,7 +1,14 @@
-var React = require('react');
+var React = require('react'),
+    Jumbotron = require('react-bootstrap').Jumbotron;
 
 module.exports = React.createClass({
+
   render: function() {
-    return(<div>Welcome to the DeathSTARter</div>)
+    return(
+      <Jumbotron className='welcome'>
+        <h1>Welcome to the DeathSTARter</h1>
+        <p>To benefit the Empire and her citizens.</p>
+      </Jumbotron>
+    )
   }
 });

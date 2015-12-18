@@ -50,7 +50,6 @@ body{
   margin-right: 5%;
   height: 100%;
   background: rgba(255,255,255,0.5);
-  opacity: 50%;
   border-radius: 5%;
   position: relative;
 }
@@ -133,4 +132,8 @@ body{
   background-color: white;
   z-index: 1;
   width: 180px;
+}
+
+.welcome{
+  background: rgba(255,255,255,0);
 }
