@@ -11,21 +11,58 @@ module.exports = React.createClass({
       email: "",
       username: "",
       password: "",
+      passwordConfirmation: "",
+      errors: [],
       showModal: false,
     };
   },
 
   close: function() {
-    this.setState({ showModal: false });
+    this.setState({ showModal: false, errors: [] });
   },
 
   open: function() {
     this.setState({ showModal: true });
   },
 
+  _validations: function() {
+    var validated = true;
+    var errors = [];
+    var emailPattern = /.*@.*/;
+
+    if (!this.state.email.match(emailPattern)) {
+      errors.push(<li>Invalid email</li>);
+      this.setState({errors: errors});
+      validated = false;
+    }
+
+    if (!this.state.username) {
+      errors.push(<li>Username can't be blank</li>);
+      this.setState({errors: errors});
+      validated = false;
+    }
+
+    if (!this.state.password) {
+      errors.push(<li>Password can't be blank</li>);
+      this.setState({errors: errors});
+      validated = false;
+    }
+
+    if (this.state.password !== this.state.passwordConfirmation) {
+      errors.push(<li>Password didn't match confirmation</li>);
+      this.setState({errors: errors});
+      validated = false;
+    }
+
+    return validated
+  },
+
   handleSubmit: function(e) {
     e.preventDefault();
+    var validated = true;
+    var errors = this.state.errors.slice();
 
+    if (!this._validations()) {return false;}
     ApiUtil.createUser({
       email: this.state.email,
       username: this.state.username,
@@ -47,6 +84,9 @@ module.exports = React.createClass({
             </Modal.Header>
 
             <Modal.Body>
+            <ul className="errors">
+              {this.state.errors}
+            </ul>
             <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <label>Email:
@@ -63,6 +103,12 @@ module.exports = React.createClass({
                 <div className="form-group">
                   <label>Password:
                     <input type='password' className='form-control' valueLink={this.linkState('password')} />
+                  </label>
+                </div>
+
+                <div className="form-group">
+                  <label>Password-Confirmation:
+                    <input type='password' className='form-control' valueLink={this.linkState('passwordConfirmation')} />
                   </label>
                 </div>
 

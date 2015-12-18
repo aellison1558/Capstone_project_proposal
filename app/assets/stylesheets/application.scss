@@ -70,6 +70,20 @@ body{
   border: 1px solid #ccc;
 }
 
+.nav form{
+  margin-top: 3vh;
+}
+
+.nav a{
+  margin-top: 3vh;
+}
+
+.nav button{
+  margin-right: 5px;
+  margin-top: 2.5vh;
+  line-height: 2;
+}
+
 .project-form{
   width: 60vw;
   margin: auto;
@@ -136,4 +150,9 @@ body{
 
 .welcome{
   background: rgba(255,255,255,0);
+}
+
+.errors{
+  list-style-type: square;
+  color: red;
 }

@@ -10,8 +10,7 @@ class SessionsController < ApplicationController
       sign_in(@user)
       render :show
     else
-      flash.now[:errors] = ["Invalid email/password combination"]
-      render :new
+      render json: ["Invalid email/password combination"]
     end
   end
 

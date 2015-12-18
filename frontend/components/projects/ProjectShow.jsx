@@ -80,14 +80,15 @@ module.exports = React.createClass({
     var backingForm;
 
     if (SessionStore.currentUser()) {
-
+      var commentForm = <CommentForm project={project} />
       if (this._checkBacking()) {
         backingForm = <button onClick={this.undoBacking}>Withdraw Support</button>
       } else {
         backingForm = <BackingsForm project={project}/>
       }
     } else {
-      backingForm = <div><SignInForm /> to Back</div>
+      backingForm = <div><SignInForm text="Log in to back"/></div>
+      commentForm = <div><SignInForm text="Log in to comment"/></div>
     }
 
     return(
@@ -132,7 +133,7 @@ module.exports = React.createClass({
           <div>
             <h4>Comments: ({project.comments.length})</h4>
             <CommentsIndex comments={project.comments} />
-            <CommentForm project={project} />
+            {commentForm}
           </div>
         </content>
       </div>
