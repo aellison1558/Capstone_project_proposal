@@ -7,28 +7,32 @@ var React = require('react'),
     CommentsIndex = require('../comments/CommentsIndex'),
     CommentForm = require('../comments/CommentForm'),
     ProjectImage = require('./ProjectImageCarousel'),
-    SignInForm = require('../SignInForm');
+    SignInForm = require('../SignInForm'),
+    UserStore = require('../../stores/UserStore');
 
 module.exports = React.createClass({
   getInitialState: function() {
     ApiUtil.fetchProject(this.props.params.projectId);
-    return { project: ProjectStore.find(parseInt(this.props.params.projectId))
+    return { project: ProjectStore.find(parseInt(this.props.params.projectId)),
+      users: UserStore.all()
       };
   },
 
   listeners: [],
 
   _updateState: function() {
-    this.setState({ project: ProjectStore.find(parseInt(this.props.params.projectId)) });
+    this.setState({ project: ProjectStore.find(parseInt(this.props.params.projectId)), users: UserStore.all() });
   },
 
   componentWillMount: function() {
     ApiUtil.fetchEveryProject();
+    ApiUtil.fetchAllUsers();
   },
 
   componentDidMount: function() {
     this.listeners.push(ProjectStore.addListener(this._updateState));
     ApiUtil.fetchProject(this.props.params.projectId);
+    ApiUtil.fetchAllUsers();
   },
 
   componentWillUnmount: function() {
@@ -78,6 +82,7 @@ module.exports = React.createClass({
     var project = this.state.project;
     var url = '/categories/' + project.category_id;
     var backingForm;
+    var user = this.state.users.find(function(user) {return user.id === project.creator_id}) || {username: ""}
 
     if (SessionStore.currentUser()) {
       var commentForm = <CommentForm project={project} />
@@ -117,6 +122,10 @@ module.exports = React.createClass({
                 <h5>Campaign:</h5>
                 {this._calcTimeLeft()} days left!
               </div>
+
+              <div>
+                By: {user.username}
+              </div>
             </div>
           </div>
 
@@ -132,7 +141,7 @@ module.exports = React.createClass({
 
           <div>
             <h4>Comments: ({project.comments.length})</h4>
-            <CommentsIndex comments={project.comments} />
+            <CommentsIndex user={user} comments={project.comments} />
             {commentForm}
           </div>
         </content>

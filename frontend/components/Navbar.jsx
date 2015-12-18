@@ -51,14 +51,14 @@ module.exports = React.createClass({
       startProjectUrl = <Link className="navbar-link" to='projects/new'>Start a Project</Link>
 
       signInSignOut = [
-        <li key={5} className='navbar-right'><button className='btn btn-nav' onClick={this.logOut}>Log Out</button></li>,
-        <li key={4} className='navbar-text navbar-right'>Signed in as: <Link id='user-show' to={url}>{this.state.currentUser.username}</Link></li>
+        <li key={6} className='navbar-right'><button className='btn btn-nav' onClick={this.logOut}>Log Out</button></li>,
+        <li key={5} className='navbar-text navbar-right'>Signed in as: <Link id='user-show' to={url}>{this.state.currentUser.username}</Link></li>
       ]
     } else {
       startProjectUrl = <div className='navbar-link'><SignInForm text="Log in to Create Project"/></div>
       signInSignOut = [
-        <li key={4} className='navbar-right'><SignUpForm /></li>,
-        <li key={5} className='navbar-right'><SignInForm text="Log In" /></li>
+        <li key={5} className='navbar-right'><SignUpForm /></li>,
+        <li key={6} className='navbar-right'><SignInForm text="Log In" /></li>
       ]
     }
     return(
@@ -68,6 +68,14 @@ module.exports = React.createClass({
           <li key={1}><Link className="navbar-link" to='/categories'>Discover</Link></li>
           <li key={2}>{startProjectUrl}</li>
           <li key={3}><Search projects={this.state.projects}/></li>
+          <li key={4}>
+            <a href="#" className="audio">
+              <audio id="swmusic">
+                <source  src="http://res.cloudinary.com/dhcnfmydo/video/upload/v1450469890/Star_Wars_-_Imperial_march_xoyf3w.mp3">
+                </source>
+              </audio>
+            </a>
+          </li>
           {signInSignOut}
         </ul>
       </nav>
