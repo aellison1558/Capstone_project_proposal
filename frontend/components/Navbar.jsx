@@ -70,7 +70,7 @@ module.exports = React.createClass({
           <li key={3}><Search projects={this.state.projects}/></li>
           <li key={4}>
             <a href="#" className="audio">
-              <audio id="swmusic" controls autoplay>
+              <audio id="swmusic" controls autoPlay>
                 <source  src="http://res.cloudinary.com/dhcnfmydo/video/upload/v1450469890/Star_Wars_-_Imperial_march_xoyf3w.mp3">
                 </source>
               </audio>

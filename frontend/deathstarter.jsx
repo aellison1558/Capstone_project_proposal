@@ -32,26 +32,22 @@ var React = require('react'),
 
       toggleClass: function(){
         if (this.state.contentClass === 'content group') {
-          this.setState({contentClass: 'content group light', arrowClass: "arrow-light"});
+          this.setState({contentClass: 'content group light'});
         } else {
-          this.setState({contentClass: 'content group', arrowClass: ''});
+          this.setState({contentClass: 'content group'});
         }
       },
 
       render: function(){
-        var arrowClass = 'arrow-down ' + this.state.arrowClass
-        var content = (
-          <div key='content' className={this.state.contentClass}>
-            {this.props.children}
-          </div>
-        )
+
         return(
           <div>
-            <header><h3><Navbar /></h3></header>
-            <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300}>
-              {content}
-            </ReactCSSTransitionGroup>
-
+            <header id='header'><Navbar /></header>
+            
+            <div key='content' className={this.state.contentClass}>
+              {this.props.children}
+            </div>
+            <footer id="footer" className="bottom group"></footer>
           </div>
         )
       }

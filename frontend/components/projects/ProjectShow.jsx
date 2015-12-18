@@ -79,8 +79,24 @@ module.exports = React.createClass({
 
 
   render: function() {
-    var project = this.state.project;
-    var url = '/categories/' + project.category_id;
+    var project = this.state.project || {
+      title: "",
+      summary: "",
+      description: "",
+      creator_id: 0,
+      category_id: 0,
+      images: [],
+      backings: [],
+      comments: [],
+      start_date: new Date(),
+      end_date: new Date()
+    };
+    var url;
+    if (project) {
+      url = '/categories/' + project.category_id;
+    } else {
+      url = '/';
+    }
     var backingForm;
     var user = this.state.users.find(function(user) {return user.id === project.creator_id}) || {username: ""}
 
@@ -139,7 +155,7 @@ module.exports = React.createClass({
           <h4>Project Description:</h4>
           {project.description}
 
-          <div>
+          <div className='project-comments'>
             <h4>Comments: ({project.comments.length})</h4>
             <CommentsIndex comments={project.comments} />
             {commentForm}
@@ -150,7 +166,18 @@ module.exports = React.createClass({
   },
 
   _calcTimeLeft: function() {
-    var project = this.state.project;
+    var project = this.state.project || {
+      title: "",
+      summary: "",
+      description: "",
+      creator_id: 0,
+      category_id: 0,
+      images: [],
+      backings: [],
+      comments: [],
+      start_date: new Date(),
+      end_date: new Date()
+    };
     var start = new Date(project.start_date);
     var end = new Date(project.end_date);
     var elapsed = Date.parse(end) - Date.parse(start)
@@ -159,8 +186,19 @@ module.exports = React.createClass({
   },
 
   _calcFunding: function() {
-    var project = this.state.project;
-    var backings = this.state.project.backings;
+    var project = this.state.project || {
+      title: "",
+      summary: "",
+      description: "",
+      creator_id: 0,
+      category_id: 0,
+      images: [],
+      backings: [],
+      comments: [],
+      start_date: new Date(),
+      end_date: new Date()
+    };
+    var backings = project.backings;
     var current_funding = 0;
 
     backings.forEach(function(backing) {
@@ -171,8 +209,19 @@ module.exports = React.createClass({
   },
 
   _checkBacking: function(){
-    var project = this.state.project;
-    var backings = this.state.project.backings;
+    var project = this.state.project || {
+      title: "",
+      summary: "",
+      description: "",
+      creator_id: 0,
+      category_id: 0,
+      images: [],
+      backings: [],
+      comments: [],
+      start_date: new Date(),
+      end_date: new Date()
+    };
+    var backings = project.backings;
     var currentUser = SessionStore.currentUser();
 
     var backingFound = this._findBacking()
@@ -182,7 +231,7 @@ module.exports = React.createClass({
 
   _findBacking: function() {
     var project = this.state.project;
-    var backings = this.state.project.backings;
+    var backings = project.backings;
     var currentUser = SessionStore.currentUser();
 
     return backings.find(function(backing){
