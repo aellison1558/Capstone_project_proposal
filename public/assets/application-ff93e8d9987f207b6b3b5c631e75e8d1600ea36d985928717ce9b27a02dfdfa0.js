@@ -61181,7 +61181,7 @@ return jQuery;
 	          React.createElement('textarea', { className: 'form-control', valueLink: this.linkState('body') })
 	        )
 	      ),
-	      React.createElement('input', { type: 'submit', value: 'Add Comment' })
+	      React.createElement('input', { className: 'submit', type: 'submit', value: 'Add Comment' })
 	    );
 	  }
 	});

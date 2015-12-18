@@ -50,7 +50,7 @@ body{
   height: 80vh;
   background: rgba(45,76,135,0.5);
   color: rgba(242, 242, 242, 0.7);
-
+  margin-bottom: 10vh;
   position: relative;
   transition: background-color 3s, color 3s;
 }
@@ -60,6 +60,12 @@ body{
   background-color: rgba(223, 60, 103, 0.8);
 }
 .content button{
+  color: rgba(255,255,255,1);
+  background-color: rgba(223, 60, 103, 0.8);
+  border: 0;
+}
+
+.submit{
   color: rgba(255,255,255,1);
   background-color: rgba(223, 60, 103, 0.8);
   border: 0;
@@ -164,6 +170,7 @@ body{
   padding-left: 30vw;
   padding-right: 30vw;
   overflow: auto;
+  margin-bottom: 5vh;
 }
 
 .user-profile-pane{

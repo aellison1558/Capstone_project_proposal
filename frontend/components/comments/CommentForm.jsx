@@ -28,7 +28,7 @@ module.exports = React.createClass({
           </label>
         </div>
 
-        <input type="submit" value="Add Comment"/>
+        <input className='submit' type="submit" value="Add Comment"/>
       </form>
     )
   }
