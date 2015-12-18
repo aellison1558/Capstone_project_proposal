@@ -7,7 +7,7 @@ module.exports = React.createClass({
     return(
       <Jumbotron className='welcome'>
         <h1>Welcome to the DeathSTARter</h1>
-        <p>To benefit the Empire and her citizens.</p>
+        <p>Funding the common good of the Empire</p>
       </Jumbotron>
     )
   }
