@@ -16,6 +16,7 @@
 
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @import url(https://fonts.googleapis.com/css?family=Orbitron:400,900);
 
  .group:after {
   content: "";
@@ -36,6 +37,7 @@
  }
 
 body{
+  font-family: 'Orbitron', sans-serif;
   background: url(background.jpg);
   margin: 0px;
   height: 100%;
@@ -187,9 +189,7 @@ body{
   float: left;
   width: 20vw;
   height: 10vw;
-  background: url(Superlaser2.jpg);
-  background-size: cover;
-  background-position: center center;
+
   text-align: center center;
   color: #ffffff;
   font-size: 20px;
@@ -199,6 +199,60 @@ body{
     -1px 1px 0 #000,
     1px 1px 0 #000;
 
+}
+
+#superweapons{
+  background: url(Superlaser2.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+#navy{
+  background: url(navy.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+#army{
+  background: url(army.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+#technology{
+  background: url(technology.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+#economy{
+  background: url(economy.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+#civil{
+  background: url(civil.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+#exploration{
+  background: url(exploration.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+#force{
+  background: url(force.jpg);
+  background-size: cover;
+  background-position: center center;
+}
+
+#private{
+  background: url(private.JPG);
+  background-size: cover;
+  background-position: center center;
 }
 
 .carousel{

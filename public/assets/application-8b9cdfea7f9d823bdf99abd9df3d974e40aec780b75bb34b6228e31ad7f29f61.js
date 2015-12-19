@@ -43262,7 +43262,7 @@ return jQuery;
 
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
-	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 300 },
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, : 300 },
 	      React.createElement(
 	        'div',
 	        { key: 'category-index-pane', className: 'category-index-pane' },
@@ -43332,7 +43332,7 @@ return jQuery;
 	  render: function () {
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
-	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 300 },
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, : 300 },
 	      React.createElement(
 	        'div',
 	        null,
@@ -43583,7 +43583,7 @@ return jQuery;
 
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
-	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 300 },
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, : 300 },
 	      React.createElement(
 	        'div',
 	        { className: 'project-show-pane' },
@@ -61490,7 +61490,7 @@ return jQuery;
 
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
-	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 300 },
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, : 300 },
 	      React.createElement(
 	        'div',
 	        { className: 'project-form' },
@@ -61630,7 +61630,7 @@ return jQuery;
 	  render: function () {
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
-	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 300 },
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, : 300 },
 	      React.createElement(
 	        Jumbotron,
 	        { className: 'welcome' },
@@ -62716,7 +62716,7 @@ return jQuery;
 
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
-	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 300 },
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, : 300 },
 	      React.createElement(
 	        'div',
 	        { className: 'user-profile-pane' },
@@ -62863,7 +62863,7 @@ return jQuery;
 	    transitionLeave: React.PropTypes.bool,
 	    transitionAppearTimeout: createTransitionTimeoutPropValidator('Appear'),
 	    transitionEnterTimeout: createTransitionTimeoutPropValidator('Enter'),
-	    transitionLeaveTimeout: createTransitionTimeoutPropValidator('Leave')
+	    : createTransitionTimeoutPropValidator('Leave')
 	  },
 
 	  getDefaultProps: function () {
@@ -62885,7 +62885,7 @@ return jQuery;
 	      leave: this.props.transitionLeave,
 	      appearTimeout: this.props.transitionAppearTimeout,
 	      enterTimeout: this.props.transitionEnterTimeout,
-	      leaveTimeout: this.props.transitionLeaveTimeout
+	      leaveTimeout: this.props.
 	    }, child);
 	  },
 

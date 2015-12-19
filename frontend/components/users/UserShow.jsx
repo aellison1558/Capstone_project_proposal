@@ -80,7 +80,7 @@ module.exports = React.createClass({
     }
 
     return(
-      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={300}>
+      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} >
         <div className="user-profile-pane">
           <h3>{username}</h3>
           <img src={url} alt="Profile picture" />

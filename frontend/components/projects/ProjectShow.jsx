@@ -8,7 +8,8 @@ var React = require('react'),
     CommentForm = require('../comments/CommentForm'),
     ProjectImage = require('./ProjectImageCarousel'),
     SignInForm = require('../SignInForm'),
-    UserStore = require('../../stores/UserStore');
+    UserStore = require('../../stores/UserStore'),
+    Funding = require('./Funding');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -113,7 +114,7 @@ module.exports = React.createClass({
     }
 
     return(
-      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={300}>
+      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} >
         <div className="project-show-pane">
           <Link to={url}>Back to Projects List</Link>
           <header>
@@ -132,6 +133,7 @@ module.exports = React.createClass({
                   <br/>
                   {project.backings.length} Backers
                   <br/>
+                  <Funding />
                   {backingForm}
                 </div>
 

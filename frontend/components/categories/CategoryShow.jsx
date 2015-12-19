@@ -12,7 +12,7 @@ module.exports = React.createClass({
   render: function() {
     return(
 
-      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={300}>
+      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} >
         <div>
           <ProjectIndex editButtonHandler={this.editButtonHandler} categoryId={this.props.params.categoryId} />
         </div>

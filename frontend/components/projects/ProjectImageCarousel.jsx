@@ -29,7 +29,7 @@ module.exports = React.createClass({
       var url = "http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/" + image.image_public_id
       return (
         <CarouselItem key={image.id}>
-          <img width={300} height={400} alt="Project image" src={url}/>
+          <img width height={400} alt="Project image" src={url}/>
 
         </CarouselItem>
       )
