@@ -100,6 +100,7 @@ module.exports = React.createClass({
     }
     var backingForm;
     var user = this.state.users.find(function(user) {return user.id === project.creator_id}) || {username: ""}
+    var userUrl = user.id ? '/users/' + user.id : "";
 
     if (SessionStore.currentUser()) {
       var commentForm = <CommentForm project={project} />
@@ -143,7 +144,7 @@ module.exports = React.createClass({
                 </div>
 
                 <div>
-                  By: {user.username}
+                  By: <Link to={userUrl}>{user.username}</Link>
                 </div>
               </div>
             </div>

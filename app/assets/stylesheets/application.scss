@@ -136,7 +136,6 @@ body{
 
 
 .nav{
-  display: block;
   position: sticky;
   width: 100%;
   color: rgb(178,170,167);
@@ -258,6 +257,20 @@ body{
 .carousel{
   display: block;
   float: left;
+}
+
+.project-index{
+  position: relative;
+  width: 80vw;
+  padding-left: 20vw;
+}
+
+.project-index-item{
+  float: left;
+  width: 20vw;
+  margin-top: 5vh;
+  margin-right: 5vw;
+  margin-left: 5vw;
 }
 
 .project-show-pane{
