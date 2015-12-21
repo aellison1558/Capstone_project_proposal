@@ -6,6 +6,15 @@ var React = require('react'),
 module.exports = React.createClass({
   mixins: [LinkStateMixin],
 
+  titles: [
+    "Good, good, let the funds flow through you.",
+    "Fund this, it is your destiny.",
+    "Fund me now, and your journey towards the dark side will be complete",
+    "I find your lack of funding disturbing",
+    "This is the project you're looking for"
+
+  ],
+
   getInitialState: function() {
     return {
       amount: 0,
@@ -31,6 +40,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var title = this.titles[Math.floor(Math.random() * 5)];
     var submitText = "Back " + this.props.project.title
     return(
       <div>
@@ -41,7 +51,7 @@ module.exports = React.createClass({
         <Modal show={this.state.showModal} onHide={this.close}>
 
             <Modal.Header closeButton>
-              <Modal.Title>Back Project:</Modal.Title>
+              <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>

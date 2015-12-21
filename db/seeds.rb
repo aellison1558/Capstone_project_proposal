@@ -14,7 +14,8 @@ User.create([
   {email: 'leth@impscience.gov', username: 'Umak Leth', password: 'science!'},
   {email: 'jerjerrod@empire.gov', username: 'Moff Jerjerrod', password: 'deathstar2'},
   {email: 'gahg@empire.gov', username: 'Finance Minister Gahg', password: 'mrovermc'},
-  {email: 'veers@imparmy.mil', username: "General Veers", password: 'walkingthunder'}
+  {email: 'veers@imparmy.mil', username: "General Veers", password: 'walkingthunder'},
+  {email: 'tk-421@stc.mil', username: "Stormtrooper TK-421", password: 'feelingalittleshort'}
 ])
 
 Image.create([
@@ -61,6 +62,7 @@ Image.create([
   {imageable_id: '5', imageable_type: 'User', image_public_id: 'Leth_rcba5u'},
   {imageable_id: '6', imageable_type: 'User', image_public_id: 'Jerjerrod-hd_v2fe7a'},
   {imageable_id: '8', imageable_type: 'User', image_public_id: 'GeneralVeers_Murray_TCG.jpg_awtyp4'},
+  {imageable_id: '9', imageable_type: 'User', image_public_id: '1588263-tk421_hmhyze'},
 ])
 
 Project.create([
@@ -257,6 +259,61 @@ Project.create([
     creator_id: 5
   },
 
+  {
+    title: "Something economic",
+    summary: "",
+    description: "",
+    goal_amt: 1000000000000,
+    start_date: Date.new,
+    end_date: Date.new,
+    category_id: 5,
+    creator_id: 7
+  },
+
+  {
+    title: "Something civic",
+    summary: "",
+    description: "",
+    goal_amt: 1000000000000,
+    start_date: Date.new,
+    end_date: Date.new,
+    category_id: 6,
+    creator_id: 7
+  },
+
+  {
+    title: "Something exploration",
+    summary: "",
+    description: "",
+    goal_amt: 1000000000000,
+    start_date: Date.new,
+    end_date: Date.new,
+    category_id: 7,
+    creator_id: 7
+  },
+
+  {
+    title: "Something force",
+    summary: "",
+    description: "",
+    goal_amt: 1000000000000,
+    start_date: Date.new,
+    end_date: Date.new,
+    category_id: 8,
+    creator_id: 7
+  },
+
+  {
+    title: "Something private",
+    summary: "",
+    description: "",
+    goal_amt: 1000000000000,
+    start_date: Date.new,
+    end_date: Date.new,
+    category_id: 9,
+    creator_id: 7
+  },
+
 
 ])
 
@@ -275,8 +332,14 @@ Category.create([
 Backing.create([
   {backer_id: 1, project_id: 1, amount: 1000000000},
   {backer_id: 3, project_id: 1, amount: 1000000000}
+  {backer_id: 4, project_id: 1, amount: 1000000000},
+  {backer_id: 5, project_id: 1, amount: 1000000000},
+  {backer_id: 6, project_id: 1, amount: 1000000000},
+  {backer_id: 7, project_id: 1, amount: 1000000000},
+  {backer_id: 8, project_id: 1, amount: 1000000000},
 ])
 
 Comment.create([
-  {author_id: 2, project_id: 1, body: "Good, good.  Let the fund flow through you!"}
+  {author_id: 2, project_id: 1, body: "Good, good.  Let the funds flow through you!"},
+  {author_id: 1, project_id: 1, body: "Yes, my master"}
 ])

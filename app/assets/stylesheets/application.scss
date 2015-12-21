@@ -120,6 +120,15 @@ body{
   color: rgba(255,255,255,0.7);
 }
 
+.navbar{
+  margin-bottom: 0px;
+  position: sticky;
+  color: rgb(178,170,167);
+  background-color: black;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
 .navbar-brand{
   display: inline-block;
   height: 85px;
@@ -131,37 +140,43 @@ body{
 
 .navbar-brand img{
   position: relative;
-  top: -25px;
+  top: -10px;
 }
 
 
 .nav{
-  position: sticky;
-  width: 100%;
-  color: rgb(178,170,167);
-  background-color: black;
-  border-top: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
+  position: relative;
 }
 
 .nav form{
-  margin-top: 4vh;
+  position: relative;
+  top: -10px;
 }
 
 .nav a{
-  margin-top: 3vh;
-}
-
-.nav button{
-  margin-right: 1vw;
   margin-top: 2.5vh;
-  line-height: 2;
 }
 
-.nav div, .nav li, .nav a{
-  margin-right: 5px;
-  margin-left: 10px;
+// .nav button{
+//   margin-right: 1vw;
+//   margin-top: 2.5vh;
+//   line-height: 2;
+// }
+
+.container{
+  position: relative;
+  padding: 0;
+  margin: 0;
 }
+
+.container div.navbar-collapse{
+  width: 95vw;
+}
+
+// .nav div, .nav li, .nav a{
+//   margin-right: 5px;
+//   margin-left: 10px;
+// }
 
 .project-form{
   width: 60vw;
