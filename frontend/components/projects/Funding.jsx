@@ -8,7 +8,9 @@ module.exports = React.createClass({
   },
 
   _determineCircleCoordinates: function(){
-
+    var coordinateX = this.props.difference * 50 + 25;
+    var coordinateY = 25 - this.props.difference * 50;
+    return [coordinateY, coordinateX];
   },
 
   _determineTriangleCoordinates: function(){
@@ -38,7 +40,7 @@ module.exports = React.createClass({
 
     ctx.fillStyle = '#FF0000';
     ctx.beginPath();
-    ctx.arc(25, 25, 5, 0, 2 * Math.PI, true);
+    ctx.arc(this._determineCircleCoordinates()[0], this._determineCircleCoordinates()[1], 5, 0, 2 * Math.PI, true);
     ctx.fill();
 
     ctx.moveTo(25, 25);

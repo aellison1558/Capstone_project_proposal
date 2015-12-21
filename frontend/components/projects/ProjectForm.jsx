@@ -85,6 +85,8 @@ module.exports = React.createClass({
       return <option key={category.id} value={category.id}>{category.name}</option>
     });
 
+    var submitText = this.props.params.projectId ? "Update Project" : "Create Project";
+
     return(
       <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} >
         <div className="project-form">
@@ -143,7 +145,7 @@ module.exports = React.createClass({
               <input type="date" className="form-control" valueLink={this.linkState('end_date')}/>
             </div>
 
-            <input className='submit' type='submit' value="Create Project" />
+            <input className='submit' type='submit' value={submitText} />
           </form>
         </div>
       </ReactCSSTransitionGroup>

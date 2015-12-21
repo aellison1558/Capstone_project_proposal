@@ -15,7 +15,11 @@ User.create([
   {email: 'jerjerrod@empire.gov', username: 'Moff Jerjerrod', password: 'deathstar2'},
   {email: 'gahg@empire.gov', username: 'Finance Minister Gahg', password: 'mrovermc'},
   {email: 'veers@imparmy.mil', username: "General Veers", password: 'walkingthunder'},
-  {email: 'tk-421@stc.mil', username: "Stormtrooper TK-421", password: 'feelingalittleshort'}
+  {email: 'tk-421@stc.mil', username: "Stormtrooper TK-421", password: 'feelingalittleshort'},
+  {email: 'tonth@impsurvey.gov', username: "Captain Tonth", password: 'explorerreporting'},
+  {email: 'grandinquisitor@inquisitorius.gov', username: "Grand Inquisitor", password: "jedihunting"},
+  {email: 'jabba@tatooine.hutt', username: "The Great Jabba", password: 'youlllearntoloveme'},
+  {email: 'cody@gar.mil', username: "Commander Cody", password: 'grandarmyoftherepublic'}
 ])
 
 Image.create([
@@ -55,6 +59,16 @@ Image.create([
   {imageable_id: '11', imageable_type: 'Project', image_public_id: 'Personal-shield_negwt_ksuslx'},
   {imageable_id: '11', imageable_type: 'Project', image_public_id: 'PersonalShields-SWIA_jeh1kl'},
 
+  {imageable_id: '12', imageable_type: 'Project', image_public_id: 'Deep_Core_m80hyc'},
+
+  {imageable_id: '13', imageable_type: 'Project', image_public_id: 'Unknown_Regions_kxrghx'},
+
+  {imageable_id: '14', imageable_type: 'Project', image_public_id: 'KaasCity-TOR_qihbeb'},
+
+  {imageable_id: '15', imageable_type: 'Project', image_public_id: 'Mos_Espa_AotC_hfbkfq'},
+
+  {imageable_id: '16', imageable_type: 'Project', image_public_id: 'Grand_army_formation.jpg_vmlbzc'},
+
 
   {imageable_id: '1', imageable_type: 'User', image_public_id: 'oxba40nyjywfxglzhpx7'},
   {imageable_id: '2', imageable_type: 'User', image_public_id: 'emperor_zrib13'},
@@ -63,6 +77,10 @@ Image.create([
   {imageable_id: '6', imageable_type: 'User', image_public_id: 'Jerjerrod-hd_v2fe7a'},
   {imageable_id: '8', imageable_type: 'User', image_public_id: 'GeneralVeers_Murray_TCG.jpg_awtyp4'},
   {imageable_id: '9', imageable_type: 'User', image_public_id: '1588263-tk421_hmhyze'},
+  {imageable_id: '10', imageable_type: 'User', image_public_id: 'Pilia_Tonth_cvdaa1'},
+  {imageable_id: '11', imageable_type: 'User', image_public_id: 'TheInquisitor_jm9iyy'},
+  {imageable_id: '12', imageable_type: 'User', image_public_id: 'Jabba_SWSB_ohcth1'},
+  {imageable_id: '13', imageable_type: 'User', image_public_id: 'CodyHS_gqhisg'},
 ])
 
 Project.create([
@@ -259,6 +277,76 @@ Project.create([
     creator_id: 5
   },
 
+
+
+  {
+    title: "Rechart the Deep Core",
+    summary: "Find reliable paths into the heart of the galaxy",
+    description: "
+      The Deep Core is a treacherous place.  Massive stars and blackholes make charting hyperspace routes difficult.  However, the Deep Core is rumored to have many habitable worlds, some of great historic importance.  I would like to put together a team to find a way into the Deep Core and find out the truth behind these rumors.",
+    goal_amt: 100000000000,
+    start_date: Date.new,
+    end_date: Date.new,
+    category_id: 7,
+    creator_id: 10
+  },
+
+  {
+    title: "Chart the Unknown Regions",
+    summary: "Explore new sectors and worlds",
+    description: "
+        There is a large portion of the galaxy that after thousands of years of space travel is still unexplored.  I would like to put together a team to venture into said region and discover new worlds.
+      ",
+    goal_amt: 100000000000,
+    start_date: Date.new,
+    end_date: Date.new,
+    category_id: 7,
+    creator_id: 10
+  },
+
+  {
+    title: "Find Dromund Kaas",
+    summary: "Find the capital of the ancient Sith Empire",
+    description: "
+      Dromund Kaas was the capital city of the first Sith Empire.  Unlike Korriban, its location was lost long ago.  I believe it is therefore untouched by time and looters.  We should mount an expedition immediately to secure its power lest an enemy of the Empire arrive there first.
+    ",
+    goal_amt: 100000000000,
+    start_date: Date.new,
+    end_date: Date.new,
+    category_id: 8,
+    creator_id: 11
+  },
+
+  {
+    title: "Hotel Tatooine",
+    summary: "Bu investment see wa sicieia",
+    description: "Nan bo, nan tytung. Bu cakanle Jabba kanieh uba bai chalankbana du Yakai Hokaaen. Yoieu koumhaptecee doi bu kouiohe see mee danko an gee uahloba du bu bin du tah dhiuox'a tam jedahkacs bmala mee. Natmahconza dah jaa whonbola an neu bu neu cay nagoza-ah dah Jabba baa see'ybark! Tah doth ba makacheesa uba caiot tee san bai konpa!",
+    goal_amt: 1000000000000,
+    start_date: Date.new,
+    end_date: Date.new,
+    category_id: 9,
+    creator_id: 12
+  },
+
+  {
+    title: "Return to the Clones",
+    summary: "Bring back the best soldiers",
+    description: "
+    Under Regulation 5.3, I must report a grave misconduct by my superiors.  Specifically: replacing our very best soldiers with subpar amateurs.
+
+    The Grand Army of the Republic was the most powerful army this galaxy's ever seen, and that was because of us, the clones.  We defeated the Separatists.  We ended the Clone Wars.  We defeated the Jedi who betrayed us.  We kept the peace afterwards.
+
+    Yet, our superiors seem to think we can be replaced.  I've noticed a steady decline in the competency of the Imperial Military ever since we stopped using the clones.  The stormtroopers who replaced us are, bluntly, terrible.
+
+    Save the Imperial military from disaster before it's too late.  Bring us back.
+    ",
+    goal_amt: 10000000000000,
+    start_date: Date.new,
+    end_date: Date.new,
+    category_id: 2,
+    creator_id: 13
+  },
+
   {
     title: "Something economic",
     summary: "",
@@ -281,38 +369,6 @@ Project.create([
     creator_id: 7
   },
 
-  {
-    title: "Something exploration",
-    summary: "",
-    description: "",
-    goal_amt: 1000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
-    category_id: 7,
-    creator_id: 7
-  },
-
-  {
-    title: "Something force",
-    summary: "",
-    description: "",
-    goal_amt: 1000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
-    category_id: 8,
-    creator_id: 7
-  },
-
-  {
-    title: "Something private",
-    summary: "",
-    description: "",
-    goal_amt: 1000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
-    category_id: 9,
-    creator_id: 7
-  },
 
 
 ])

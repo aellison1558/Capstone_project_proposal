@@ -10,10 +10,13 @@ module.exports = React.createClass({
   },
 
   render: function() {
+    var disclaimer = parseInt(this.props.params.categoryId) === 9 ? "Note: all private projects are subject to review by the Imperial Security Bureau" : "";
+    
     return(
 
       <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} >
         <div>
+          <h6>{disclaimer}</h6>
           <ProjectIndex editButtonHandler={this.editButtonHandler} categoryId={this.props.params.categoryId} />
         </div>
       </ReactCSSTransitionGroup>

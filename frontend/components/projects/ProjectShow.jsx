@@ -101,7 +101,7 @@ module.exports = React.createClass({
     var backingForm;
     var user = this.state.users.find(function(user) {return user.id === project.creator_id}) || {username: ""}
     var userUrl = user.id ? '/users/' + user.id : "";
-
+  
     if (SessionStore.currentUser()) {
       var commentForm = <CommentForm project={project} />
       if (this._checkBacking()) {
@@ -134,7 +134,7 @@ module.exports = React.createClass({
                   <br/>
                   {project.backings.length} Backers
                   <br/>
-                  <Funding />
+
                   {backingForm}
                 </div>
 
