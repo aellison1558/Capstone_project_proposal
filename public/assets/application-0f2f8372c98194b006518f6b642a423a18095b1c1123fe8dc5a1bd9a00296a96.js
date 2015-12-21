@@ -44126,12 +44126,19 @@ return jQuery;
 	  },
 
 	  render: function () {
+	    var disclaimer = parseInt(this.props.params.categoryId) === 9 ? "Note: all private projects are subject to review by the Imperial Security Bureau" : "";
+
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
 	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000 },
 	      React.createElement(
 	        'div',
 	        null,
+	        React.createElement(
+	          'h6',
+	          null,
+	          disclaimer
+	        ),
 	        React.createElement(ProjectIndex, { editButtonHandler: this.editButtonHandler, categoryId: this.props.params.categoryId })
 	      )
 	    );
@@ -44440,7 +44447,6 @@ return jQuery;
 	                project.backings.length,
 	                ' Backers',
 	                React.createElement('br', null),
-	                React.createElement(Funding, null),
 	                backingForm
 	              ),
 	              React.createElement(
@@ -62275,7 +62281,11 @@ return jQuery;
 	    };
 	  },
 
-	  _determineCircleCoordinates: function () {},
+	  _determineCircleCoordinates: function () {
+	    var coordinateX = this.props.difference * 50 + 25;
+	    var coordinateY = 25 - this.props.difference * 50;
+	    return [coordinateY, coordinateX];
+	  },
 
 	  _determineTriangleCoordinates: function () {},
 
@@ -62302,7 +62312,7 @@ return jQuery;
 
 	    ctx.fillStyle = '#FF0000';
 	    ctx.beginPath();
-	    ctx.arc(25, 25, 5, 0, 2 * Math.PI, true);
+	    ctx.arc(this._determineCircleCoordinates()[0], this._determineCircleCoordinates()[1], 5, 0, 2 * Math.PI, true);
 	    ctx.fill();
 
 	    ctx.moveTo(25, 25);
@@ -62417,6 +62427,8 @@ return jQuery;
 	      );
 	    });
 
+	    var submitText = this.props.params.projectId ? "Update Project" : "Create Project";
+
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
 	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000 },
@@ -62510,7 +62522,7 @@ return jQuery;
 	            ),
 	            React.createElement('input', { type: 'date', className: 'form-control', valueLink: this.linkState('end_date') })
 	          ),
-	          React.createElement('input', { className: 'submit', type: 'submit', value: 'Create Project' })
+	          React.createElement('input', { className: 'submit', type: 'submit', value: submitText })
 	        )
 	      )
 	    );
