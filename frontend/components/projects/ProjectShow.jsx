@@ -94,7 +94,7 @@ module.exports = React.createClass({
       end_date: new Date()
     };
     var url;
-    if (project) {
+    if (this.state.project) {
       url = '/categories/' + project.category_id;
     } else {
       url = '/';
@@ -103,7 +103,7 @@ module.exports = React.createClass({
     var user = this.state.users.find(function(user) {return user.id === project.creator_id}) || {username: ""}
     var userUrl = user.id ? '/users/' + user.id : "";
 
-    if (SessionStore.currentUser()) {
+    if (SessionStore.currentUser() && user.id) {
       var commentForm = <CommentForm project={project} />
       if (this._checkBacking()) {
         backingForm = <button onClick={this.undoBacking}>Withdraw Support</button>
@@ -116,7 +116,11 @@ module.exports = React.createClass({
     }
 
     var timeLeft = "";
-    if (this._checkLive() === 'LIVE') {
+    var live = ""
+    if (user.id) {
+      var live = this._checkLive()
+    }
+    if (user.id && live === 'LIVE') {
       timeLeft = <div>{this._calcTimeLeft()} days left!</div>;
     };
 
@@ -153,7 +157,7 @@ module.exports = React.createClass({
 
                 <div>
                   <h5>Campaign:</h5>
-                  <h6>{this._checkLive()}</h6>
+                  <h6>{live}</h6>
                   {timeLeft}
                 </div>
 

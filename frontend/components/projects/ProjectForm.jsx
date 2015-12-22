@@ -21,7 +21,7 @@ module.exports = React.createClass({
       };
 
       initialState['categories'] = CategoryStore.all();
-      initialState['errors'] = "";
+      initialState['errors'] = [];
     }
     else {
       initialState = {
@@ -33,7 +33,7 @@ module.exports = React.createClass({
         end_date: new Date(),
         category_id: 0,
         categories: CategoryStore.all(),
-        errors: ""
+        errors: []
       }
     }
 
@@ -55,7 +55,7 @@ module.exports = React.createClass({
 
     var project = this._stateProjectProperties();
 
-    if (this._validProperties()) {
+    if (this._validProperties()[0]) {
 
       if (this.props.params.projectId) {
         ApiUtil.updateProject(this.props.params.projectId, project);
@@ -67,7 +67,7 @@ module.exports = React.createClass({
 
     } else {
 
-      this.setState({errors: "something went wrong"})
+      this.setState({errors: this._validProperties()[1]})
 
     }
   },
@@ -78,7 +78,7 @@ module.exports = React.createClass({
 
   sampleProject: function(e) {
     e.preventDefault();
-    
+
     this.setState({
       title: "Better Power Converters",
       summary: "Longer lasting, more reliable power converters",
@@ -91,7 +91,6 @@ module.exports = React.createClass({
       errors: ""
     })
   },
-
 
   //render
 
@@ -106,7 +105,7 @@ module.exports = React.createClass({
     return(
       <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} >
         <div className="project-form">
-          <div>{this.state.errors}</div>
+          <ul>{this.state.errors.map(function(error) {return <li>{error}</li>})}</ul>
 
           <form onSubmit={this.submitHandler}>
             <button onClick={this.sampleProject}>Sample Project</button>
@@ -178,20 +177,51 @@ module.exports = React.createClass({
   _validProperties: function() {
     var start = new Date(this.state.start_date);
     var end = new Date(this.state.end_date);
+    var today = new Date();
     var elapsed = Date.parse(end) - Date.parse(start)
-    if (
-        this.state.title &&
-        this.state.description &&
-        this.state.category_id &&
-        this.state.goal_amt &&
-        this.state.start_date &&
-        this.state.end_date &&
-        (elapsed > 0)
-      ) {
-        return true
-      } else {
-        return false
-      }
+    var errors = [];
+    var validated = true;
+    if (!this.state.title) {
+      errors.push("Title can't be blank");
+      validated = false;
+    };
+
+    if (!this.state.description) {
+      errors.push("Description can't be blank");
+      validated = false;
+    };
+
+    if (!this.state.category_id) {
+      errors.push("Category can't be blank");
+      validated = false;
+    };
+
+    if (!this.state.goal_amt) {
+      errors.push("Funding Goal can't be blank");
+      validated = false;
+    };
+
+    if (!this.state.start_date) {
+      errors.push("Start date can't be blank");
+      validated = false;
+    };
+
+    if (!this.state.end_date) {
+      errors.push("End date can't be blank");
+      validated = false;
+    };
+
+    if (elapsed < 0) {
+      errors.push("End date must come after start date");
+      validated = false;
+    };
+
+    if (Date.parse(start) - Date.parse(today) < 0) {
+      errors.push("Must choose a future date for start date");
+      validated = false;
+    }
+
+    return [validated, errors];
   },
 
   _stateProjectProperties: function(){

@@ -44413,7 +44413,7 @@ return jQuery;
 	      end_date: new Date()
 	    };
 	    var url;
-	    if (project) {
+	    if (this.state.project) {
 	      url = '/categories/' + project.category_id;
 	    } else {
 	      url = '/';
@@ -44424,7 +44424,7 @@ return jQuery;
 	    }) || { username: "" };
 	    var userUrl = user.id ? '/users/' + user.id : "";
 
-	    if (SessionStore.currentUser()) {
+	    if (SessionStore.currentUser() && user.id) {
 	      var commentForm = React.createElement(CommentForm, { project: project });
 	      if (this._checkBacking()) {
 	        backingForm = React.createElement(
@@ -44449,7 +44449,11 @@ return jQuery;
 	    }
 
 	    var timeLeft = "";
-	    if (this._checkLive() === 'LIVE') {
+	    var live = "";
+	    if (user.id) {
+	      var live = this._checkLive();
+	    }
+	    if (user.id && live === 'LIVE') {
 	      timeLeft = React.createElement(
 	        'div',
 	        null,
@@ -44535,7 +44539,7 @@ return jQuery;
 	                React.createElement(
 	                  'h6',
 	                  null,
-	                  this._checkLive()
+	                  live
 	                ),
 	                timeLeft
 	              ),
@@ -62415,7 +62419,7 @@ return jQuery;
 	      };
 
 	      initialState['categories'] = CategoryStore.all();
-	      initialState['errors'] = "";
+	      initialState['errors'] = [];
 	    } else {
 	      initialState = {
 	        title: "",
@@ -62426,7 +62430,7 @@ return jQuery;
 	        end_date: new Date(),
 	        category_id: 0,
 	        categories: CategoryStore.all(),
-	        errors: ""
+	        errors: []
 	      };
 	    }
 
@@ -62447,7 +62451,7 @@ return jQuery;
 
 	    var project = this._stateProjectProperties();
 
-	    if (this._validProperties()) {
+	    if (this._validProperties()[0]) {
 
 	      if (this.props.params.projectId) {
 	        ApiUtil.updateProject(this.props.params.projectId, project);
@@ -62458,7 +62462,7 @@ return jQuery;
 	      }
 	    } else {
 
-	      this.setState({ errors: "something went wrong" });
+	      this.setState({ errors: this._validProperties()[1] });
 	    }
 	  },
 
@@ -62503,9 +62507,15 @@ return jQuery;
 	        'div',
 	        { className: 'project-form' },
 	        React.createElement(
-	          'div',
+	          'ul',
 	          null,
-	          this.state.errors
+	          this.state.errors.map(function (error) {
+	            return React.createElement(
+	              'li',
+	              null,
+	              error
+	            );
+	          })
 	        ),
 	        React.createElement(
 	          'form',
@@ -62609,12 +62619,51 @@ return jQuery;
 	  _validProperties: function () {
 	    var start = new Date(this.state.start_date);
 	    var end = new Date(this.state.end_date);
+	    var today = new Date();
 	    var elapsed = Date.parse(end) - Date.parse(start);
-	    if (this.state.title && this.state.description && this.state.category_id && this.state.goal_amt && this.state.start_date && this.state.end_date && elapsed > 0) {
-	      return true;
-	    } else {
-	      return false;
+	    var errors = [];
+	    var validated = true;
+	    if (!this.state.title) {
+	      errors.push("Title can't be blank");
+	      validated = false;
+	    };
+
+	    if (!this.state.description) {
+	      errors.push("Description can't be blank");
+	      validated = false;
+	    };
+
+	    if (!this.state.category_id) {
+	      errors.push("Category can't be blank");
+	      validated = false;
+	    };
+
+	    if (!this.state.goal_amt) {
+	      errors.push("Funding Goal can't be blank");
+	      validated = false;
+	    };
+
+	    if (!this.state.start_date) {
+	      errors.push("Start date can't be blank");
+	      validated = false;
+	    };
+
+	    if (!this.state.end_date) {
+	      errors.push("End date can't be blank");
+	      validated = false;
+	    };
+
+	    if (elapsed < 0) {
+	      errors.push("End date must come after start date");
+	      validated = false;
+	    };
+
+	    if (Date.parse(start) - Date.parse(today) < 0) {
+	      errors.push("Must choose a future date for start date");
+	      validated = false;
 	    }
+
+	    return [validated, errors];
 	  },
 
 	  _stateProjectProperties: function () {
