@@ -11763,7 +11763,15 @@ return jQuery;
 	      React.createElement(
 	        ReactCSSTransitionGroup,
 	        { transitionName: 'slide', transitionAppear: true, transitionAppearTimeout: 1000 },
-	        React.createElement('footer', { id: 'footer', className: 'bottom group' })
+	        React.createElement(
+	          'footer',
+	          { id: 'footer', className: 'bottom group' },
+	          React.createElement(
+	            'audio',
+	            { id: 'swmusic', controls: true },
+	            React.createElement('source', { src: 'https://res.cloudinary.com/dhcnfmydo/video/upload/v1450469890/Star_Wars_Episode_V_Soundtrack_-_The_Imperial_March_Darth_Vader_s_Theme_v4ilco.mp3' })
+	          )
+	        )
 	      )
 	    );
 	  }
@@ -62760,15 +62768,6 @@ return jQuery;
 	        React.createElement(
 	          Nav,
 	          { pullRight: true },
-	          React.createElement(
-	            NavItem,
-	            { eventKey: 1 },
-	            React.createElement(
-	              'audio',
-	              { id: 'swmusic', controls: true },
-	              React.createElement('source', { src: 'http://res.cloudinary.com/dhcnfmydo/video/upload/v1450469890/Star_Wars_Episode_V_Soundtrack_-_The_Imperial_March_Darth_Vader_s_Theme_v4ilco.mp3' })
-	            )
-	          ),
 	          signInSignOut
 	        )
 	      )
@@ -63687,8 +63686,6 @@ return jQuery;
 	        url = "http://res.cloudinary.com/dhcnfmydo/image/upload/w_200,h_200/" + user.profile_picture.image_public_id;
 	      }
 	      var username = user.username;
-	      console.log(user);
-	      console.log(user.projects);
 	      var numProjects = user.projects.length;
 	      var numBackings = user.backings.length;
 	      var numComments = user.comments.length;
