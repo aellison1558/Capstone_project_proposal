@@ -88,23 +88,23 @@ body{
 }
 
 
-.contentfade-enter {
-  opacity: 0.01;
-}
-
-.contentfade-enter.contentfade-enter-active {
-  opacity: 1;
-  transition: opacity 2000ms ease-in;
-}
-
-.contentfade-leave {
-  opacity: 1;
-}
-
-.contentfade-leave.contentfade-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
-}
+// .contentfade-enter {
+//   opacity: 0.01;
+// }
+//
+// .contentfade-enter.contentfade-enter-active {
+//   opacity: 1;
+//   transition: opacity 2000ms ease-in;
+// }
+//
+// .contentfade-leave {
+//   opacity: 1;
+// }
+//
+// .contentfade-leave.contentfade-leave-active {
+//   opacity: 0.01;
+//   transition: opacity 300ms ease-in;
+// }
 
 .content .form-control{
   color: rgba(255,255,255,1);

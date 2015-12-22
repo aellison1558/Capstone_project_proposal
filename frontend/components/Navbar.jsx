@@ -55,7 +55,7 @@ module.exports = React.createClass({
     var startProjectUrl
     if (this.state.currentUser) {
       var url = '#/users/' + this.state.currentUser.id;
-      startProjectUrl = <NavItem eventKey={2} href="#/projects/new">Start a Project</NavItem>
+      startProjectUrl = <NavItem key={2} eventKey={2} href="#/projects/new">Start a Project</NavItem>
 
       signInSignOut = [
         <NavItem key={4}><button className='btn btn-nav' onClick={this.logOut}>Log Out</button></NavItem>,
@@ -64,32 +64,32 @@ module.exports = React.createClass({
     } else {
       startProjectUrl = <NavItem eventKey={2}><SignInForm text="Log in to Create Project"/></NavItem>
       signInSignOut = [
-        <NavItem eventKey={4}><SignUpForm /></NavItem>,
-        <NavItem eventKey={5}><SignInForm text="Log In" /></NavItem>,
-        <NavItem eventKey={6}><button onClick={this.guestSignIn}>Guest Log In</button></NavItem>
+        <NavItem key={4} eventKey={4}><SignUpForm /></NavItem>,
+        <NavItem key={5} eventKey={5}><SignInForm text="Log In" /></NavItem>,
+        <NavItem key={6} eventKey={6}><button onClick={this.guestSignIn}>Guest Log In</button></NavItem>
       ]
     }
     return(
 
       <Navbar inverse>
-    <Navbar.Header>
-      <Navbar.Brand>
-        <div key={0}><Link to='/'><img src={window.logo} /></Link></div>
-      </Navbar.Brand>
-      <Navbar.Toggle />
-    </Navbar.Header>
-    <Navbar.Collapse>
-      <Nav>
-        <NavItem eventKey={1} href="#/categories">Discover</NavItem>
-        {startProjectUrl}
-        <NavItem eventKey={3}><Search projects={this.state.projects}/></NavItem>
-      </Nav>
-      <Nav pullRight>
+        <Navbar.Header>
+          <Navbar.Brand>
+            <div key={0}><Link to='/'><img src={window.logo} /></Link></div>
+          </Navbar.Brand>
+          <Navbar.Toggle />
+        </Navbar.Header>
+        <Navbar.Collapse>
+          <Nav>
+            <NavItem key={1} eventKey={1} href="#/categories">Discover</NavItem>
+            {startProjectUrl}
+            <NavItem key={3} eventKey={3}><Search projects={this.state.projects}/></NavItem>
+          </Nav>
+          <Nav pullRight>
 
-        {signInSignOut}
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>
+            {signInSignOut}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
     )
 
   }

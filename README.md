@@ -10,10 +10,9 @@ The DeathSTARter is a web application inspired by Kickstarter for the citizens o
 - [X] Create an account
 - [X] Log in / Log out
 - [X] Create, read, edit, and delete projects
-- [X] Place project in category and browse projects by category
+- [X] Place project in category and browse projects by category (discover)
 - [X] View, comment on, and back a project
 - [X] Add photos to projects
-- [ ] Launch Project
 - [X] Keep track of funding and funders
 
 ## Design Docs
@@ -73,7 +72,7 @@ Users should have a profile page, profile pictures, created projects, and backed
 In this phase we go from Kickstarter to TheDeathSTARter.  I'll style and seed appropriately!
 
 ### Bonus Features (TBD)
-- [ ] Prettify transitions
+- [X] Prettify transitions
 - [ ] Likes
 - [X] Multiple Images
 - [ ] Videos
