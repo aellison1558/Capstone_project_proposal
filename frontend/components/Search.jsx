@@ -42,12 +42,12 @@ var Search = React.createClass({
 
   render: function(){
     var items = <li>no matches</li>;
-    var ulClass = "";
+    var ulClass = "search-list ";
     if (this.matches()) {
-      ulClass = "appears";
+      ulClass += "appears";
       items = this.matches().map(function(project){
         var url = '/projects/' + project.id;
-        return <li className="search-result" key={project.id}><Link to={url}>{project.title}</Link></li>
+        return <li className="search-result" key={project.id}><Link to={url}>{"-" + project.title}</Link></li>
       })
     }
 

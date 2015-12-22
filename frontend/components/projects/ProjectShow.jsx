@@ -101,7 +101,7 @@ module.exports = React.createClass({
     var backingForm;
     var user = this.state.users.find(function(user) {return user.id === project.creator_id}) || {username: ""}
     var userUrl = user.id ? '/users/' + user.id : "";
-  
+
     if (SessionStore.currentUser()) {
       var commentForm = <CommentForm project={project} />
       if (this._checkBacking()) {
@@ -130,7 +130,8 @@ module.exports = React.createClass({
 
                 <div>
                   <h5>Funding:</h5>
-                  {this._calcFunding()} out of {project.goal_amt}
+                  {this._calcFunding()} out of {project.goal_amt} ({Math.floor((this._calcFunding() / project.goal_amt) * 100)} % of goal)
+
                   <br/>
                   {project.backings.length} Backers
                   <br/>
@@ -140,6 +141,7 @@ module.exports = React.createClass({
 
                 <div>
                   <h5>Campaign:</h5>
+                  <h6>{this._checkLive()}</h6>
                   {this._calcTimeLeft()} days left!
                 </div>
 
@@ -243,5 +245,20 @@ module.exports = React.createClass({
       return backing.backer_id === currentUser.id
     });
   },
+
+  _checkLive: function() {
+    var project = this.state.project;
+    var today = new Date();
+    var start = project.start_date;
+    var end = project.end_date;
+
+    if (Date.parse(today) - Date.parse(start) < 0) {
+      return ("Campaign hasn't started yet");
+    } else if (Date.parse(today) - Date.parse(end) < 0) {
+      return ("LIVE");
+    } else {
+      return ("Campaign over!");
+    }
+  }
 
 });

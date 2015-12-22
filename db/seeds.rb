@@ -19,7 +19,8 @@ User.create([
   {email: 'tonth@impsurvey.gov', username: "Captain Tonth", password: 'explorerreporting'},
   {email: 'grandinquisitor@inquisitorius.gov', username: "Grand Inquisitor", password: "jedihunting"},
   {email: 'jabba@tatooine.hutt', username: "The Great Jabba", password: 'youlllearntoloveme'},
-  {email: 'cody@gar.mil', username: "Commander Cody", password: 'grandarmyoftherepublic'}
+  {email: 'cody@gar.mil', username: "Commander Cody", password: 'grandarmyoftherepublic'},
+  {email: 'cowall@impculture.gov', username: 'Cultural Minister Cowall', password: 'highwinds'}
 ])
 
 Image.create([
@@ -69,6 +70,13 @@ Image.create([
 
   {imageable_id: '16', imageable_type: 'Project', image_public_id: 'Grand_army_formation.jpg_vmlbzc'},
 
+  {imageable_id: '17', imageable_type: 'Project', image_public_id: 'f73a1bfbdf6c645b4f1b3f53bf111abd_spooxc'},
+
+  {imageable_id: '18', imageable_type: 'Project', image_public_id: 'Epguide407_qnn67r'},
+
+  {imageable_id: '19', imageable_type: 'Project', image_public_id: 'download_4_gslbcq'},
+  {imageable_id: '19', imageable_type: 'Project', image_public_id: 'download_3_f6xbdu'},
+
 
   {imageable_id: '1', imageable_type: 'User', image_public_id: 'oxba40nyjywfxglzhpx7'},
   {imageable_id: '2', imageable_type: 'User', image_public_id: 'emperor_zrib13'},
@@ -96,8 +104,8 @@ Project.create([
      The Death Star will provide complete security for the citizens of the Empire.  No longer will they need live in fear of terrorists, Jedi or otherwise.
     ",
     goal_amt: 850000000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 1,
     creator_id: 2
   },
@@ -115,8 +123,8 @@ Project.create([
 
     The Tarkin can provide the same security at the Death Star, but at a price that won't break the budget.",
     goal_amt: 250000000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 1,
     creator_id: 4
   },
@@ -135,8 +143,8 @@ Project.create([
     Choose sleek and deadly speed.  Choose the Sun Crusher.
     ",
     goal_amt: 500000000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 1,
     creator_id: 3
   },
@@ -152,8 +160,8 @@ Project.create([
     With the Galaxy Gun the Empire will be able to respond to any threat, any place, any time, and all without messy and costly fleet deployments.  The Galaxy Gun can target and destroy anything in the galaxy without leaving its secure location, where we can build strong defensive emplacements.  The Galaxy Gun will immediately bring total peace and safety to our citizens, as no terrorist will be able to run or hide.
     ",
     goal_amt: 350000000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 1,
     creator_id: 2
   },
@@ -170,8 +178,8 @@ Project.create([
     Sure its not as fast or cool as a huge superlaser, but we have a responsibility to think about the future.  Choose sustainability.  Choose our children's future.  Choose the World Devastor.
     ",
     goal_amt: 250000000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 1,
     creator_id: 5
   },
@@ -190,8 +198,8 @@ Project.create([
     Go with what works.  Go with honor and distinction.  Go with the Imperial Navy.
     ",
     goal_amt: 950000000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 1,
     creator_id: 6
   },
@@ -202,8 +210,8 @@ Project.create([
     description: "The Mass Shadow Generator is a historic weapon used to end the Mandalorian Wars in the days of the Old Republic.  Commissioned and used by Revan, Sith Lord and Prodigal Jedi Knight, it utilized the gravitational anomalies around Malachor V to wipe out the Mandalorian Fleet, a blow they never recovered from to this day.  There were, however, plans to generalize the weapon to be used on any planet.  I believe with today's technology it would be a simple matter to reconstruct this weapon, which could wipe out an enemy fleet in a single strike as opposed to say a superlaser.
     ",
     goal_amt: 1000000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 1,
     creator_id: 5
   },
@@ -218,8 +226,8 @@ Project.create([
     For the superweapon that will bring not just peace but also prosperity, fund the Star Forge.
     ",
     goal_amt: 950000000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 1,
     creator_id: 5
   },
@@ -236,8 +244,8 @@ Project.create([
     Support our troops.  Fund better helmets.
     ",
     goal_amt: 100000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 2,
     creator_id: 8
   },
@@ -254,8 +262,8 @@ Project.create([
     Stop the terrorists wherever they strike.  Fund the TIE/D Defender.
     ",
     goal_amt: 100000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 3,
     creator_id: 8
   },
@@ -271,8 +279,8 @@ Project.create([
     The Old Republic designs are no longer effective due to the increased power of modern blasters.  Most shields powerful enough to be effective would release deadly amounts of radiation.  However, I am developing a new, advanced design.  It will use rapid shield rotation to disperse and deflect energy at angles rather than directly, and contain special capacitors in order to absorb energy rather than resisting it.  These should allow stormtroopers to safely utilize the personal energy shields, granting them protection from both blasters and the occasional lightsaber antique.
     ",
     goal_amt: 1000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 4,
     creator_id: 5
   },
@@ -285,8 +293,8 @@ Project.create([
     description: "
       The Deep Core is a treacherous place.  Massive stars and blackholes make charting hyperspace routes difficult.  However, the Deep Core is rumored to have many habitable worlds, some of great historic importance.  I would like to put together a team to find a way into the Deep Core and find out the truth behind these rumors.",
     goal_amt: 100000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 7,
     creator_id: 10
   },
@@ -298,8 +306,8 @@ Project.create([
         There is a large portion of the galaxy that after thousands of years of space travel is still unexplored.  I would like to put together a team to venture into said region and discover new worlds.
       ",
     goal_amt: 100000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 7,
     creator_id: 10
   },
@@ -311,8 +319,8 @@ Project.create([
       Dromund Kaas was the capital city of the first Sith Empire.  Unlike Korriban, its location was lost long ago.  I believe it is therefore untouched by time and looters.  We should mount an expedition immediately to secure its power lest an enemy of the Empire arrive there first.
     ",
     goal_amt: 100000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 8,
     creator_id: 11
   },
@@ -322,8 +330,8 @@ Project.create([
     summary: "Bu investment see wa sicieia",
     description: "Nan bo, nan tytung. Bu cakanle Jabba kanieh uba bai chalankbana du Yakai Hokaaen. Yoieu koumhaptecee doi bu kouiohe see mee danko an gee uahloba du bu bin du tah dhiuox'a tam jedahkacs bmala mee. Natmahconza dah jaa whonbola an neu bu neu cay nagoza-ah dah Jabba baa see'ybark! Tah doth ba makacheesa uba caiot tee san bai konpa!",
     goal_amt: 1000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 9,
     creator_id: 12
   },
@@ -341,30 +349,47 @@ Project.create([
     Save the Imperial military from disaster before it's too late.  Bring us back.
     ",
     goal_amt: 10000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 2,
     creator_id: 13
   },
 
   {
-    title: "Something economic",
-    summary: "",
-    description: "",
-    goal_amt: 1000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    title: "Durasteel Man",
+    summary: "Live action adaptation of popular Wonder Comics character",
+    description: "
+      Stato Cebos, billionaire weapon-designing genius, has it all.  He has the brains, the money, the fame, the life.  But everything changes when he's captured by a group of villainous Rebels.
+      ",
+    goal_amt: 100000000,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 5,
-    creator_id: 7
+    creator_id: 14
   },
 
   {
-    title: "Something civic",
-    summary: "",
-    description: "",
+    title: "Saving CT-3516",
+    summary: "A war drama set in the Invasion of Umbara",
+    description: "
+      Arc Trooper 5555 takes his men behind enemy lines to save CT-3516, whose squad is killed.
+      ",
+    goal_amt: 100000000,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
+    category_id: 5,
+    creator_id: 14
+  },
+
+  {
+    title: "Mining on Ilum",
+    summary: "Funding mining operations on a new planet",
+    description: "
+      The recently rediscovered, former Jedi world of Ilum is a treasure trove of rare crystal deposits.  A mining operation there could be highly lucrative, despite the hostile environment.
+    ",
     goal_amt: 1000000000000,
-    start_date: Date.new,
-    end_date: Date.new,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
     category_id: 6,
     creator_id: 7
   },
@@ -378,24 +403,26 @@ Category.create([
   {name: 'Imperial Army'},
   {name: 'Imperial Navy'},
   {name: 'Technology'},
-  {name: 'Economy'},
-  {name: 'Civil Infrastructure'},
+  {name: 'Culture'},
+  {name: 'Economy and Infrastructure'},
   {name: 'Exploration'},
   {name: "Mysteries of the Force"},
   {name: "Private Projects"}
 ])
 
 Backing.create([
-  {backer_id: 1, project_id: 1, amount: 1000000000},
-  {backer_id: 3, project_id: 1, amount: 1000000000},
-  {backer_id: 4, project_id: 1, amount: 1000000000},
-  {backer_id: 5, project_id: 1, amount: 1000000000},
-  {backer_id: 6, project_id: 1, amount: 1000000000},
-  {backer_id: 7, project_id: 1, amount: 1000000000},
-  {backer_id: 8, project_id: 1, amount: 1000000000},
+  {backer_id: 1, project_id: 1, amount: 100000000000000000},
+  {backer_id: 3, project_id: 1, amount: 10000000000000000},
+  {backer_id: 4, project_id: 1, amount: 100000000000000000},
+  {backer_id: 5, project_id: 1, amount: 100000000000000000},
+  {backer_id: 6, project_id: 1, amount: 100000000000000000},
+  {backer_id: 7, project_id: 1, amount: 100000000000000000},
+  {backer_id: 8, project_id: 1, amount: 100000000000000000},
 ])
 
 Comment.create([
   {author_id: 2, project_id: 1, body: "Good, good.  Let the funds flow through you!"},
-  {author_id: 1, project_id: 1, body: "Yes, my master"}
+  {author_id: 1, project_id: 1, body: "Yes, my master"},
+  {author_id: 13, project_id: 9, body: "It's not the helmets."},
+  {author_id: 8, project_id: 9, body: "A bit bitter, are we Cody?"}
 ])

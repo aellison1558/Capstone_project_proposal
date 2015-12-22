@@ -43235,7 +43235,7 @@ return jQuery;
 
 	  listeners: [],
 
-	  categories: ['superweapons', 'army', 'navy', 'technology', 'economy', 'civil', 'exploration', 'force', 'private'],
+	  categories: ['superweapons', 'army', 'navy', 'technology', 'culture', 'civil', 'exploration', 'force', 'private'],
 
 	  _updateState: function () {
 	    this.setState({ categories: CategoryStore.all() });
@@ -44443,6 +44443,9 @@ return jQuery;
 	                this._calcFunding(),
 	                ' out of ',
 	                project.goal_amt,
+	                ' (',
+	                Math.floor(this._calcFunding() / project.goal_amt * 100),
+	                ' % of goal)',
 	                React.createElement('br', null),
 	                project.backings.length,
 	                ' Backers',
@@ -44456,6 +44459,11 @@ return jQuery;
 	                  'h5',
 	                  null,
 	                  'Campaign:'
+	                ),
+	                React.createElement(
+	                  'h6',
+	                  null,
+	                  this._checkLive()
 	                ),
 	                this._calcTimeLeft(),
 	                ' days left!'
@@ -44581,6 +44589,21 @@ return jQuery;
 	    return backings.find(function (backing) {
 	      return backing.backer_id === currentUser.id;
 	    });
+	  },
+
+	  _checkLive: function () {
+	    var project = this.state.project;
+	    var today = new Date();
+	    var start = project.start_date;
+	    var end = project.end_date;
+
+	    if (Date.parse(today) - Date.parse(start) < 0) {
+	      return "Campaign hasn't started yet";
+	    } else if (Date.parse(today) - Date.parse(end) < 0) {
+	      return "LIVE";
+	    } else {
+	      return "Campaign over!";
+	    }
 	  }
 
 	});
@@ -62743,7 +62766,7 @@ return jQuery;
 	            React.createElement(
 	              'audio',
 	              { id: 'swmusic', controls: true },
-	              React.createElement('source', { src: 'http://res.cloudinary.com/dhcnfmydo/video/upload/v1450469890/Star_Wars_-_Imperial_march_xoyf3w.mp3' })
+	              React.createElement('source', { src: 'http://res.cloudinary.com/dhcnfmydo/video/upload/v1450469890/Star_Wars_Episode_V_Soundtrack_-_The_Imperial_March_Darth_Vader_s_Theme_v4ilco.mp3' })
 	            )
 	          ),
 	          signInSignOut
@@ -62807,9 +62830,9 @@ return jQuery;
 	      null,
 	      'no matches'
 	    );
-	    var ulClass = "";
+	    var ulClass = "search-list ";
 	    if (this.matches()) {
-	      ulClass = "appears";
+	      ulClass += "appears";
 	      items = this.matches().map(function (project) {
 	        var url = '/projects/' + project.id;
 	        return React.createElement(
@@ -62818,7 +62841,7 @@ return jQuery;
 	          React.createElement(
 	            Link,
 	            { to: url },
-	            project.title
+	            "-" + project.title
 	          )
 	        );
 	      });

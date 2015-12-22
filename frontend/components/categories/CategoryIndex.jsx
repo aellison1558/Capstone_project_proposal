@@ -11,7 +11,7 @@ module.exports = React.createClass({
 
   listeners: [],
 
-  categories: ['superweapons', 'army', 'navy', 'technology', 'economy', 'civil', 'exploration', 'force', 'private'],
+  categories: ['superweapons', 'army', 'navy', 'technology', 'culture', 'civil', 'exploration', 'force', 'private'],
 
   _updateState: function() {
     this.setState({ categories: CategoryStore.all() });

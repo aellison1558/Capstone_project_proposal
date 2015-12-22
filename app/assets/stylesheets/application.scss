@@ -36,6 +36,12 @@
    background: transparent;
  }
 
+.search-results a{
+  color: #000;
+}
+
+
+
 body{
   font-family: 'Orbitron', sans-serif;
   background: url(background.jpg);
@@ -246,8 +252,8 @@ body{
   background-position: center center;
 }
 
-#economy{
-  background: url(economy.jpg);
+#culture{
+  background: url(culture.png);
   background-size: cover;
   background-position: center center;
 }
@@ -349,23 +355,3 @@ body{
   width: 100vw;
   background-color: black;
 }
-
-// .arrow-down {
-// 	width: 0;
-// 	height: 0;
-// 	border-left: 35vw solid transparent;
-// 	border-right: 35vw solid transparent;
-// 	border-top: 20vh solid rgba(45,76,135,0.5);
-//   margin-left: 10vw;
-//   margin-right: 10vw;
-//   transition: border-top 3s;
-// }
-//
-// .arrow-light {
-//   border-top: 20vh solid rgba(0, 153, 255, 0.5);
-// }
-//
-// .hologram {
-//   margin-left: 35vw;
-//   margin-right: 37vw;
-// }
