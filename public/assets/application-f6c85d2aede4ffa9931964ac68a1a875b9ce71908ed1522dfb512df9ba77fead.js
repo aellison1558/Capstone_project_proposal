@@ -62008,6 +62008,14 @@ return jQuery;
 	    var user = this.state.user || { username: "" };
 	    var createdAt = new Date(this.props.comment.created_at);
 	    var time = createdAt.toTimeString() + " on " + createdAt.toDateString();
+	    var deleteButton = "";
+	    if (SessionStore.currentUser() && SessionStore.currentUser().id === user.id) {
+	      deleteButton = React.createElement(
+	        'button',
+	        { onClick: this.deleteComment },
+	        'Delete Comment'
+	      );
+	    }
 
 	    return React.createElement(
 	      'li',
@@ -62018,11 +62026,7 @@ return jQuery;
 	      user.username,
 	      ' at ',
 	      time,
-	      React.createElement(
-	        'button',
-	        { onClick: this.deleteComment },
-	        'Delete Comment'
-	      )
+	      deleteButton
 	    );
 	  }
 	});
@@ -62779,7 +62783,7 @@ return jQuery;
 	      var url = '#/users/' + this.state.currentUser.id;
 	      startProjectUrl = React.createElement(
 	        NavItem,
-	        { eventKey: 2, href: '#/projects/new' },
+	        { key: 2, eventKey: 2, href: '#/projects/new' },
 	        'Start a Project'
 	      );
 
@@ -62805,15 +62809,15 @@ return jQuery;
 	      );
 	      signInSignOut = [React.createElement(
 	        NavItem,
-	        { eventKey: 4 },
+	        { key: 4, eventKey: 4 },
 	        React.createElement(SignUpForm, null)
 	      ), React.createElement(
 	        NavItem,
-	        { eventKey: 5 },
+	        { key: 5, eventKey: 5 },
 	        React.createElement(SignInForm, { text: 'Log In' })
 	      ), React.createElement(
 	        NavItem,
-	        { eventKey: 6 },
+	        { key: 6, eventKey: 6 },
 	        React.createElement(
 	          'button',
 	          { onClick: this.guestSignIn },
@@ -62850,13 +62854,13 @@ return jQuery;
 	          null,
 	          React.createElement(
 	            NavItem,
-	            { eventKey: 1, href: '#/categories' },
+	            { key: 1, eventKey: 1, href: '#/categories' },
 	            'Discover'
 	          ),
 	          startProjectUrl,
 	          React.createElement(
 	            NavItem,
-	            { eventKey: 3 },
+	            { key: 3, eventKey: 3 },
 	            React.createElement(Search, { projects: this.state.projects })
 	          )
 	        ),

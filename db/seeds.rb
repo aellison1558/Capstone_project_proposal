@@ -82,6 +82,12 @@ Image.create([
 
   {imageable_id: '21', imageable_type: 'Project', image_public_id: 'UmojanMarine_SC2-HotS_DevArt1_duw6f6'},
 
+  {imageable_id: '22', imageable_type: 'Project', image_public_id: 'star_wars_rebels___inquisitors_by_darthtemoc-d8qwwu2_fic4hl'},
+
+  {imageable_id: '23', imageable_type: 'Project', image_public_id: 'AT-AHT_jga99l'},
+
+  {imageable_id: '24', imageable_type: 'Project', image_public_id: 'tumblr_ntm8ieClrj1rhhbdfo1_1280_w9h8tt'},
+
 
   {imageable_id: '1', imageable_type: 'User', image_public_id: 'oxba40nyjywfxglzhpx7'},
   {imageable_id: '2', imageable_type: 'User', image_public_id: 'emperor_zrib13'},
@@ -429,7 +435,50 @@ Project.create([
     creator_id: 5
   },
 
+  {
+    title: "Expand the Inquistors",
+    summary: "Protecting you from forces of a particular nature",
+    description: "
+    What goes bump in the night?  It may be your gifted child.
 
+    Expand the Inquisitors.  It's the only way to protect your children...from themselves.
+    ",
+    goal_amt: 1000000000000,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
+    category_id: 8,
+    creator_id: 11
+  },
+
+  {
+    title: "All-Terrain Armored Heavy Transport",
+    summary: "What's better than a walker?  A bigger walker!",
+    description: "
+    The AT-AT is an amazing piece of machinery.  That being said, it is not without weaknesses.
+
+    The AT-AHT solves those weaknesses.  This walker features stronger armor around the head and neck, solving the reported chink in the AT-AT.  It also features guns mounted around the main chassis, to allow for 360-degree fields of fire.
+
+    With the AT-AHT, the Imperial Army will be truly invincible.
+    ",
+    goal_amt: 1000000000000,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
+    category_id: 2,
+    creator_id: 8
+  },
+
+  {
+    title: "Inside Sith",
+    summary: "What goes on inside the mind of a young apprentice?",
+    description: "
+      A peek inside the mind of a young Sith apprentice.  As he starts his training and faces the greatest challenges of his life, his emotions, led by Anger, must guide him to his destiny.
+      ",
+    goal_amt: 100000000,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
+    category_id: 5,
+    creator_id: 14
+  },
 
 ])
 
@@ -453,11 +502,16 @@ Backing.create([
   {backer_id: 6, project_id: 1, amount: 100000000000000000},
   {backer_id: 7, project_id: 1, amount: 100000000000000000},
   {backer_id: 8, project_id: 1, amount: 100000000000000000},
+  {backer_id: 1, project_id: 18, amount: 10000000},
+  {backer_id: 13, project_id: 18, amount: 10000000},
+  {backer_id: 3, project_id: 18, amount: 10000000},
+  {backer_id: 2, project_id: 24, amount: 10000000}
 ])
 
 Comment.create([
   {author_id: 2, project_id: 1, body: "Good, good.  Let the funds flow through you!"},
   {author_id: 1, project_id: 1, body: "Yes, my master"},
   {author_id: 13, project_id: 9, body: "It's not the helmets."},
-  {author_id: 8, project_id: 9, body: "A bit bitter, are we Cody?"}
+  {author_id: 8, project_id: 9, body: "A bit bitter, are we Cody?"},
+  {author_id: 2, project_id: 24, body: "I can feel the hate swelling.  Can't wait!"}
 ])
