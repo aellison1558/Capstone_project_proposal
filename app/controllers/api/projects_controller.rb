@@ -19,6 +19,10 @@ class Api::ProjectsController < ApplicationController
 
     if @project.save
       render :show
+      flash[:success] = ["Project created!"]
+    else
+      flash[:errors] = @project.errors.full_messages
+      render json: ["something went wrong"]
     end
   end
 
@@ -27,7 +31,11 @@ class Api::ProjectsController < ApplicationController
 
     validate_user
 
-    @project.destroy
+    if @project.destroy
+      flash[:success] = ["#{@project.title} destroyed!"]
+    else
+      flash[:errors] = @project.errors.full_messages
+    end
     @category = Category.includes(:projects).find(@project.category_id)
     @projects = @category.projects
     render :index
@@ -38,7 +46,11 @@ class Api::ProjectsController < ApplicationController
 
     validate_user
 
-    @project.update(project_params)
+    if @project.update(project_params)
+      flash[:success] = ["#{@project.title} updated!"]
+    else
+      flash[:errors] = @project.errors.full_messages
+    end
     render :show
   end
 

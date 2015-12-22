@@ -1,7 +1,8 @@
 var Store = require('flux/utils').Store,
     Dispatcher = require('../dispatcher/Dispatcher'),
     ApiUtil = require('../util/ApiUtil'),
-    UserConstants = require('../constants/UserConstants');
+    UserConstants = require('../constants/UserConstants'),
+    SessionConstants = require('../constants/SessionConstants');
 
 var _users = [];
 
@@ -34,6 +35,12 @@ UserStore.__onDispatch = function(payload) {
       break;
     case UserConstants.RECEIVE_USER:
       UserStore.updateUser(payload.user);
+      UserStore.__emitChange();
+      break;
+    case SessionConstants.RECEIVE_USER:
+      UserStore.__emitChange();
+      break;
+    case SessionConstants.CLEAR_USER:
       UserStore.__emitChange();
       break;
 

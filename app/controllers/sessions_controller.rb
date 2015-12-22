@@ -8,8 +8,10 @@ class SessionsController < ApplicationController
 
     if @user
       sign_in(@user)
+      flash[:success] = ["Logged in!"]
       render :show
     else
+      flash[:errors] = ["Invalid email/password combination"]
       render json: ["Invalid email/password combination"]
     end
   end
@@ -20,6 +22,7 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out
+    flash[:success] = ["Logged out!"]
     render :show
   end
 

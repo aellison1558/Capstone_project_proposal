@@ -32,6 +32,7 @@ module.exports = React.createClass({
 
   componentDidMount: function() {
     this.listeners.push(ProjectStore.addListener(this._updateState));
+    this.listeners.push(SessionStore.addListener(this._updateState));
     ApiUtil.fetchProject(this.props.params.projectId);
     ApiUtil.fetchAllUsers();
   },
@@ -114,6 +115,17 @@ module.exports = React.createClass({
       commentForm = <div><SignInForm text="Log in to comment"/></div>
     }
 
+    var timeLeft = "";
+    if (this._checkLive() === 'LIVE') {
+      timeLeft = <div>{this._calcTimeLeft()} days left!</div>;
+    };
+
+    var uploadImage = "";
+
+    if (SessionStore.currentUser() && user.id === SessionStore.currentUser().id) {
+      uploadImage = <button className='btn btn-primary' onClick={this.imageButton}>Upload Image</button>;
+    }
+
     return(
       <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} >
         <div className="project-show-pane">
@@ -142,7 +154,7 @@ module.exports = React.createClass({
                 <div>
                   <h5>Campaign:</h5>
                   <h6>{this._checkLive()}</h6>
-                  {this._calcTimeLeft()} days left!
+                  {timeLeft}
                 </div>
 
                 <div>
@@ -152,7 +164,7 @@ module.exports = React.createClass({
             </div>
 
             <div className="form-group row" >
-              <button className='btn btn-primary' onClick={this.imageButton}>Upload Image</button>
+              {uploadImage}
             </div>
 
           </header>

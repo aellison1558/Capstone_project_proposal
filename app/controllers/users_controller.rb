@@ -16,24 +16,35 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       sign_in(@user)
+      flash[:success] = ["User Created!"]
       render :show
     else
-      flash.now[:errors] = @user.errors.full_messages
+      flash[:errors] = @user.errors.full_messages
       render :new
     end
   end
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
+    if @user.update(user_params)
+      flash[:success] = ["User Updated!"]
+    else
+      flash[:errors] = @user.errors.full_messages
+    end
     render :show
   end
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    @users = User.all
-    render :index
+    if @user.destroy
+      flash[:success] = ["User Destroyed!"]
+      @users = User.all
+      render :index
+    else
+      flash[:errors] = @user.errors.full_messages
+      @users = User.all
+      render :index
+    end
   end
 
   private

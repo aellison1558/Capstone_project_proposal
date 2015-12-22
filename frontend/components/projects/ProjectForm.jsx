@@ -76,6 +76,22 @@ module.exports = React.createClass({
     this.setState({category_id: e.target.value})
   },
 
+  sampleProject: function(e) {
+    e.preventDefault();
+    
+    this.setState({
+      title: "Better Power Converters",
+      summary: "Longer lasting, more reliable power converters",
+      description: 'Power converters are notoriously short-lived, requiring many an errand run to pick up more.  I have a better design that will cut trips to the station in half!',
+      goal_amt: 1000000,
+      start_date: new Date(2016, 1, 1),
+      end_date: new Date(2016, 3, 1),
+      category_id: 6,
+      categories: CategoryStore.all(),
+      errors: ""
+    })
+  },
+
 
   //render
 
@@ -93,6 +109,7 @@ module.exports = React.createClass({
           <div>{this.state.errors}</div>
 
           <form onSubmit={this.submitHandler}>
+            <button onClick={this.sampleProject}>Sample Project</button>
             <div className="form-group" >
               <label>
                 Category:

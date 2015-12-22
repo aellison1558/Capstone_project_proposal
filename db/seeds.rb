@@ -77,6 +77,11 @@ Image.create([
   {imageable_id: '19', imageable_type: 'Project', image_public_id: 'download_4_gslbcq'},
   {imageable_id: '19', imageable_type: 'Project', image_public_id: 'download_3_f6xbdu'},
 
+  {imageable_id: '20', imageable_type: 'Project', image_public_id: 'Executor_09_crop.jpg_bmho2g'},
+  {imageable_id: '20', imageable_type: 'Project', image_public_id: 'Executor-CHRON_y79wyj'},
+
+  {imageable_id: '21', imageable_type: 'Project', image_public_id: 'UmojanMarine_SC2-HotS_DevArt1_duw6f6'},
+
 
   {imageable_id: '1', imageable_type: 'User', image_public_id: 'oxba40nyjywfxglzhpx7'},
   {imageable_id: '2', imageable_type: 'User', image_public_id: 'emperor_zrib13'},
@@ -265,7 +270,7 @@ Project.create([
     start_date: Time.new(2015, 12, 21),
     end_date: Time.new(2016, 3, 21),
     category_id: 3,
-    creator_id: 8
+    creator_id: 6
   },
 
   {
@@ -392,6 +397,36 @@ Project.create([
     end_date: Time.new(2016, 3, 21),
     category_id: 6,
     creator_id: 7
+  },
+
+  {
+    title: "Executor-Class Super Star Destroyer",
+    summary: "State of the art Dreadnought",
+    description: "The terrorists have proven highly resourceful.  They are increasingly well armed, posing a threat to our fleets, our soldiers, and our people.  We will need to continue to update our fleets to ensure our superiority over these threats.
+    The Executor will be a new super Star Destroyer.  It will dwarf even our current Star Destroyers in both size and capabilities, and therefore can immediately shut down anything the Rebels bring to bear.
+    ",
+    goal_amt: 10000000000000000,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
+    category_id: 3,
+    creator_id: 6
+  },
+
+  {
+    title: "Stormtrooper Powered Combat Armor",
+    summary: "Increase the strength of our troops",
+    description: "
+    The Stormtroopers are our elite, the best of the best.  Yet, they are only men.
+
+    With the Powered Combat Armor they will become more. This armor will allow our troops not only to survive more attacks, but also carry more and larger weapons, increasing their firepower as well.  A single troop with this armor can do the work of an entire squad.
+
+      Best of all, this armor will be cheap and easy to mass produce.  Once the prototypes are developed, I believe we can equip all our troops with this kind of armor.
+    ",
+    goal_amt: 1000000000000,
+    start_date: Time.new(2015, 12, 21),
+    end_date: Time.new(2016, 3, 21),
+    category_id: 4,
+    creator_id: 5
   },
 
 

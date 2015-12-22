@@ -8,15 +8,16 @@ class Api::ImagesController < ApplicationController
       else
         render :user
       end
+      flash[:success] = ["Image Uploaded!"]
     else
       @errors = @image.errors.full_messages
+      flash[:errors] = @errors
       render json: @errors
     end
   end
 
   def destroy
     @image = Image.find(params[:id])
-    @image.destroy
     @parent = @image.imageable
 
     if @parent.is_a?(Project)

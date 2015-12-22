@@ -111,6 +111,27 @@ body{
   background-color: rgba(223, 60, 103, 0.8);
 }
 
+
+.flash_messages_component{
+  position: relative;
+  text-align: center;
+}
+
+.flash_messages_component *{
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 3vh;
+  background-color: rgba(153, 255, 153, 0.5);
+  z-index: 1;
+}
+
+.flash_messages_component span{
+  background: transparent;
+  text-align: center;
+  color: #FFF;
+}
+
 .nav .form-control{
   background-color: rgba(255, 255, 255, 1);
 }
@@ -355,4 +376,22 @@ body{
   width: 100vw;
   background-color: black;
   text-align: center;
+}
+
+
+.category-count{
+  color: #FFF;
+  outline: 0;
+  box-sizing: inherit;
+  font: inherit;
+  text-decoration: inherit;
+  text-align: inherit;
+}
+
+.appear{
+  display: block;
+}
+
+.disappear{
+  display: none;
 }

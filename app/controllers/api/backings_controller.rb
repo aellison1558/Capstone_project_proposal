@@ -5,15 +5,21 @@ class Api::BackingsController < ApplicationController
     @backing = current_user.backings.new(backing_params)
     @project = @backing.project
     if @backing.save
+      flash[:success] = ["#{@project.title} backed!"]
       render :show
     else
+      flash[:errors] = @backing.errors.full_messages
       render json: "Something went wrong"
     end
   end
 
   def destroy
     @backing = Backing.find(params[:id])
-    @backing.destroy
+    if @backing.destroy
+      flash[:success] = ["Support withdrawn!"]
+    else
+      flash[:errors] = @backing.errors.full_messages
+    end
     @project = @backing.project
     render :show
   end

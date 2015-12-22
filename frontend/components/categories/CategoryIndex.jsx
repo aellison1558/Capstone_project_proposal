@@ -2,7 +2,8 @@ var React = require('react'),
     CategoryStore = require('../../stores/CategoryStore'),
     ApiUtil = require('../../util/ApiUtil'),
     Link = require('react-router').Link,
-    ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+    ReactCSSTransitionGroup = require('react-addons-css-transition-group'),
+    CategoryIndexItem = require('./CategoryIndexItem');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -14,7 +15,7 @@ module.exports = React.createClass({
   categories: ['superweapons', 'army', 'navy', 'technology', 'culture', 'civil', 'exploration', 'force', 'private'],
 
   _updateState: function() {
-    this.setState({ categories: CategoryStore.all() });
+    this.setState({ categories: CategoryStore.all()});
   },
 
   componentDidMount: function() {
@@ -28,10 +29,10 @@ module.exports = React.createClass({
     })
   },
 
+
   render: function() {
     var items = this.state.categories.map(function(category, idx) {
-      var url = "/categories/" + category.id;
-      return <Link className="category-index-item" id={this.categories[idx]} key={category.id} to={url}>{category.name}</Link>
+      return (<CategoryIndexItem className="category-index-item" catId={this.categories[idx]} category={category} />)
     }.bind(this));
 
     return(

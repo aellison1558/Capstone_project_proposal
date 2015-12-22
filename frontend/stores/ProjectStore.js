@@ -1,7 +1,8 @@
 var Store = require('flux/utils').Store,
     Dispatcher = require('../dispatcher/Dispatcher'),
     ApiUtil = require('../util/ApiUtil'),
-    ProjectConstants = require('../constants/ProjectConstants');
+    ProjectConstants = require('../constants/ProjectConstants'),
+    SessionConstants = require('../constants/SessionConstants');
 
 var _projects = {};
 var ProjectStore = new Store(Dispatcher);
@@ -48,10 +49,10 @@ ProjectStore.__onDispatch = function(payload) {
       ProjectStore.__emitChange();
       break;
 
-      case ProjectConstants.RECEIVE_EVERY_PROJECT:
-        ProjectStore.resetProjects(payload.projects);
-        ProjectStore.__emitChange();
-        break;
+    case ProjectConstants.RECEIVE_EVERY_PROJECT:
+      ProjectStore.resetProjects(payload.projects);
+      ProjectStore.__emitChange();
+      break;
 
   }
 };

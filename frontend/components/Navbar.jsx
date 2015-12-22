@@ -58,15 +58,15 @@ module.exports = React.createClass({
       startProjectUrl = <NavItem eventKey={2} href="#/projects/new">Start a Project</NavItem>
 
       signInSignOut = [
-        <NavItem key={2}><button className='btn btn-nav' onClick={this.logOut}>Log Out</button></NavItem>,
-        <NavItem key={3} href={url}>Signed in as: {this.state.currentUser.username}</NavItem>
+        <NavItem key={4}><button className='btn btn-nav' onClick={this.logOut}>Log Out</button></NavItem>,
+        <NavItem key={5} href={url}>Signed in as: {this.state.currentUser.username}</NavItem>
       ]
     } else {
       startProjectUrl = <NavItem eventKey={2}><SignInForm text="Log in to Create Project"/></NavItem>
       signInSignOut = [
-        <NavItem eventKey={2}><SignUpForm /></NavItem>,
-        <NavItem eventKey={3}><SignInForm text="Log In" /></NavItem>,
-        <NavItem eventKey={4}><button onClick={this.guestSignIn}>Guest Log In</button></NavItem>
+        <NavItem eventKey={4}><SignUpForm /></NavItem>,
+        <NavItem eventKey={5}><SignInForm text="Log In" /></NavItem>,
+        <NavItem eventKey={6}><button onClick={this.guestSignIn}>Guest Log In</button></NavItem>
       ]
     }
     return(
@@ -85,7 +85,7 @@ module.exports = React.createClass({
         <NavItem eventKey={3}><Search projects={this.state.projects}/></NavItem>
       </Nav>
       <Nav pullRight>
-        
+
         {signInSignOut}
       </Nav>
     </Navbar.Collapse>

@@ -6,14 +6,20 @@ class Api::CommentsController < ApplicationController
     @project = @comment.project
     if @comment.save
       render :show
+      flash[:success] = ["Comment added!"]
     else
+      flash[:errors] = @comment.errors.full_messages
       render json: "something went wrong"
     end
   end
 
   def destroy
     @comment = Comment.find(params[:id])
-    @comment.destroy
+    if @comment.destroy
+      flash[:success] = ["Comment deleted!"]
+    else
+      flash[:errors] = @comment.errors.full_messages
+    end
     @project = @comment.project
     render :show
   end

@@ -1,6 +1,7 @@
 var React = require('react'),
     UserStore = require('../../stores/UserStore'),
-    ApiUtil = require('../../util/ApiUtil');
+    ApiUtil = require('../../util/ApiUtil'),
+    SessionStore = require('../../stores/SessionStore');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -66,6 +67,7 @@ module.exports = React.createClass({
   render: function() {
     var user = this.state.user
     var url;
+    var uploadImage = "";
     if (user) {
 
       if (user.profile_picture) {
@@ -75,6 +77,10 @@ module.exports = React.createClass({
       var numProjects = user.projects.length;
       var numBackings = user.backings.length;
       var numComments = user.comments.length;
+
+      if (SessionStore.currentUser() && SessionStore.currentUser().id === user.id) {
+        uploadImage = <button className='btn btn-primary' onClick={this.imageButton}>Change Profile Picture</button>;
+      }
     }
 
     return(
@@ -82,7 +88,7 @@ module.exports = React.createClass({
         <div className="user-profile-pane">
           <h3>{username}</h3>
           <img src={url} alt="Profile picture" />
-          <button className='btn btn-primary' onClick={this.imageButton}>Change Profile Picture</button>
+          {uploadImage}
 
           <h4>{numProjects}</h4>
            Created Projects
