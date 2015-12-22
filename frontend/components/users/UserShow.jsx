@@ -72,8 +72,6 @@ module.exports = React.createClass({
         url = "http://res.cloudinary.com/dhcnfmydo/image/upload/w_200,h_200/" + user.profile_picture.image_public_id;
       }
       var username = user.username;
-      console.log(user);
-      console.log(user.projects);
       var numProjects = user.projects.length;
       var numBackings = user.backings.length;
       var numComments = user.comments.length;
