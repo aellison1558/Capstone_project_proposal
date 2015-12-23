@@ -6,11 +6,11 @@ var assetpath = function(filename) { return '../assets/' + filename; };
 
 var MeshFactory = React.createFactory(ReactTHREE.Mesh);
 
-var sphereGeometry = new THREE.SphereGeometry( 50, 100, 100);
+var sphereGeometry = new THREE.SphereGeometry( 70, 100, 100);
 
-var cupcaketexture = THREE.ImageUtils.loadTexture(window.movinglogo);
-cupcaketexture.minFilter = THREE.LinearFilter;
-var cupcakematerial = new THREE.MeshBasicMaterial( { map: cupcaketexture, side: THREE.DoubleSide} );
+var deathstartexture = THREE.ImageUtils.loadTexture(window.movinglogo);
+deathstartexture.minFilter = THREE.LinearFilter;
+var deathstarmaterial = new THREE.MeshBasicMaterial( { map: deathstartexture, side: THREE.DoubleSide} );
 
 var DeathStar = React.createClass({
   displayName: 'DeathStar',
@@ -22,7 +22,7 @@ var DeathStar = React.createClass({
    return React.createElement(
      ReactTHREE.Object3D,
      {quaternion:this.props.quaternion, position:this.props.position || new THREE.Vector3(0,0,0)},
-     MeshFactory({position:new THREE.Vector3(0,30,0), geometry:sphereGeometry, material:cupcakematerial})
+     MeshFactory({position:new THREE.Vector3(0,20,0), geometry:sphereGeometry, material:deathstarmaterial})
    );
   }
 })
@@ -87,20 +87,20 @@ var Logo = React.createClass({
       ReactTHREE.Scene,
       {width:this.props.width, height:this.props.height, camera:'maincamera', orbitControls:THREE.OrbitControls},
       React.createElement(OrbitCamera, {key:'camera', distance:100, azimuth:this.state.cameraazimuth, aspectratio:100 / 100}),
-      React.createElement(DeathStar, this.props.cupcakedata)
+      React.createElement(DeathStar, this.props.deathstardata)
     );
   }
 });
 
 
 
-var cupcakestart = function() { // eslint-disable-line no-unused-vars
+var deathstarstart = function() { // eslint-disable-line no-unused-vars
   var renderelement = document.getElementById("logo");
 
   var w = 70;
   var h = 70;
 
-  var sceneprops = {width:w, height:h, cupcakedata:{position:new THREE.Vector3(0,0,0), quaternion:new THREE.Quaternion()}};
+  var sceneprops = {width:w, height:h, deathstardata:{position:new THREE.Vector3(0,0,0), quaternion:new THREE.Quaternion()}};
 
   function animate(time) {
 
@@ -110,4 +110,4 @@ var cupcakestart = function() { // eslint-disable-line no-unused-vars
   ReactTHREE.render(React.createElement(Logo,sceneprops), renderelement);
 }
 
-module.exports = cupcakestart;
+module.exports = deathstarstart;
