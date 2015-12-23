@@ -1,5 +1,6 @@
 var React = require('react'),
-    Jumbotron = require('react-bootstrap').Jumbotron;
+    Jumbotron = require('react-bootstrap').Jumbotron,
+    Logo = require('./Logo');
 
 module.exports = React.createClass({
 

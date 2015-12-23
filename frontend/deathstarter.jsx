@@ -14,7 +14,10 @@ var React = require('react'),
     Navbar = require('./components/Navbar'),
     UserShow = require('./components/users/UserShow'),
     ReactCSSTransitionGroup = require('react-addons-css-transition-group'),
-    FlashMessages = require('./components/FlashMessages');
+    FlashMessages = require('./components/FlashMessages'),
+    Logo = require('./components/Logo'),
+    THREE = require('three'),
+    ReactTHREE = require('react-three');
 
 
     var App = React.createClass({
@@ -77,6 +80,9 @@ var routes = (
 );
 
 
+
+
 document.addEventListener("DOMContentLoaded", function(){
   ReactDOM.render(<Router>{routes}</Router>, document.getElementById('root'));
+  Logo();
 })

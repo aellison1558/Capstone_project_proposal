@@ -12,8 +12,8 @@ module.exports = React.createClass({
   },
 
   eraseMessages: function(){
-    this.componentClass = "disappearFade";
-    setTimeout(function() {this.setState({messages: []});}.bind(this), 2000)
+
+  this.setState({messages: []});
 
   },
 

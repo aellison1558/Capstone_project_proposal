@@ -74,7 +74,7 @@ module.exports = React.createClass({
       <Navbar inverse>
         <Navbar.Header>
           <Navbar.Brand>
-            <div key={0}><Link to='/'><img src={window.logo} /></Link></div>
+            <div key={0}><Link to='/'><div id="logo"></div></Link></div>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
