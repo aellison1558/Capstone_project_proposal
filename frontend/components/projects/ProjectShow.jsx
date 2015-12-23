@@ -2,14 +2,15 @@ var React = require('react'),
     ApiUtil = require('../../util/ApiUtil'),
     ProjectStore = require('../../stores/ProjectStore'),
     Link = require('react-router').Link,
-    BackingsForm = require('../BackingsForm'),
+    BackingsForm = require('../backings/BackingsForm'),
     SessionStore = require('../../stores/SessionStore'),
     CommentsIndex = require('../comments/CommentsIndex'),
     CommentForm = require('../comments/CommentForm'),
     ProjectImage = require('./ProjectImageCarousel'),
     SignInForm = require('../SignInForm'),
     UserStore = require('../../stores/UserStore'),
-    Funding = require('./Funding');
+    Funding = require('./Funding'),
+    Backings = require('../backings/Backings');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -47,10 +48,7 @@ module.exports = React.createClass({
     this.setState({ project: ProjectStore.find(parseInt(newProps.params.projectId)) })
   },
 
-  undoBacking: function() {
-    var backing = this._findBacking();
-    ApiUtil.destroyBacking(backing.id);
-  },
+
 
   imageButton: function(e) {
     e.preventDefault();
@@ -99,19 +97,13 @@ module.exports = React.createClass({
     } else {
       url = '/';
     }
-    var backingForm;
+
     var user = this.state.users.find(function(user) {return user.id === project.creator_id}) || {username: ""}
     var userUrl = user.id ? '/users/' + user.id : "";
 
     if (SessionStore.currentUser() && user.id) {
       var commentForm = <CommentForm project={project} />
-      if (this._checkBacking()) {
-        backingForm = <button onClick={this.undoBacking}>Withdraw Support</button>
-      } else {
-        backingForm = <BackingsForm project={project}/>
-      }
     } else {
-      backingForm = <div><SignInForm text="Log in to back"/></div>
       commentForm = <div><SignInForm text="Log in to comment"/></div>
     }
 
@@ -131,38 +123,33 @@ module.exports = React.createClass({
     }
 
     return(
-      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} >
+      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000}  transitionEnterTimeout={1000} transitionLeaveTimeout={1000} >
         <div className="project-show-pane">
           <Link to={url}>Back to Projects List</Link>
           <header>
             <h3>{project.title}</h3>
+            By: <Link to={userUrl}>{user.username}</Link>
 
             <div className="row">
-              <ProjectImage className="col-xs-2" images={project.images} />
+              <ProjectImage className="col-xs-6" images={project.images} />
 
-              <div className="col-xs-2">
-                <h5>Project Summary:</h5>
-                <div>{project.summary}</div>
+              <div className="col-xs-6">
+                <div className="row">
+                  <div className="col-xs-4">
+                    <h5>Project Summary:</h5>
+                    <div>{project.summary}</div>
+                  </div>
+                  <div className="col-xs-4">
+                    <Backings project={project} user={user}/>
+                  </div>
 
-                <div>
-                  <h5>Funding:</h5>
-                  {this._calcFunding()} out of {project.goal_amt} ({Math.floor((this._calcFunding() / project.goal_amt) * 100)} % of goal)
+                  <div className="col-xs-4">
+                    <h5>Campaign:</h5>
+                    <h6>{live}</h6>
+                    {timeLeft}
+                  </div>
 
-                  <br/>
-                  {project.backings.length} Backers
-                  <br/>
 
-                  {backingForm}
-                </div>
-
-                <div>
-                  <h5>Campaign:</h5>
-                  <h6>{live}</h6>
-                  {timeLeft}
-                </div>
-
-                <div>
-                  By: <Link to={userUrl}>{user.username}</Link>
                 </div>
               </div>
             </div>
@@ -208,59 +195,7 @@ module.exports = React.createClass({
     return (elapsed)
   },
 
-  _calcFunding: function() {
-    var project = this.state.project || {
-      title: "",
-      summary: "",
-      description: "",
-      creator_id: 0,
-      category_id: 0,
-      images: [],
-      backings: [],
-      comments: [],
-      start_date: new Date(),
-      end_date: new Date()
-    };
-    var backings = project.backings;
-    var current_funding = 0;
 
-    backings.forEach(function(backing) {
-      current_funding += backing.amount;
-    })
-
-    return current_funding;
-  },
-
-  _checkBacking: function(){
-    var project = this.state.project || {
-      title: "",
-      summary: "",
-      description: "",
-      creator_id: 0,
-      category_id: 0,
-      images: [],
-      backings: [],
-      comments: [],
-      start_date: new Date(),
-      end_date: new Date()
-    };
-    var backings = project.backings;
-    var currentUser = SessionStore.currentUser();
-
-    var backingFound = this._findBacking()
-
-    return backingFound ? true : false;
-  },
-
-  _findBacking: function() {
-    var project = this.state.project;
-    var backings = project.backings;
-    var currentUser = SessionStore.currentUser();
-
-    return backings.find(function(backing){
-      return backing.backer_id === currentUser.id
-    });
-  },
 
   _checkLive: function() {
     var project = this.state.project;

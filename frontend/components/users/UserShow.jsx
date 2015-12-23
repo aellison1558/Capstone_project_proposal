@@ -84,18 +84,30 @@ module.exports = React.createClass({
     }
 
     return(
-      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} >
+      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000}  transitionEnterTimeout={1000} transitionLeaveTimeout={1000} >
         <div className="user-profile-pane">
-          <h3>{username}</h3>
-          <img src={url} alt="Profile picture" />
-          {uploadImage}
+          <div>
+            <h2>{username}</h2>
+            <img src={url} alt="Profile picture" />
+            {uploadImage}
+          </div>
+          <h3>Stats:</h3>
+          <div className='row'>
+            <div className='col-xs-4'>
+              <h4>{numProjects}</h4>
+              Created Projects
+            </div>
 
-          <h4>{numProjects}</h4>
-           Created Projects
-          <h4>{numBackings}</h4>
-           Backed Projects
-          <h4>{numComments}</h4>
-           Comments
+            <div className='col-xs-4'>
+              <h4>{numBackings}</h4>
+              Backed Projects
+            </div>
+
+            <div className='col-xs-4'>
+              <h4>{numComments}</h4>
+              Comments
+            </div>
+          </div>
         </div>
       </ReactCSSTransitionGroup>
     )

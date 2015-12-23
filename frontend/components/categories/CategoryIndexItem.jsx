@@ -1,8 +1,7 @@
 var React = require('react'),
     CategoryStore = require('../../stores/CategoryStore'),
     ApiUtil = require('../../util/ApiUtil'),
-    Link = require('react-router').Link,
-    ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+    Link = require('react-router').Link;
 
 module.exports = React.createClass({
   getInitialState: function() {

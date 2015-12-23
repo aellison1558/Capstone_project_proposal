@@ -18,13 +18,13 @@ module.exports = React.createClass({
     var url = '/projects/' + project.id
     var images = project.images;
     var buttons = "";
-    var image = images[0] ? <img src={"http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/" + images[0].image_public_id} />: <div></div>;
-
+    var imageUrl = images[0] ? "http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/" + images[0].image_public_id : 'http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/Deathstar_blueprint_wfq2iq';
+    var image = <img src={imageUrl} />;
     if (SessionStore.currentUser()) {
       if (SessionStore.currentUser().id === project.creator_id) {
         buttons = [
-          <button onClick={this.editProjectButton}>Edit Project</button>,
-          <button onClick={this.destroyProjectButton}>Destroy Project</button>
+          <button key='edit' onClick={this.editProjectButton}>Edit Project</button>,
+          <button key='destroy' onClick={this.destroyProjectButton}>Destroy Project</button>
         ]
       }
     }

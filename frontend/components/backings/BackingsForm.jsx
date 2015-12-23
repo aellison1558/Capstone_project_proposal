@@ -1,5 +1,5 @@
 var React = require('react'),
-    ApiUtil = require('../util/ApiUtil'),
+    ApiUtil = require('../../util/ApiUtil'),
     LinkStateMixin = require('react-addons-linked-state-mixin'),
     Modal = require('react-bootstrap').Modal;
 

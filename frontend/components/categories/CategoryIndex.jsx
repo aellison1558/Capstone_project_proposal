@@ -5,7 +5,7 @@ var React = require('react'),
     ReactCSSTransitionGroup = require('react-addons-css-transition-group'),
     CategoryIndexItem = require('./CategoryIndexItem');
 
-module.exports = React.createClass({
+CategoryIndex = React.createClass({
   getInitialState: function() {
     return { categories: CategoryStore.all() }
   },
@@ -19,7 +19,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    CategoryStore.addListener(this._updateState);
+    this.listeners.push(CategoryStore.addListener(this._updateState));
     ApiUtil.fetchAllCategories();
   },
 
@@ -32,12 +32,12 @@ module.exports = React.createClass({
 
   render: function() {
     var items = this.state.categories.map(function(category, idx) {
-      return (<CategoryIndexItem className="category-index-item" catId={this.categories[idx]} category={category} />)
+      return (<CategoryIndexItem className="category-index-item" key={idx} catId={this.categories[idx]} category={category} />)
     }.bind(this));
 
     return(
 
-      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} >
+      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000}  transitionEnterTimeout={1000} transitionLeaveTimeout={1000} >
         <div key='category-index-pane' className="category-index-pane">
           <div className="category-index">
             <h3>Categories:</h3>
@@ -49,3 +49,6 @@ module.exports = React.createClass({
     )
   }
 });
+
+
+module.exports = CategoryIndex;

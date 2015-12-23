@@ -1,3 +1,120 @@
 // Place all the styles related to the api/categories controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.category-index-pane{
+  margin-top: 0;
+  padding-left: 12.5vw;
+}
+
+.category-index{
+  position: relative;
+  width: 68vw;
+  text-align: center;
+}
+
+.category-index-item{
+  margin: 1vw;
+  border: 1px solid black;
+  border-radius: 10%;
+  padding-top: 8vh;
+  float: left;
+  width: 20vw;
+  height: 10vw;
+
+  text-align: center center;
+  color: #ffffff;
+  font-size: 20px;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+
+}
+
+.category-count{
+  color: #FFF;
+  outline: 0;
+  box-sizing: inherit;
+  font: inherit;
+  text-decoration: inherit;
+  text-align: inherit;
+}
+
+.appear{
+  display: block;
+}
+
+.disappear{
+  display: none;
+}
+
+.appearFade{
+  opacity: 1;
+}
+
+.disappearFade{
+  opacity: 0;
+}
+
+.category-show{
+  text-align: center;
+}
+
+
+
+#superweapons{
+  background: image-url('Superlaser2.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+#navy{
+  background: image-url('navy.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+#army{
+  background: image-url('army.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+#technology{
+  background: image-url('technology.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+#culture{
+  background: image-url('culture.png');
+  background-size: cover;
+  background-position: center center;
+}
+
+#civil{
+  background: image-url('civil.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+#exploration{
+  background: image-url('exploration.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+#force{
+  background: image-url('force.jpg');
+  background-size: cover;
+  background-position: center center;
+}
+
+#private{
+  background: image-url('private.JPG');
+  background-size: cover;
+  background-position: center center;
+}

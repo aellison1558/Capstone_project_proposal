@@ -40,10 +40,9 @@ var React = require('react'),
       },
 
       render: function(){
-
         return(
           <div>
-            <ReactCSSTransitionGroup transitionName="slide" transitionAppear={true} transitionAppearTimeout={1000}>
+            <ReactCSSTransitionGroup transitionName="slide" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
               <header id='header'><Navbar /></header>
             </ReactCSSTransitionGroup>
 
@@ -51,7 +50,7 @@ var React = require('react'),
               {this.props.children}
             </div>
 
-            <ReactCSSTransitionGroup transitionName="slide" transitionAppear={true} transitionAppearTimeout={1000}>
+            <ReactCSSTransitionGroup transitionName="slide" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
               <footer id="footer" className="bottom group">
                   <audio id="swmusic" controls>
                     <source  src="https://res.cloudinary.com/dhcnfmydo/video/upload/v1450469890/Star_Wars_Episode_V_Soundtrack_-_The_Imperial_March_Darth_Vader_s_Theme_v4ilco.mp3">

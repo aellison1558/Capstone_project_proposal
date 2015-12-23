@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+    ReactDOM = require('react-dom');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -6,12 +7,23 @@ module.exports = React.createClass({
   },
 
   messages: function (messageArray) {
+    this.componentClass = 'appearFade';
     this.replaceState({messages: messageArray});
+  },
+
+  eraseMessages: function(){
+    this.componentClass = "disappearFade";
+    setTimeout(function() {this.setState({messages: []});}.bind(this), 2000)
+
+  },
+
+  componentDidMount: function() {
+    setInterval(this.eraseMessages, 4000);
   },
 
   render: function() {
     return (
-      <div className='flash_messages_component'>
+      <div className={'flash_messages_component ' + this.componentClass}>
         {this.state.messages.map(function(message, index) {
           _level = message[0];
           _text  = message[1];
@@ -59,7 +71,7 @@ function handleFlashMessagesHeader(node, xhr) {
 
 $(document).ready(function() {
   var dummy = new Array();
-  var flashDiv = React.render(<FlashMessages messages={dummy} />, $('#flash_messages')[0]);
+  var flashDiv = ReactDOM.render(<FlashMessages messages={dummy} />, $('#flash_messages')[0]);
 
   $(document).ajaxComplete(function(event, xhr, settings) {
     handleFlashMessagesHeader(flashDiv, xhr);

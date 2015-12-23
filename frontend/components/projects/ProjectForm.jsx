@@ -48,6 +48,12 @@ module.exports = React.createClass({
     ApiUtil.fetchAllCategories();
   },
 
+  componentWillUnmount: function() {
+    this.listeners.forEach(function(listener) {
+      listener.remove();
+    })
+  },
+
   //handlers
 
   submitHandler: function(e) {
@@ -88,7 +94,7 @@ module.exports = React.createClass({
       end_date: new Date(2016, 3, 1),
       category_id: 6,
       categories: CategoryStore.all(),
-      errors: ""
+      errors: []
     })
   },
 
@@ -103,7 +109,7 @@ module.exports = React.createClass({
     var submitText = this.props.params.projectId ? "Update Project" : "Create Project";
 
     return(
-      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} >
+      <ReactCSSTransitionGroup transitionName="contentfade" transitionAppear={true} transitionAppearTimeout={1000}  transitionEnterTimeout={1000} transitionLeaveTimeout={1000} >
         <div className="project-form">
           <ul>{this.state.errors.map(function(error) {return <li>{error}</li>})}</ul>
 

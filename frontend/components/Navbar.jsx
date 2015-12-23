@@ -85,7 +85,6 @@ module.exports = React.createClass({
             <NavItem key={3} eventKey={3}><Search projects={this.state.projects}/></NavItem>
           </Nav>
           <Nav pullRight>
-
             {signInSignOut}
           </Nav>
         </Navbar.Collapse>

@@ -37,13 +37,6 @@ UserStore.__onDispatch = function(payload) {
       UserStore.updateUser(payload.user);
       UserStore.__emitChange();
       break;
-    case SessionConstants.RECEIVE_USER:
-      UserStore.__emitChange();
-      break;
-    case SessionConstants.CLEAR_USER:
-      UserStore.__emitChange();
-      break;
-
   }
 };
 
