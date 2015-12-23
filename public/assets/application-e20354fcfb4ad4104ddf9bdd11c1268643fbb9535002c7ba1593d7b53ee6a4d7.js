@@ -11715,7 +11715,7 @@ return jQuery;
 	    Router = ReactRouter.Router,
 	    Route = ReactRouter.Route,
 	    IndexRoute = ReactRouter.IndexRoute;
-	CategoryIndex = __webpack_require__(240), CategoryShow = __webpack_require__(249), ProjectShow = __webpack_require__(253), ProjectForm = __webpack_require__(510), Root = __webpack_require__(511), Navbar = __webpack_require__(512), UserShow = __webpack_require__(517), ReactCSSTransitionGroup = __webpack_require__(242), FlashMessages = __webpack_require__(518);
+	CategoryIndex = __webpack_require__(240), CategoryShow = __webpack_require__(250), ProjectShow = __webpack_require__(253), ProjectForm = __webpack_require__(512), Root = __webpack_require__(513), Navbar = __webpack_require__(514), UserShow = __webpack_require__(519), ReactCSSTransitionGroup = __webpack_require__(242), FlashMessages = __webpack_require__(520);
 
 	var App = React.createClass({
 	  displayName: 'App',
@@ -11742,13 +11742,12 @@ return jQuery;
 	  },
 
 	  render: function () {
-
 	    return React.createElement(
 	      'div',
 	      null,
 	      React.createElement(
 	        ReactCSSTransitionGroup,
-	        { transitionName: 'slide', transitionAppear: true, transitionAppearTimeout: 1000 },
+	        { transitionName: 'slide', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 1000 },
 	        React.createElement(
 	          'header',
 	          { id: 'header' },
@@ -11762,7 +11761,7 @@ return jQuery;
 	      ),
 	      React.createElement(
 	        ReactCSSTransitionGroup,
-	        { transitionName: 'slide', transitionAppear: true, transitionAppearTimeout: 1000 },
+	        { transitionName: 'slide', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 1000 },
 	        React.createElement(
 	          'footer',
 	          { id: 'footer', className: 'bottom group' },
@@ -43234,10 +43233,10 @@ return jQuery;
 	    ApiUtil = __webpack_require__(159),
 	    Link = __webpack_require__(189).Link,
 	    ReactCSSTransitionGroup = __webpack_require__(242),
-	    CategoryIndexItem = __webpack_require__(519);
+	    CategoryIndexItem = __webpack_require__(249);
 
-	module.exports = React.createClass({
-	  displayName: 'exports',
+	CategoryIndex = React.createClass({
+	  displayName: 'CategoryIndex',
 
 	  getInitialState: function () {
 	    return { categories: CategoryStore.all() };
@@ -43252,7 +43251,7 @@ return jQuery;
 	  },
 
 	  componentDidMount: function () {
-	    CategoryStore.addListener(this._updateState);
+	    this.listeners.push(CategoryStore.addListener(this._updateState));
 	    ApiUtil.fetchAllCategories();
 	  },
 
@@ -43264,12 +43263,12 @@ return jQuery;
 
 	  render: function () {
 	    var items = this.state.categories.map((function (category, idx) {
-	      return React.createElement(CategoryIndexItem, { className: 'category-index-item', catId: this.categories[idx], category: category });
+	      return React.createElement(CategoryIndexItem, { className: 'category-index-item', key: idx, catId: this.categories[idx], category: category });
 	    }).bind(this));
 
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
-	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000 },
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 1000 },
 	      React.createElement(
 	        'div',
 	        { key: 'category-index-pane', className: 'category-index-pane' },
@@ -43287,6 +43286,8 @@ return jQuery;
 	    );
 	  }
 	});
+
+	module.exports = CategoryIndex;
 
 /***/ },
 /* 241 */
@@ -44118,7 +44119,59 @@ return jQuery;
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
-	    ProjectIndex = __webpack_require__(250),
+	    CategoryStore = __webpack_require__(241),
+	    ApiUtil = __webpack_require__(159),
+	    Link = __webpack_require__(189).Link;
+
+	module.exports = React.createClass({
+	  displayName: 'exports',
+
+	  getInitialState: function () {
+	    return { divNameClass: " appear", divCountClass: " disappear" };
+	  },
+	  showCount: function () {
+	    this.setState({
+	      divNameClass: " disappear",
+	      divCountClass: " appear"
+	    });
+	  },
+
+	  showName: function () {
+	    this.setState({
+	      divNameClass: " appear",
+	      divCountClass: " disappear"
+	    });
+	  },
+
+	  render: function () {
+	    var category = this.props.category;
+
+	    var url = "/categories/" + category.id;
+	    return React.createElement(
+	      Link,
+	      { className: 'category-index-item', id: this.props.catId, key: category.id, to: url, onMouseEnter: this.showCount, onMouseLeave: this.showName },
+	      React.createElement(
+	        'div',
+	        { className: "category-name" + this.state.divNameClass },
+	        category.name
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: "category-count" + this.state.divCountClass },
+	        category.projects.length,
+	        ' Projects!'
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 250 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1),
+	    ProjectIndex = __webpack_require__(251),
+	    Link = __webpack_require__(189).Link,
 	    CategoryStore = __webpack_require__(241);
 
 	module.exports = React.createClass({
@@ -44131,18 +44184,17 @@ return jQuery;
 	  },
 
 	  render: function () {
-	    var disclaimer = parseInt(this.props.params.categoryId) === 9 ? "Note: all private projects are subject to review by the Imperial Security Bureau" : "";
 
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
-	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000 },
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 1000 },
 	      React.createElement(
 	        'div',
-	        null,
+	        { className: 'category-show' },
 	        React.createElement(
-	          'h6',
-	          null,
-	          disclaimer
+	          Link,
+	          { to: '/categories' },
+	          'Back to Categories'
 	        ),
 	        React.createElement(ProjectIndex, { editButtonHandler: this.editButtonHandler, categoryId: this.props.params.categoryId })
 	      )
@@ -44151,13 +44203,13 @@ return jQuery;
 	});
 
 /***/ },
-/* 250 */
+/* 251 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
 	    ProjectStore = __webpack_require__(172),
 	    ApiUtil = __webpack_require__(159),
-	    ProjectIndexItem = __webpack_require__(251);
+	    ProjectIndexItem = __webpack_require__(252);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -44202,13 +44254,13 @@ return jQuery;
 	});
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
 	    ProjectStore = __webpack_require__(172),
 	    ApiUtil = __webpack_require__(159),
-	    SessionStore = __webpack_require__(252),
+	    SessionStore = __webpack_require__(503),
 	    Link = __webpack_require__(189).Link;
 
 	module.exports = React.createClass({
@@ -44227,17 +44279,17 @@ return jQuery;
 	    var url = '/projects/' + project.id;
 	    var images = project.images;
 	    var buttons = "";
-	    var image = images[0] ? React.createElement('img', { src: "http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/" + images[0].image_public_id }) : React.createElement('div', null);
-
+	    var imageUrl = images[0] ? "http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/" + images[0].image_public_id : 'http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/Deathstar_blueprint_wfq2iq';
+	    var image = React.createElement('img', { src: imageUrl });
 	    if (SessionStore.currentUser()) {
 	      if (SessionStore.currentUser().id === project.creator_id) {
 	        buttons = [React.createElement(
 	          'button',
-	          { onClick: this.editProjectButton },
+	          { key: 'edit', onClick: this.editProjectButton },
 	          'Edit Project'
 	        ), React.createElement(
 	          'button',
-	          { onClick: this.destroyProjectButton },
+	          { key: 'destroy', onClick: this.destroyProjectButton },
 	          'Destroy Project'
 	        )];
 	      }
@@ -44267,52 +44319,6 @@ return jQuery;
 	});
 
 /***/ },
-/* 252 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Store = __webpack_require__(173).Store,
-	    Dispatcher = __webpack_require__(161),
-	    SessionConstants = __webpack_require__(169);
-
-	var SessionStore = new Store(Dispatcher);
-
-	var _currentUser = {};
-
-	SessionStore.currentUser = function () {
-	  var result = {};
-	  for (key in _currentUser) {
-	    if (_currentUser.hasOwnProperty(key)) {
-	      result[key] = _currentUser[key];
-	    }
-	  }
-	  return _currentUser.username ? result : null;
-	};
-
-	SessionStore.updateCurrentUser = function (user) {
-	  _currentUser = user;
-	};
-
-	SessionStore.clearCurrentUser = function () {
-	  _currentUser = {};
-	};
-
-	SessionStore.__onDispatch = function (payload) {
-	  switch (payload.actionType) {
-
-	    case SessionConstants.RECEIVE_USER:
-	      SessionStore.updateCurrentUser(payload.user);
-	      SessionStore.__emitChange();
-	      break;
-	    case SessionConstants.CLEAR_USER:
-	      SessionStore.clearCurrentUser();
-	      SessionStore.__emitChange();
-	      break;
-	  }
-	};
-
-	module.exports = SessionStore;
-
-/***/ },
 /* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -44321,13 +44327,14 @@ return jQuery;
 	    ProjectStore = __webpack_require__(172),
 	    Link = __webpack_require__(189).Link,
 	    BackingsForm = __webpack_require__(254),
-	    SessionStore = __webpack_require__(252),
-	    CommentsIndex = __webpack_require__(503),
-	    CommentForm = __webpack_require__(506),
-	    ProjectImage = __webpack_require__(507),
-	    SignInForm = __webpack_require__(508),
-	    UserStore = __webpack_require__(505),
-	    Funding = __webpack_require__(509);
+	    SessionStore = __webpack_require__(503),
+	    CommentsIndex = __webpack_require__(504),
+	    CommentForm = __webpack_require__(507),
+	    ProjectImage = __webpack_require__(508),
+	    SignInForm = __webpack_require__(509),
+	    UserStore = __webpack_require__(506),
+	    Funding = __webpack_require__(510),
+	    Backings = __webpack_require__(511);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -44365,11 +44372,6 @@ return jQuery;
 
 	  componentWillReceiveProps: function (newProps) {
 	    this.setState({ project: ProjectStore.find(parseInt(newProps.params.projectId)) });
-	  },
-
-	  undoBacking: function () {
-	    var backing = this._findBacking();
-	    ApiUtil.destroyBacking(backing.id);
 	  },
 
 	  imageButton: function (e) {
@@ -44418,7 +44420,7 @@ return jQuery;
 	    } else {
 	      url = '/';
 	    }
-	    var backingForm;
+
 	    var user = this.state.users.find(function (user) {
 	      return user.id === project.creator_id;
 	    }) || { username: "" };
@@ -44426,21 +44428,7 @@ return jQuery;
 
 	    if (SessionStore.currentUser() && user.id) {
 	      var commentForm = React.createElement(CommentForm, { project: project });
-	      if (this._checkBacking()) {
-	        backingForm = React.createElement(
-	          'button',
-	          { onClick: this.undoBacking },
-	          'Withdraw Support'
-	        );
-	      } else {
-	        backingForm = React.createElement(BackingsForm, { project: project });
-	      }
 	    } else {
-	      backingForm = React.createElement(
-	        'div',
-	        null,
-	        React.createElement(SignInForm, { text: 'Log in to back' })
-	      );
 	      commentForm = React.createElement(
 	        'div',
 	        null,
@@ -44474,7 +44462,7 @@ return jQuery;
 
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
-	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000 },
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 1000 },
 	      React.createElement(
 	        'div',
 	        { className: 'project-show-pane' },
@@ -44491,66 +44479,55 @@ return jQuery;
 	            null,
 	            project.title
 	          ),
+	          'By: ',
+	          React.createElement(
+	            Link,
+	            { to: userUrl },
+	            user.username
+	          ),
 	          React.createElement(
 	            'div',
 	            { className: 'row' },
-	            React.createElement(ProjectImage, { className: 'col-xs-2', images: project.images }),
+	            React.createElement(ProjectImage, { className: 'col-xs-6', images: project.images }),
 	            React.createElement(
 	              'div',
-	              { className: 'col-xs-2' },
-	              React.createElement(
-	                'h5',
-	                null,
-	                'Project Summary:'
-	              ),
+	              { className: 'col-xs-6' },
 	              React.createElement(
 	                'div',
-	                null,
-	                project.summary
-	              ),
-	              React.createElement(
-	                'div',
-	                null,
+	                { className: 'row' },
 	                React.createElement(
-	                  'h5',
-	                  null,
-	                  'Funding:'
-	                ),
-	                this._calcFunding(),
-	                ' out of ',
-	                project.goal_amt,
-	                ' (',
-	                Math.floor(this._calcFunding() / project.goal_amt * 100),
-	                ' % of goal)',
-	                React.createElement('br', null),
-	                project.backings.length,
-	                ' Backers',
-	                React.createElement('br', null),
-	                backingForm
-	              ),
-	              React.createElement(
-	                'div',
-	                null,
-	                React.createElement(
-	                  'h5',
-	                  null,
-	                  'Campaign:'
+	                  'div',
+	                  { className: 'col-xs-4' },
+	                  React.createElement(
+	                    'h5',
+	                    null,
+	                    'Project Summary:'
+	                  ),
+	                  React.createElement(
+	                    'div',
+	                    null,
+	                    project.summary
+	                  )
 	                ),
 	                React.createElement(
-	                  'h6',
-	                  null,
-	                  live
+	                  'div',
+	                  { className: 'col-xs-4' },
+	                  React.createElement(Backings, { project: project, user: user })
 	                ),
-	                timeLeft
-	              ),
-	              React.createElement(
-	                'div',
-	                null,
-	                'By: ',
 	                React.createElement(
-	                  Link,
-	                  { to: userUrl },
-	                  user.username
+	                  'div',
+	                  { className: 'col-xs-4' },
+	                  React.createElement(
+	                    'h5',
+	                    null,
+	                    'Campaign:'
+	                  ),
+	                  React.createElement(
+	                    'h6',
+	                    null,
+	                    live
+	                  ),
+	                  timeLeft
 	                )
 	              )
 	            )
@@ -44606,60 +44583,6 @@ return jQuery;
 	    var elapsed = Date.parse(end) - Date.parse(start);
 	    elapsed = elapsed / 1000 / 60 / 60 / 24;
 	    return elapsed;
-	  },
-
-	  _calcFunding: function () {
-	    var project = this.state.project || {
-	      title: "",
-	      summary: "",
-	      description: "",
-	      creator_id: 0,
-	      category_id: 0,
-	      images: [],
-	      backings: [],
-	      comments: [],
-	      start_date: new Date(),
-	      end_date: new Date()
-	    };
-	    var backings = project.backings;
-	    var current_funding = 0;
-
-	    backings.forEach(function (backing) {
-	      current_funding += backing.amount;
-	    });
-
-	    return current_funding;
-	  },
-
-	  _checkBacking: function () {
-	    var project = this.state.project || {
-	      title: "",
-	      summary: "",
-	      description: "",
-	      creator_id: 0,
-	      category_id: 0,
-	      images: [],
-	      backings: [],
-	      comments: [],
-	      start_date: new Date(),
-	      end_date: new Date()
-	    };
-	    var backings = project.backings;
-	    var currentUser = SessionStore.currentUser();
-
-	    var backingFound = this._findBacking();
-
-	    return backingFound ? true : false;
-	  },
-
-	  _findBacking: function () {
-	    var project = this.state.project;
-	    var backings = project.backings;
-	    var currentUser = SessionStore.currentUser();
-
-	    return backings.find(function (backing) {
-	      return backing.backer_id === currentUser.id;
-	    });
 	  },
 
 	  _checkLive: function () {
@@ -61955,9 +61878,55 @@ return jQuery;
 /* 503 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var Store = __webpack_require__(173).Store,
+	    Dispatcher = __webpack_require__(161),
+	    SessionConstants = __webpack_require__(169);
+
+	var SessionStore = new Store(Dispatcher);
+
+	var _currentUser = {};
+
+	SessionStore.currentUser = function () {
+	  var result = {};
+	  for (key in _currentUser) {
+	    if (_currentUser.hasOwnProperty(key)) {
+	      result[key] = _currentUser[key];
+	    }
+	  }
+	  return _currentUser.username ? result : null;
+	};
+
+	SessionStore.updateCurrentUser = function (user) {
+	  _currentUser = user;
+	};
+
+	SessionStore.clearCurrentUser = function () {
+	  _currentUser = {};
+	};
+
+	SessionStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+
+	    case SessionConstants.RECEIVE_USER:
+	      SessionStore.updateCurrentUser(payload.user);
+	      SessionStore.__emitChange();
+	      break;
+	    case SessionConstants.CLEAR_USER:
+	      SessionStore.clearCurrentUser();
+	      SessionStore.__emitChange();
+	      break;
+	  }
+	};
+
+	module.exports = SessionStore;
+
+/***/ },
+/* 504 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var React = __webpack_require__(1),
 	    ApiUtil = __webpack_require__(159),
-	    CommentsIndexItem = __webpack_require__(504);
+	    CommentsIndexItem = __webpack_require__(505);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -61976,13 +61945,13 @@ return jQuery;
 	});
 
 /***/ },
-/* 504 */
+/* 505 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
 	    ApiUtil = __webpack_require__(159),
-	    SessionStore = __webpack_require__(252),
-	    UserStore = __webpack_require__(505);
+	    SessionStore = __webpack_require__(503),
+	    UserStore = __webpack_require__(506);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -62032,7 +62001,7 @@ return jQuery;
 	});
 
 /***/ },
-/* 505 */
+/* 506 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Store = __webpack_require__(173).Store,
@@ -62074,20 +62043,13 @@ return jQuery;
 	      UserStore.updateUser(payload.user);
 	      UserStore.__emitChange();
 	      break;
-	    case SessionConstants.RECEIVE_USER:
-	      UserStore.__emitChange();
-	      break;
-	    case SessionConstants.CLEAR_USER:
-	      UserStore.__emitChange();
-	      break;
-
 	  }
 	};
 
 	module.exports = UserStore;
 
 /***/ },
-/* 506 */
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
@@ -62137,17 +62099,16 @@ return jQuery;
 	});
 
 /***/ },
-/* 507 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
 	    ApiUtil = __webpack_require__(159),
 	    ProjectStore = __webpack_require__(172),
 	    Link = __webpack_require__(189).Link,
-	    BackingsForm = __webpack_require__(254),
-	    SessionStore = __webpack_require__(252),
-	    CommentsIndex = __webpack_require__(503),
-	    CommentForm = __webpack_require__(506);
+	    SessionStore = __webpack_require__(503),
+	    CommentsIndex = __webpack_require__(504),
+	    CommentForm = __webpack_require__(507);
 	Carousel = __webpack_require__(259).Carousel, CarouselItem = __webpack_require__(259).CarouselItem;
 
 	module.exports = React.createClass({
@@ -62168,14 +62129,21 @@ return jQuery;
 	  },
 
 	  render() {
-	    var images = this.props.images.map(function (image) {
-	      var url = "http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/" + image.image_public_id;
-	      return React.createElement(
-	        CarouselItem,
-	        { key: image.id },
-	        React.createElement('img', { width: true, height: 400, alt: 'Project image', src: url })
-	      );
-	    });
+	    var images = React.createElement(
+	      CarouselItem,
+	      { key: 0 },
+	      React.createElement('img', { width: true, height: 400, alt: 'Project image', src: 'http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/Deathstar_blueprint_wfq2iq' })
+	    );
+	    if (this.props.images[0]) {
+	      images = this.props.images.map(function (image) {
+	        var url = "http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/" + image.image_public_id;
+	        return React.createElement(
+	          CarouselItem,
+	          { key: image.id },
+	          React.createElement('img', { width: true, height: 400, alt: 'Project image', src: url })
+	        );
+	      });
+	    }
 	    return React.createElement(
 	      'div',
 	      { className: 'carousel' },
@@ -62189,7 +62157,7 @@ return jQuery;
 	});
 
 /***/ },
-/* 508 */
+/* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
@@ -62326,7 +62294,7 @@ return jQuery;
 	});
 
 /***/ },
-/* 509 */
+/* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
@@ -62395,7 +62363,139 @@ return jQuery;
 	});
 
 /***/ },
-/* 510 */
+/* 511 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(1),
+	    ApiUtil = __webpack_require__(159),
+	    ProjectStore = __webpack_require__(172),
+	    Link = __webpack_require__(189).Link,
+	    BackingsForm = __webpack_require__(254),
+	    SessionStore = __webpack_require__(503),
+	    SignInForm = __webpack_require__(509),
+	    UserStore = __webpack_require__(506);
+
+	module.exports = React.createClass({
+	  displayName: 'exports',
+
+	  undoBacking: function () {
+	    var backing = this._findBacking();
+	    ApiUtil.destroyBacking(backing.id);
+	  },
+
+	  _calcFunding: function () {
+	    var project = this.props.project || {
+	      title: "",
+	      summary: "",
+	      description: "",
+	      creator_id: 0,
+	      category_id: 0,
+	      images: [],
+	      backings: [],
+	      comments: [],
+	      start_date: new Date(),
+	      end_date: new Date()
+	    };
+	    var backings = project.backings;
+	    var current_funding = 0;
+
+	    backings.forEach(function (backing) {
+	      current_funding += backing.amount;
+	    });
+
+	    return current_funding;
+	  },
+
+	  _checkBacking: function () {
+	    var project = this.props.project || {
+	      title: "",
+	      summary: "",
+	      description: "",
+	      creator_id: 0,
+	      category_id: 0,
+	      images: [],
+	      backings: [],
+	      comments: [],
+	      start_date: new Date(),
+	      end_date: new Date()
+	    };
+	    var backings = project.backings;
+	    var currentUser = SessionStore.currentUser();
+
+	    var backingFound = this._findBacking();
+
+	    return backingFound ? true : false;
+	  },
+
+	  _findBacking: function () {
+	    var project = this.props.project;
+	    var backings = project.backings;
+	    var currentUser = SessionStore.currentUser();
+
+	    return backings.find(function (backing) {
+	      return backing.backer_id === currentUser.id;
+	    });
+	  },
+
+	  render: function () {
+	    var project = this.props.project || {
+	      title: "",
+	      summary: "",
+	      description: "",
+	      creator_id: 0,
+	      category_id: 0,
+	      images: [],
+	      backings: [],
+	      comments: [],
+	      start_date: new Date(),
+	      end_date: new Date()
+	    };
+
+	    var backingForm;
+
+	    if (SessionStore.currentUser() && this.props.user.id) {
+	      if (this._checkBacking()) {
+	        backingForm = React.createElement(
+	          'button',
+	          { onClick: this.undoBacking },
+	          'Withdraw Support'
+	        );
+	      } else {
+	        backingForm = React.createElement(BackingsForm, { project: project });
+	      }
+	    } else {
+	      backingForm = React.createElement(
+	        'div',
+	        null,
+	        React.createElement(SignInForm, { text: 'Log in to back' })
+	      );
+	    }
+
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'h5',
+	        null,
+	        'Funding:'
+	      ),
+	      this._calcFunding(),
+	      ' out of ',
+	      project.goal_amt,
+	      ' (',
+	      Math.floor(this._calcFunding() / project.goal_amt * 100),
+	      ' % of goal)',
+	      React.createElement('br', null),
+	      project.backings.length,
+	      ' Backers',
+	      React.createElement('br', null),
+	      backingForm
+	    );
+	  }
+	});
+
+/***/ },
+/* 512 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
@@ -62448,6 +62548,12 @@ return jQuery;
 	    ApiUtil.fetchAllCategories();
 	  },
 
+	  componentWillUnmount: function () {
+	    this.listeners.forEach(function (listener) {
+	      listener.remove();
+	    });
+	  },
+
 	  //handlers
 
 	  submitHandler: function (e) {
@@ -62486,7 +62592,7 @@ return jQuery;
 	      end_date: new Date(2016, 3, 1),
 	      category_id: 6,
 	      categories: CategoryStore.all(),
-	      errors: ""
+	      errors: []
 	    });
 	  },
 
@@ -62506,7 +62612,7 @@ return jQuery;
 
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
-	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000 },
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 1000 },
 	      React.createElement(
 	        'div',
 	        { className: 'project-form' },
@@ -62684,7 +62790,7 @@ return jQuery;
 	});
 
 /***/ },
-/* 511 */
+/* 513 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
@@ -62694,9 +62800,10 @@ return jQuery;
 	  displayName: 'exports',
 
 	  render: function () {
+	    var disclaimer = "Note: all projects are subject to review by the Imperial Security Bureau";
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
-	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000 },
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 1000 },
 	      React.createElement(
 	        Jumbotron,
 	        { className: 'welcome' },
@@ -62714,6 +62821,11 @@ return jQuery;
 	          'p',
 	          null,
 	          'Click discover to checkout projects or log in to propose your own'
+	        ),
+	        React.createElement(
+	          'h6',
+	          null,
+	          disclaimer
 	        )
 	      )
 	    );
@@ -62721,17 +62833,17 @@ return jQuery;
 	});
 
 /***/ },
-/* 512 */
+/* 514 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
 	    Link = __webpack_require__(189).Link,
-	    SessionStore = __webpack_require__(252),
+	    SessionStore = __webpack_require__(503),
 	    ApiUtil = __webpack_require__(159),
-	    Search = __webpack_require__(513),
-	    ProjectSearchStore = __webpack_require__(515),
-	    SignInForm = __webpack_require__(508),
-	    SignUpForm = __webpack_require__(516),
+	    Search = __webpack_require__(515),
+	    ProjectSearchStore = __webpack_require__(517),
+	    SignInForm = __webpack_require__(509),
+	    SignUpForm = __webpack_require__(518),
 	    Navbar = __webpack_require__(259).Navbar,
 	    Nav = __webpack_require__(259).Nav,
 	    NavItem = __webpack_require__(259).NavItem;
@@ -62875,14 +62987,14 @@ return jQuery;
 	});
 
 /***/ },
-/* 513 */
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
 	    LinkStateMixin = __webpack_require__(255),
 	    Link = __webpack_require__(189).Link,
 	    Modal = __webpack_require__(259).Modal,
-	    Fuse = __webpack_require__(514);
+	    Fuse = __webpack_require__(516);
 
 	var Search = React.createClass({
 	  displayName: 'Search',
@@ -62969,7 +63081,7 @@ return jQuery;
 	module.exports = Search;
 
 /***/ },
-/* 514 */
+/* 516 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -63476,7 +63588,7 @@ return jQuery;
 
 
 /***/ },
-/* 515 */
+/* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Store = __webpack_require__(173).Store,
@@ -63521,7 +63633,7 @@ return jQuery;
 	module.exports = ProjectSearchStore;
 
 /***/ },
-/* 516 */
+/* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
@@ -63706,13 +63818,13 @@ return jQuery;
 	});
 
 /***/ },
-/* 517 */
+/* 519 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
-	    UserStore = __webpack_require__(505),
+	    UserStore = __webpack_require__(506),
 	    ApiUtil = __webpack_require__(159),
-	    SessionStore = __webpack_require__(252);
+	    SessionStore = __webpack_require__(503);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -63802,45 +63914,71 @@ return jQuery;
 
 	    return React.createElement(
 	      ReactCSSTransitionGroup,
-	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000 },
+	      { transitionName: 'contentfade', transitionAppear: true, transitionAppearTimeout: 1000, transitionEnterTimeout: 1000, transitionLeaveTimeout: 1000 },
 	      React.createElement(
 	        'div',
 	        { className: 'user-profile-pane' },
 	        React.createElement(
+	          'div',
+	          null,
+	          React.createElement(
+	            'h2',
+	            null,
+	            username
+	          ),
+	          React.createElement('img', { src: url, alt: 'Profile picture' }),
+	          uploadImage
+	        ),
+	        React.createElement(
 	          'h3',
 	          null,
-	          username
+	          'Stats:'
 	        ),
-	        React.createElement('img', { src: url, alt: 'Profile picture' }),
-	        uploadImage,
 	        React.createElement(
-	          'h4',
-	          null,
-	          numProjects
-	        ),
-	        'Created Projects',
-	        React.createElement(
-	          'h4',
-	          null,
-	          numBackings
-	        ),
-	        'Backed Projects',
-	        React.createElement(
-	          'h4',
-	          null,
-	          numComments
-	        ),
-	        'Comments'
+	          'div',
+	          { className: 'row' },
+	          React.createElement(
+	            'div',
+	            { className: 'col-xs-4' },
+	            React.createElement(
+	              'h4',
+	              null,
+	              numProjects
+	            ),
+	            'Created Projects'
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'col-xs-4' },
+	            React.createElement(
+	              'h4',
+	              null,
+	              numBackings
+	            ),
+	            'Backed Projects'
+	          ),
+	          React.createElement(
+	            'div',
+	            { className: 'col-xs-4' },
+	            React.createElement(
+	              'h4',
+	              null,
+	              numComments
+	            ),
+	            'Comments'
+	          )
+	        )
 	      )
 	    );
 	  }
 	});
 
 /***/ },
-/* 518 */
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1);
+	var React = __webpack_require__(1),
+	    ReactDOM = __webpack_require__(158);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -63850,13 +63988,25 @@ return jQuery;
 	  },
 
 	  messages: function (messageArray) {
+	    this.componentClass = 'appearFade';
 	    this.replaceState({ messages: messageArray });
+	  },
+
+	  eraseMessages: function () {
+	    this.componentClass = "disappearFade";
+	    setTimeout((function () {
+	      this.setState({ messages: [] });
+	    }).bind(this), 2000);
+	  },
+
+	  componentDidMount: function () {
+	    setInterval(this.eraseMessages, 4000);
 	  },
 
 	  render: function () {
 	    return React.createElement(
 	      'div',
-	      { className: 'flash_messages_component' },
+	      { className: 'flash_messages_component ' + this.componentClass },
 	      this.state.messages.map((function (message, index) {
 	        _level = message[0];
 	        _text = message[1];
@@ -63903,63 +64053,11 @@ return jQuery;
 
 	$(document).ready(function () {
 	  var dummy = new Array();
-	  var flashDiv = React.render(React.createElement(FlashMessages, { messages: dummy }), $('#flash_messages')[0]);
+	  var flashDiv = ReactDOM.render(React.createElement(FlashMessages, { messages: dummy }), $('#flash_messages')[0]);
 
 	  $(document).ajaxComplete(function (event, xhr, settings) {
 	    handleFlashMessagesHeader(flashDiv, xhr);
 	  });
-	});
-
-/***/ },
-/* 519 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1),
-	    CategoryStore = __webpack_require__(241),
-	    ApiUtil = __webpack_require__(159),
-	    Link = __webpack_require__(189).Link,
-	    ReactCSSTransitionGroup = __webpack_require__(242);
-
-	module.exports = React.createClass({
-	  displayName: 'exports',
-
-	  getInitialState: function () {
-	    return { divNameClass: " appear", divCountClass: " disappear" };
-	  },
-	  showCount: function () {
-	    this.setState({
-	      divNameClass: " disappear",
-	      divCountClass: " appear"
-	    });
-	  },
-
-	  showName: function () {
-	    this.setState({
-	      divNameClass: " appear",
-	      divCountClass: " disappear"
-	    });
-	  },
-
-	  render: function () {
-	    var category = this.props.category;
-
-	    var url = "/categories/" + category.id;
-	    return React.createElement(
-	      Link,
-	      { className: 'category-index-item', id: this.props.catId, key: category.id, to: url, onMouseEnter: this.showCount, onMouseLeave: this.showName },
-	      React.createElement(
-	        'div',
-	        { className: "category-name" + this.state.divNameClass },
-	        category.name
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: "category-count" + this.state.divCountClass },
-	        category.projects.length,
-	        ' Projects!'
-	      )
-	    );
-	  }
 	});
 
 /***/ }
