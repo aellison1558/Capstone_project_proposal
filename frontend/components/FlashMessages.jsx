@@ -17,6 +17,12 @@ module.exports = React.createClass({
 
   },
 
+  componentWillMount: function() {
+    if (this.props.location && this.props.location.action === 'POP') {
+      $.get('/', {}, function() {});
+    }
+  },
+
   componentDidMount: function() {
     setInterval(this.eraseMessages, 4000);
   },

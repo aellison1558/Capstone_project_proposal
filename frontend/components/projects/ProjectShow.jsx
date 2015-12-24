@@ -27,6 +27,10 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
+    if (this.props.location.action === 'POP') {
+      $.get('/', {}, function(response) {this.props.history.push('/')}.bind(this));
+    }
+
     ApiUtil.fetchEveryProject();
     ApiUtil.fetchAllUsers();
   },
@@ -62,8 +66,6 @@ module.exports = React.createClass({
     };
 
     options['multiple'] = false;
-    options['cropping'] = 'server';
-    options['cropping_aspect_ratio'] = 0.75;
 
     cloudinary.openUploadWidget(options, function(error, result) {
       if (!error) {
@@ -131,7 +133,10 @@ module.exports = React.createClass({
             By: <Link to={userUrl}>{user.username}</Link>
 
             <div className="row">
-              <ProjectImage className="col-xs-6" images={project.images} />
+              <div className="col-xs-6">
+                <ProjectImage  images={project.images} />
+                {uploadImage}
+              </div>
 
               <div className="col-xs-6">
                 <div className="row">
@@ -154,9 +159,9 @@ module.exports = React.createClass({
               </div>
             </div>
 
-            <div className="form-group row" >
-              {uploadImage}
-            </div>
+
+
+
 
           </header>
 

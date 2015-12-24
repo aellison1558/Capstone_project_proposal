@@ -43,6 +43,12 @@ module.exports = React.createClass({
   listeners: [],
 
 
+  componentWillMount: function() {
+    if (this.props.location.action === 'POP') {
+      $.get('/', {}, function() {});
+    }
+  },
+  
   componentDidMount: function() {
     this.listeners.push(CategoryStore.addListener(this._updateState));
     ApiUtil.fetchAllCategories();

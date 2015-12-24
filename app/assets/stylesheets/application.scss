@@ -166,6 +166,7 @@ body{
 
 .welcome{
   background: rgba(255,255,255,0);
+  text-align: center;
 }
 
 .errors{
@@ -237,5 +238,6 @@ body{
 @media (min-width: 1200px) {
   .container{
     width: 100vw;
+    padding: 0;
   }
 }

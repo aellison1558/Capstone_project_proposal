@@ -28,6 +28,12 @@ module.exports = React.createClass({
     })
   },
 
+  componentWillMount: function() {
+    if (this.props.location && this.props.location.action === 'POP') {
+      $.get('/', {}, function() {});
+    }
+  },
+
   componentDidMount: function(){
     this.listeners.push(SessionStore.addListener(this._updateState));
     this.listeners.push(ProjectSearchStore.addListener(this._updateState));

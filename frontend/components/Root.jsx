@@ -3,6 +3,11 @@ var React = require('react'),
     Logo = require('./Logo');
 
 module.exports = React.createClass({
+  componentWillMount: function() {
+    if (this.props.location && this.props.location.action === 'POP') {
+      $.get('/', {}, function() {});
+    }
+  },
 
   render: function() {
     var disclaimer = "Note: all projects are subject to review by the Imperial Security Bureau";

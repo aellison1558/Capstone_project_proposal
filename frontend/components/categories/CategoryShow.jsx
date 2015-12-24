@@ -4,6 +4,12 @@ var React = require('react'),
     CategoryStore = require('../../stores/CategoryStore');
 
 module.exports = React.createClass({
+  componentWillMount: function() {
+    if (this.props.location.action === 'POP') {
+      $.get('/', {}, function() {});
+    }
+  },
+
   editButtonHandler: function(id) {
     var url = '/projects/' + id + '/edit';
     console.log(url);

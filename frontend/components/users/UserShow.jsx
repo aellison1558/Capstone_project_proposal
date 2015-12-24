@@ -15,6 +15,9 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
+    if (this.props.location.action === 'POP') {
+      $.get('/', {}, function() {});
+    }
     ApiUtil.fetchAllUsers();
   },
 
