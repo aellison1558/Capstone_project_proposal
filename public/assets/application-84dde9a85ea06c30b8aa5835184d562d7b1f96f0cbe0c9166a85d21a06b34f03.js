@@ -43251,6 +43251,12 @@ return jQuery;
 	    this.setState({ categories: CategoryStore.all() });
 	  },
 
+	  componentWillMount: function () {
+	    if (this.props.location.action === 'POP') {
+	      $.get('/', {}, function () {});
+	    }
+	  },
+
 	  componentDidMount: function () {
 	    this.listeners.push(CategoryStore.addListener(this._updateState));
 	    ApiUtil.fetchAllCategories();
@@ -44178,6 +44184,12 @@ return jQuery;
 	module.exports = React.createClass({
 	  displayName: 'exports',
 
+	  componentWillMount: function () {
+	    if (this.props.location.action === 'POP') {
+	      $.get('/', {}, function () {});
+	    }
+	  },
+
 	  editButtonHandler: function (id) {
 	    var url = '/projects/' + id + '/edit';
 	    console.log(url);
@@ -44354,6 +44366,12 @@ return jQuery;
 	  },
 
 	  componentWillMount: function () {
+	    if (this.props.location.action === 'POP') {
+	      $.get('/', {}, (function (response) {
+	        this.props.history.push('/');
+	      }).bind(this));
+	    }
+
 	    ApiUtil.fetchEveryProject();
 	    ApiUtil.fetchAllUsers();
 	  },
@@ -44387,8 +44405,6 @@ return jQuery;
 	    };
 
 	    options['multiple'] = false;
-	    options['cropping'] = 'server';
-	    options['cropping_aspect_ratio'] = 0.75;
 
 	    cloudinary.openUploadWidget(options, (function (error, result) {
 	      if (!error) {
@@ -44489,7 +44505,12 @@ return jQuery;
 	          React.createElement(
 	            'div',
 	            { className: 'row' },
-	            React.createElement(ProjectImage, { className: 'col-xs-6', images: project.images }),
+	            React.createElement(
+	              'div',
+	              { className: 'col-xs-6' },
+	              React.createElement(ProjectImage, { images: project.images }),
+	              uploadImage
+	            ),
 	            React.createElement(
 	              'div',
 	              { className: 'col-xs-6' },
@@ -44532,11 +44553,6 @@ return jQuery;
 	                )
 	              )
 	            )
-	          ),
-	          React.createElement(
-	            'div',
-	            { className: 'form-group row' },
-	            uploadImage
 	          )
 	        ),
 	        React.createElement(
@@ -62544,6 +62560,12 @@ return jQuery;
 
 	  listeners: [],
 
+	  componentWillMount: function () {
+	    if (this.props.location.action === 'POP') {
+	      $.get('/', {}, function () {});
+	    }
+	  },
+
 	  componentDidMount: function () {
 	    this.listeners.push(CategoryStore.addListener(this._updateState));
 	    ApiUtil.fetchAllCategories();
@@ -62801,6 +62823,12 @@ return jQuery;
 	module.exports = React.createClass({
 	  displayName: 'exports',
 
+	  componentWillMount: function () {
+	    if (this.props.location && this.props.location.action === 'POP') {
+	      $.get('/', {}, function () {});
+	    }
+	  },
+
 	  render: function () {
 	    var disclaimer = "Note: all projects are subject to review by the Imperial Security Bureau";
 	    return React.createElement(
@@ -62867,6 +62895,12 @@ return jQuery;
 	      currentUser: SessionStore.currentUser(),
 	      projects: ProjectSearchStore.all()
 	    });
+	  },
+
+	  componentWillMount: function () {
+	    if (this.props.location && this.props.location.action === 'POP') {
+	      $.get('/', {}, function () {});
+	    }
 	  },
 
 	  componentDidMount: function () {
@@ -63842,6 +63876,9 @@ return jQuery;
 	  },
 
 	  componentWillMount: function () {
+	    if (this.props.location.action === 'POP') {
+	      $.get('/', {}, function () {});
+	    }
 	    ApiUtil.fetchAllUsers();
 	  },
 
@@ -63997,6 +64034,12 @@ return jQuery;
 	  eraseMessages: function () {
 
 	    this.setState({ messages: [] });
+	  },
+
+	  componentWillMount: function () {
+	    if (this.props.location && this.props.location.action === 'POP') {
+	      $.get('/', {}, function () {});
+	    }
 	  },
 
 	  componentDidMount: function () {
