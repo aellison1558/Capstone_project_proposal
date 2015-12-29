@@ -27,12 +27,16 @@ module.exports = React.createClass({
   },
 
   componentWillMount: function() {
-    if (this.props.location.action === 'POP') {
-      $.get('/', {}, function(response) {this.props.history.push('/')}.bind(this));
-    }
+
 
     ApiUtil.fetchEveryProject();
     ApiUtil.fetchAllUsers();
+  },
+
+  componentWillReceiveProps: function(newProps) {
+    if (newProps.location.action === 'POP') {
+      this.props.history.push('/');
+    }
   },
 
   componentDidMount: function() {
@@ -50,6 +54,9 @@ module.exports = React.createClass({
 
   componentWillReceiveProps: function(newProps) {
     this.setState({ project: ProjectStore.find(parseInt(newProps.params.projectId)) })
+
+
+
   },
 
 

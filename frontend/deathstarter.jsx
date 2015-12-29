@@ -18,13 +18,13 @@ var React = require('react'),
     Logo = require('./components/Logo'),
     THREE = require('three'),
     ReactTHREE = require('react-three');
-    
+
     var App = React.createClass({
       getInitialState: function(){
         return {contentClass: 'content group', arrowClass: ""}
       },
 
-
+      
 
       componentDidMount: function(){
         this.intervals = [];
