@@ -24,8 +24,6 @@ var React = require('react'),
         return {contentClass: 'content group', arrowClass: ""}
       },
 
-      
-
       componentDidMount: function(){
         this.intervals = [];
         this.intervals.push(setInterval(this.toggleClass, 1000));

@@ -33,11 +33,6 @@ module.exports = React.createClass({
     ApiUtil.fetchAllUsers();
   },
 
-  componentWillReceiveProps: function(newProps) {
-    if (newProps.location.action === 'POP') {
-      this.props.history.push('/');
-    }
-  },
 
   componentDidMount: function() {
     this.listeners.push(ProjectStore.addListener(this._updateState));
