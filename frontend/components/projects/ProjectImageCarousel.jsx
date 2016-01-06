@@ -24,6 +24,10 @@ module.exports = React.createClass({
   },
 
   render() {
+    var display;
+
+
+
     var images = (
       <CarouselItem key={0}>
         <img width height={400} alt="Project image" src='http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/Deathstar_blueprint_wfq2iq'/>
@@ -41,11 +45,25 @@ module.exports = React.createClass({
         )
       })
     }
-    return (
-      <div className='carousel'>
+
+    if (this.props.images.length > 1) {
+      display = (
         <Carousel activeIndex={this.state.index} direction={this.state.direction} onSelect={this.handleSelect}>
           {images}
         </Carousel>
+      );
+    } else {
+      var image = this.props.images[0];
+      if (image) {
+        var url = "http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/" + image.image_public_id
+      } else {
+        var url = 'http://res.cloudinary.com/dhcnfmydo/image/upload/w_300,h_400/Deathstar_blueprint_wfq2iq'
+      }
+      display = <img width height={400} alt="Project image" src={url} />
+    }
+    return (
+      <div className='carousel'>
+        {display}
       </div>
     );
   }

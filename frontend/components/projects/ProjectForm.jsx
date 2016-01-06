@@ -22,6 +22,7 @@ module.exports = React.createClass({
 
       initialState['categories'] = CategoryStore.all();
       initialState['errors'] = [];
+      initialState['imageUrl'] = "";
     }
     else {
       initialState = {
@@ -33,7 +34,8 @@ module.exports = React.createClass({
         end_date: new Date(),
         category_id: 0,
         categories: CategoryStore.all(),
-        errors: []
+        errors: [],
+        imageUrl: ""
       }
     }
 
@@ -48,7 +50,7 @@ module.exports = React.createClass({
       $.get('/', {}, function() {});
     }
   },
-  
+
   componentDidMount: function() {
     this.listeners.push(CategoryStore.addListener(this._updateState));
     ApiUtil.fetchAllCategories();
@@ -58,6 +60,31 @@ module.exports = React.createClass({
     this.listeners.forEach(function(listener) {
       listener.remove();
     })
+  },
+
+  imageButton: function(e) {
+    e.preventDefault();
+
+    var options = {};
+
+    for (key in window.CloudinaryOptions) {
+      if (window.CloudinaryOptions.hasOwnProperty(key)) {
+        options[key] = window.CloudinaryOptions[key]
+      }
+    };
+
+    options['multiple'] = false;
+
+    cloudinary.openUploadWidget(options, function(error, result) {
+      if (!error) {
+        var image = {
+          // imageable_id: this.state.project.id,
+          imageable_type: "Project",
+          image_public_id: result[0].public_id
+        };
+        this.setState({imageUrl: result[0].url})
+      }
+    }.bind(this))
   },
 
   //handlers
@@ -137,6 +164,15 @@ module.exports = React.createClass({
               </label>
               <input type="string" className="form-control" valueLink={this.linkState('title')}/>
             </div>
+
+            <div className="form-group" >
+              <label>
+                Picture:
+              </label>
+              <img href={this.state.imageUrl}/>
+              <button className='btn btn-primary' onClick={this.imageButton}>Upload Image</button>
+            </div>
+
 
             <div className="form-group" >
               <label>

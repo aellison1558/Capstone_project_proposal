@@ -28,11 +28,6 @@ module.exports = React.createClass({
     })
   },
 
-  componentWillMount: function() {
-    if (this.props.location && this.props.location.action === 'POP') {
-      $.get('/', {}, function() {});
-    }
-  },
 
   componentDidMount: function(){
     this.listeners.push(SessionStore.addListener(this._updateState));
@@ -49,12 +44,8 @@ module.exports = React.createClass({
 
   logOut: function(e) {
     ApiUtil.signOut();
+    this.props.redirectToRoot();
   },
-
-  guestSignIn: function() {
-    ApiUtil.signIn('tk-421@stc.mil', 'feelingalittleshort');
-  },
-
 
   render: function() {
     var signInSignOut;
@@ -71,8 +62,7 @@ module.exports = React.createClass({
       startProjectUrl = <NavItem eventKey={2}><SignInForm text="Log in to Create Project"/></NavItem>
       signInSignOut = [
         <NavItem key={4} eventKey={4}><SignUpForm /></NavItem>,
-        <NavItem key={5} eventKey={5}><SignInForm text="Log In" /></NavItem>,
-        <NavItem key={6} eventKey={6}><button onClick={this.guestSignIn}>Guest Log In</button></NavItem>
+        <NavItem key={5} eventKey={5}><SignInForm redirectToCategories={this.props.redirectToCategories} text="Log In" /></NavItem>
       ]
     }
     return(

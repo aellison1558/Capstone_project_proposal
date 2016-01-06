@@ -41,11 +41,19 @@ var React = require('react'),
         }
       },
 
+      redirectToCategories: function() {
+        this.props.history.push('/categories/');
+      },
+
+      redirectToRoot: function() {
+        this.props.history.push('/');
+      },
+
       render: function(){
         return(
           <div>
             <ReactCSSTransitionGroup transitionName="slide" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
-              <header id='header'><Navbar /></header>
+              <header id='header'><Navbar redirectToRoot={this.redirectToRoot} redirectToCategories={this.redirectToCategories} /></header>
             </ReactCSSTransitionGroup>
 
             <div key='content' className={this.state.contentClass}>

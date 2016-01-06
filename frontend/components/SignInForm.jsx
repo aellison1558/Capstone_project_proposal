@@ -49,7 +49,15 @@ module.exports = React.createClass({
       return false;
     }
     ApiUtil.signIn(this.state.email, this.state.password)
+    this.props.redirectToCategories();
   },
+
+  guestSignIn: function() {
+    ApiUtil.signIn('tk-421@stc.mil', 'feelingalittleshort');
+    this.close();
+    this.props.redirectToCategories();
+  },
+
 
   render: function() {
 
@@ -83,6 +91,8 @@ module.exports = React.createClass({
 
                 <input type="submit" value='Log In'/>
             </form>
+            <button onClick={this.guestSignIn}>Guest Log In</button>
+
             </Modal.Body>
 
             <Modal.Footer>
