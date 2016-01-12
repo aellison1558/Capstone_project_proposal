@@ -1,3 +1,4 @@
+require('byebug');
 class SessionsController < ApplicationController
 
   def new
@@ -5,7 +6,6 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by_credentials(email, password)
-
     if @user
       sign_in(@user)
       flash[:success] = ["Logged in!"]
@@ -24,6 +24,16 @@ class SessionsController < ApplicationController
     sign_out
     flash[:success] = ["Logged out!"]
     render :show
+  end
+
+  def ensure
+    @user = User.find(params[:user][:id])
+    if @user
+      sign_in(@user)
+      render :show
+    else
+      render json: ["Invalid email/password combination"]
+    end
   end
 
   private

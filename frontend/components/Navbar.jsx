@@ -8,10 +8,13 @@ var React = require('react'),
     SignUpForm = require('./SignUpForm'),
     Navbar = require('react-bootstrap').Navbar,
     Nav = require('react-bootstrap').Nav,
-    NavItem = require('react-bootstrap').NavItem;
+    NavItem = require('react-bootstrap').NavItem,
+    History = require('react-router').History;
 
 
 module.exports = React.createClass({
+  mixins: [History],
+
   getInitialState: function(){
     return {
       currentUser: SessionStore.currentUser(),
@@ -44,7 +47,7 @@ module.exports = React.createClass({
 
   logOut: function(e) {
     ApiUtil.signOut();
-    this.props.redirectToRoot();
+    // this.history.push('/');
   },
 
   render: function() {

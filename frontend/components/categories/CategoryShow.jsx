@@ -1,13 +1,25 @@
 var React = require('react'),
     ProjectIndex = require('../projects/ProjectIndex'),
     Link = require('react-router').Link,
-    CategoryStore = require('../../stores/CategoryStore');
+    CategoryStore = require('../../stores/CategoryStore'),
+    SessionStore = require('../../stores/SessionStore');
 
 module.exports = React.createClass({
-  componentWillMount: function() {
-    if (this.props.location.action === 'POP') {
-      $.get('/', {}, function() {});
+  listeners: [],
+  _ensureSignIn: function() {
+    if (SessionStore.currentUser()) {
+      ApiUtil.ensureSignIn(SessionStore.currentUser().id)
     }
+  },
+
+  componentDidMount: function() {
+    this.listeners.push(SessionStore.addListener(this._ensureSignIn));
+  },
+
+  componentWillUnmount: function() {
+    this.listeners.forEach(function(listener) {
+      listener.remove();
+    })
   },
 
   editButtonHandler: function(id) {

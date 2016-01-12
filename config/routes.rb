@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   resources :users
   resource :session, only: [:new, :create, :destroy, :show]
+  post '/session/ensure', to: 'sessions#ensure'
 
   namespace :api do
     resources :categories do

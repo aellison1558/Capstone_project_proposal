@@ -3,7 +3,8 @@ var React = require('react'),
     ApiUtil = require('../../util/ApiUtil'),
     Link = require('react-router').Link,
     ReactCSSTransitionGroup = require('react-addons-css-transition-group'),
-    CategoryIndexItem = require('./CategoryIndexItem');
+    CategoryIndexItem = require('./CategoryIndexItem'),
+    SessionStore = require('../../stores/SessionStore');
 
 CategoryIndex = React.createClass({
   getInitialState: function() {
@@ -18,15 +19,17 @@ CategoryIndex = React.createClass({
     this.setState({ categories: CategoryStore.all()});
   },
 
-  componentWillMount: function() {
-    if (this.props.location.action === 'POP') {
-      $.get('/', {}, function() {});
-    }
-  },
-
   componentDidMount: function() {
     this.listeners.push(CategoryStore.addListener(this._updateState));
+    this.listeners.push(SessionStore.addListener(this._ensureSignIn));
     ApiUtil.fetchAllCategories();
+
+  },
+
+  _ensureSignIn: function() {
+    if (SessionStore.currentUser()) {
+      ApiUtil.ensureSignIn(SessionStore.currentUser().id)
+    }
   },
 
   componentWillUnmount: function() {

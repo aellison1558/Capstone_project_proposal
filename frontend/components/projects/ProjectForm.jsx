@@ -2,11 +2,12 @@ var React = require('react'),
     ApiUtil = require('../../util/ApiUtil'),
     LinkStateMixin = require('react-addons-linked-state-mixin'),
     CategoryStore = require('../../stores/CategoryStore'),
-    ProjectStore = require('../../stores/ProjectStore');
+    ProjectStore = require('../../stores/ProjectStore'),
+    History = require('react-router').History;
 
 module.exports = React.createClass({
   //setup
-  mixins: [LinkStateMixin],
+  mixins: [LinkStateMixin, History],
 
   getInitialState: function() {
     var initialState = {};
@@ -43,13 +44,6 @@ module.exports = React.createClass({
   },
 
   listeners: [],
-
-
-  componentWillMount: function() {
-    if (this.props.location.action === 'POP') {
-      $.get('/', {}, function() {});
-    }
-  },
 
   componentDidMount: function() {
     this.listeners.push(CategoryStore.addListener(this._updateState));
@@ -98,10 +92,10 @@ module.exports = React.createClass({
 
       if (this.props.params.projectId) {
         ApiUtil.updateProject(this.props.params.projectId, project);
-        this.props.history.push('/projects/' + this.props.params.projectId);
+        this.history.push('/projects/' + this.props.params.projectId);
       } else {
         ApiUtil.createProject(project);
-        this.props.history.push('/categories/' + this.state.category_id);
+        this.history.push('/categories/' + this.state.category_id);
       }
 
     } else {

@@ -1,10 +1,11 @@
 var React = require('react'),
     ApiUtil = require('../util/ApiUtil'),
     LinkStateMixin = require('react-addons-linked-state-mixin'),
-    Modal = require('react-bootstrap').Modal;
+    Modal = require('react-bootstrap').Modal,
+    History = require('react-router').History;
 
 module.exports = React.createClass({
-  mixins: [LinkStateMixin],
+  mixins: [LinkStateMixin, History],
 
   getInitialState: function() {
     return {
@@ -48,14 +49,15 @@ module.exports = React.createClass({
     if (!this._validations()) {
       return false;
     }
-    ApiUtil.signIn(this.state.email, this.state.password)
-    this.props.redirectToCategories();
+    ApiUtil.signIn(this.state.email, this.state.password);
+    this.history.push('/categories');
   },
 
   guestSignIn: function() {
-    ApiUtil.signIn('tk-421@stc.mil', 'feelingalittleshort');
     this.close();
-    this.props.redirectToCategories();
+    ApiUtil.signIn('tk-421@stc.mil', 'feelingalittleshort');
+    this.history.push('/categories');
+
   },
 
 

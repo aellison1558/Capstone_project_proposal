@@ -17,7 +17,8 @@ var React = require('react'),
     FlashMessages = require('./components/FlashMessages'),
     Logo = require('./components/Logo'),
     THREE = require('three'),
-    ReactTHREE = require('react-three');
+    ReactTHREE = require('react-three'),
+    SessionStore = require('./stores/SessionStore');
 
     var App = React.createClass({
       getInitialState: function(){
@@ -41,12 +42,13 @@ var React = require('react'),
         }
       },
 
-      redirectToCategories: function() {
-        this.props.history.push('/categories/');
+      sign: function(currentUser) {
+        ApiUtil.signIn(currentUser.email, currentUser.password)
       },
 
+      
       redirectToRoot: function() {
-        this.props.history.push('/');
+        this.props.history.pushState(null, '/categories');
       },
 
       render: function(){
