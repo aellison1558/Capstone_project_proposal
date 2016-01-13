@@ -42492,7 +42492,7 @@ return jQuery;
 
 	  _ensureSignIn: function () {
 	    if (SessionStore.currentUser()) {
-	      ApiUtil.ensureSignIn(SessionStore.currentUser().id);
+	      // ApiUtil.ensureSignIn(SessionStore.currentUser().id)
 	    }
 	  },
 
