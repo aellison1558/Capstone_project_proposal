@@ -10935,7 +10935,7 @@ return jQuery;
 	    Router = ReactRouter.Router,
 	    Route = ReactRouter.Route,
 	    IndexRoute = ReactRouter.IndexRoute;
-	CategoryIndex = __webpack_require__(240), CategoryShow = __webpack_require__(250), ProjectShow = __webpack_require__(254), ProjectForm = __webpack_require__(512), Root = __webpack_require__(513), Navbar = __webpack_require__(517), UserShow = __webpack_require__(522), ReactCSSTransitionGroup = __webpack_require__(242), FlashMessages = __webpack_require__(523), Logo = __webpack_require__(514), THREE = __webpack_require__(515), ReactTHREE = __webpack_require__(516), SessionStore = __webpack_require__(253);
+	CategoryIndex = __webpack_require__(240), CategoryShow = __webpack_require__(251), ProjectShow = __webpack_require__(254), ProjectForm = __webpack_require__(512), Root = __webpack_require__(513), Navbar = __webpack_require__(517), UserShow = __webpack_require__(522), ReactCSSTransitionGroup = __webpack_require__(242), FlashMessages = __webpack_require__(523), Logo = __webpack_require__(514), THREE = __webpack_require__(515), ReactTHREE = __webpack_require__(516), SessionStore = __webpack_require__(250);
 
 	var App = React.createClass({
 	  displayName: 'App',
@@ -42467,7 +42467,7 @@ return jQuery;
 	    Link = __webpack_require__(189).Link,
 	    ReactCSSTransitionGroup = __webpack_require__(242),
 	    CategoryIndexItem = __webpack_require__(249),
-	    SessionStore = __webpack_require__(253);
+	    SessionStore = __webpack_require__(250);
 
 	CategoryIndex = React.createClass({
 	  displayName: 'CategoryIndex',
@@ -43410,11 +43410,57 @@ return jQuery;
 /* 250 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var Store = __webpack_require__(173).Store,
+	    Dispatcher = __webpack_require__(161),
+	    SessionConstants = __webpack_require__(169);
+
+	var SessionStore = new Store(Dispatcher);
+
+	var _currentUser = {};
+
+	SessionStore.currentUser = function () {
+	  var result = {};
+	  for (key in _currentUser) {
+	    if (_currentUser.hasOwnProperty(key)) {
+	      result[key] = _currentUser[key];
+	    }
+	  }
+	  return _currentUser.username ? result : null;
+	};
+
+	SessionStore.updateCurrentUser = function (user) {
+	  _currentUser = user;
+	};
+
+	SessionStore.clearCurrentUser = function () {
+	  _currentUser = {};
+	};
+
+	SessionStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+
+	    case SessionConstants.RECEIVE_USER:
+	      SessionStore.updateCurrentUser(payload.user);
+	      SessionStore.__emitChange();
+	      break;
+	    case SessionConstants.CLEAR_USER:
+	      SessionStore.clearCurrentUser();
+	      SessionStore.__emitChange();
+	      break;
+	  }
+	};
+
+	module.exports = SessionStore;
+
+/***/ },
+/* 251 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var React = __webpack_require__(1),
-	    ProjectIndex = __webpack_require__(251),
+	    ProjectIndex = __webpack_require__(252),
 	    Link = __webpack_require__(189).Link,
 	    CategoryStore = __webpack_require__(241),
-	    SessionStore = __webpack_require__(253);
+	    SessionStore = __webpack_require__(250);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -43462,13 +43508,13 @@ return jQuery;
 	});
 
 /***/ },
-/* 251 */
+/* 252 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
 	    ProjectStore = __webpack_require__(172),
 	    ApiUtil = __webpack_require__(159),
-	    ProjectIndexItem = __webpack_require__(252);
+	    ProjectIndexItem = __webpack_require__(253);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -43513,13 +43559,13 @@ return jQuery;
 	});
 
 /***/ },
-/* 252 */
+/* 253 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1),
 	    ProjectStore = __webpack_require__(172),
 	    ApiUtil = __webpack_require__(159),
-	    SessionStore = __webpack_require__(253),
+	    SessionStore = __webpack_require__(250),
 	    Link = __webpack_require__(189).Link;
 
 	module.exports = React.createClass({
@@ -43578,52 +43624,6 @@ return jQuery;
 	});
 
 /***/ },
-/* 253 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var Store = __webpack_require__(173).Store,
-	    Dispatcher = __webpack_require__(161),
-	    SessionConstants = __webpack_require__(169);
-
-	var SessionStore = new Store(Dispatcher);
-
-	var _currentUser = {};
-
-	SessionStore.currentUser = function () {
-	  var result = {};
-	  for (key in _currentUser) {
-	    if (_currentUser.hasOwnProperty(key)) {
-	      result[key] = _currentUser[key];
-	    }
-	  }
-	  return _currentUser.username ? result : null;
-	};
-
-	SessionStore.updateCurrentUser = function (user) {
-	  _currentUser = user;
-	};
-
-	SessionStore.clearCurrentUser = function () {
-	  _currentUser = {};
-	};
-
-	SessionStore.__onDispatch = function (payload) {
-	  switch (payload.actionType) {
-
-	    case SessionConstants.RECEIVE_USER:
-	      SessionStore.updateCurrentUser(payload.user);
-	      SessionStore.__emitChange();
-	      break;
-	    case SessionConstants.CLEAR_USER:
-	      SessionStore.clearCurrentUser();
-	      SessionStore.__emitChange();
-	      break;
-	  }
-	};
-
-	module.exports = SessionStore;
-
-/***/ },
 /* 254 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -43632,7 +43632,7 @@ return jQuery;
 	    ProjectStore = __webpack_require__(172),
 	    Link = __webpack_require__(189).Link,
 	    BackingsForm = __webpack_require__(255),
-	    SessionStore = __webpack_require__(253),
+	    SessionStore = __webpack_require__(250),
 	    CommentsIndex = __webpack_require__(504),
 	    CommentForm = __webpack_require__(507),
 	    ProjectImage = __webpack_require__(508),
@@ -61208,7 +61208,7 @@ return jQuery;
 
 	var React = __webpack_require__(1),
 	    ApiUtil = __webpack_require__(159),
-	    SessionStore = __webpack_require__(253),
+	    SessionStore = __webpack_require__(250),
 	    UserStore = __webpack_require__(506);
 
 	module.exports = React.createClass({
@@ -61364,7 +61364,7 @@ return jQuery;
 	    ApiUtil = __webpack_require__(159),
 	    ProjectStore = __webpack_require__(172),
 	    Link = __webpack_require__(189).Link,
-	    SessionStore = __webpack_require__(253),
+	    SessionStore = __webpack_require__(250),
 	    CommentsIndex = __webpack_require__(504),
 	    CommentForm = __webpack_require__(507);
 	Carousel = __webpack_require__(260).Carousel, CarouselItem = __webpack_require__(260).CarouselItem;
@@ -61656,7 +61656,7 @@ return jQuery;
 	    ProjectStore = __webpack_require__(172),
 	    Link = __webpack_require__(189).Link,
 	    BackingsForm = __webpack_require__(255),
-	    SessionStore = __webpack_require__(253),
+	    SessionStore = __webpack_require__(250),
 	    SignInForm = __webpack_require__(509),
 	    UserStore = __webpack_require__(506);
 
@@ -62125,7 +62125,7 @@ return jQuery;
 	    Jumbotron = __webpack_require__(260).Jumbotron,
 	    Logo = __webpack_require__(514),
 	    SignInForm = __webpack_require__(509),
-	    SessionStore = __webpack_require__(253);
+	    SessionStore = __webpack_require__(250);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -100391,7 +100391,7 @@ return jQuery;
 
 	var React = __webpack_require__(1),
 	    Link = __webpack_require__(189).Link,
-	    SessionStore = __webpack_require__(253),
+	    SessionStore = __webpack_require__(250),
 	    ApiUtil = __webpack_require__(159),
 	    Search = __webpack_require__(518),
 	    ProjectSearchStore = __webpack_require__(520),
@@ -101369,7 +101369,7 @@ return jQuery;
 	var React = __webpack_require__(1),
 	    UserStore = __webpack_require__(506),
 	    ApiUtil = __webpack_require__(159),
-	    SessionStore = __webpack_require__(253);
+	    SessionStore = __webpack_require__(250);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
