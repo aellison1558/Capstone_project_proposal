@@ -8,7 +8,7 @@ module.exports = React.createClass({
   listeners: [],
   _ensureSignIn: function() {
     if (SessionStore.currentUser()) {
-      // ApiUtil.ensureSignIn(SessionStore.currentUser().id)
+      ApiUtil.ensureSignIn(SessionStore.currentUser().id)
     }
   },
 

@@ -18,7 +18,7 @@ module.exports = {
 
   ensureSignIn: function(id) {
     $.post('/session/ensure', {user: {id: id}}, function(currentUser){
-
+      
     })
   },
 

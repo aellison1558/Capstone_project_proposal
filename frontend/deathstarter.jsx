@@ -17,8 +17,7 @@ var React = require('react'),
     FlashMessages = require('./components/FlashMessages'),
     Logo = require('./components/Logo'),
     THREE = require('three'),
-    ReactTHREE = require('react-three'),
-    SessionStore = require('./stores/SessionStore');
+    ReactTHREE = require('react-three');
 
     var App = React.createClass({
       getInitialState: function(){
@@ -42,20 +41,11 @@ var React = require('react'),
         }
       },
 
-      sign: function(currentUser) {
-        ApiUtil.signIn(currentUser.email, currentUser.password)
-      },
-
-      
-      redirectToRoot: function() {
-        this.props.history.pushState(null, '/categories');
-      },
-
       render: function(){
         return(
           <div>
             <ReactCSSTransitionGroup transitionName="slide" transitionAppear={true} transitionAppearTimeout={1000} transitionEnterTimeout={1000} transitionLeaveTimeout={1000}>
-              <header id='header'><Navbar redirectToRoot={this.redirectToRoot} redirectToCategories={this.redirectToCategories} /></header>
+              <header id='header'><Navbar /></header>
             </ReactCSSTransitionGroup>
 
             <div key='content' className={this.state.contentClass}>

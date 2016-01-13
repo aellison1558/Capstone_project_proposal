@@ -7,20 +7,20 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.create([
-  {email: 'vader@empire.gov', username: "Darth Vader", password: "ihaveyounow", session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'emperor@empire.gov', username: "Da Emperor", password: "sithrule", session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'mofftarkin@empire.gov', username: "Grand Moff Tarkin", password: 'tarkindoctrine', session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'warfield@impnavy.mil', username: "Admiral Warfield", password: 'hockaleg', session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'leth@impscience.gov', username: 'Umak Leth', password: 'science!', session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'jerjerrod@empire.gov', username: 'Moff Jerjerrod', password: 'deathstar2', session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'gahg@empire.gov', username: 'Finance Minister Gahg', password: 'mrovermc', session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'veers@imparmy.mil', username: "General Veers", password: 'walkingthunder', session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'tk-421@stc.mil', username: "Stormtrooper TK-421", password: 'feelingalittleshort', session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'tonth@impsurvey.gov', username: "Captain Tonth", password: 'explorerreporting', session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'grandinquisitor@inquisitorius.gov', username: "Grand Inquisitor", password: "jedihunting", session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'jabba@tatooine.hutt', username: "The Great Jabba", password: 'youlllearntoloveme', session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'cody@gar.mil', username: "Commander Cody", password: 'grandarmyoftherepublic', session_token: SecureRandom.urlsafe_base64(16)},
-  {email: 'cowall@impculture.gov', username: 'Cultural Minister Cowall', password: 'highwinds', session_token: SecureRandom.urlsafe_base64(16)}
+  {email: 'vader@empire.gov', username: "Darth Vader", password: "ihaveyounow"},
+  {email: 'emperor@empire.gov', username: "Da Emperor", password: "sithrule"},
+  {email: 'mofftarkin@empire.gov', username: "Grand Moff Tarkin", password: 'tarkindoctrine'},
+  {email: 'warfield@impnavy.mil', username: "Admiral Warfield", password: 'hockaleg'},
+  {email: 'leth@impscience.gov', username: 'Umak Leth', password: 'science!'},
+  {email: 'jerjerrod@empire.gov', username: 'Moff Jerjerrod', password: 'deathstar2'},
+  {email: 'gahg@empire.gov', username: 'Finance Minister Gahg', password: 'mrovermc'},
+  {email: 'veers@imparmy.mil', username: "General Veers", password: 'walkingthunder'},
+  {email: 'tk-421@stc.mil', username: "Stormtrooper TK-421", password: 'feelingalittleshort'},
+  {email: 'tonth@impsurvey.gov', username: "Captain Tonth", password: 'explorerreporting'},
+  {email: 'grandinquisitor@inquisitorius.gov', username: "Grand Inquisitor", password: "jedihunting"},
+  {email: 'jabba@tatooine.hutt', username: "The Great Jabba", password: 'youlllearntoloveme'},
+  {email: 'cody@gar.mil', username: "Commander Cody", password: 'grandarmyoftherepublic'},
+  {email: 'cowall@impculture.gov', username: 'Cultural Minister Cowall', password: 'highwinds'}
 ])
 
 Image.create([

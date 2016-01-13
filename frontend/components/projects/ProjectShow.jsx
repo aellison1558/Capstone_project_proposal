@@ -22,12 +22,17 @@ module.exports = React.createClass({
 
   listeners: [],
 
+  _ensureSignIn: function() {
+    if (SessionStore.currentUser()) {
+      ApiUtil.ensureSignIn(SessionStore.currentUser().id)
+    }
+  },
+
   _updateState: function() {
     this.setState({ project: ProjectStore.find(parseInt(this.props.params.projectId)), users: UserStore.all() });
   },
 
   componentWillMount: function() {
-
 
     ApiUtil.fetchEveryProject();
     ApiUtil.fetchAllUsers();
@@ -37,6 +42,7 @@ module.exports = React.createClass({
   componentDidMount: function() {
     this.listeners.push(ProjectStore.addListener(this._updateState));
     this.listeners.push(SessionStore.addListener(this._updateState));
+    this.listeners.push(SessionStore.addListener(this._ensureSignIn));
     ApiUtil.fetchProject(this.props.params.projectId);
     ApiUtil.fetchAllUsers();
   },
