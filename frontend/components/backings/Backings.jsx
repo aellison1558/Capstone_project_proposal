@@ -91,7 +91,7 @@ module.exports = React.createClass({
         backingForm = <BackingsForm project={project}/>
       }
     } else {
-      backingForm = <div><SignInForm text="Log in to back"/></div>
+      backingForm = <div></div>
     }
 
     return(

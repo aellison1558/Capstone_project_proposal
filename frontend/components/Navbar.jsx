@@ -62,10 +62,9 @@ module.exports = React.createClass({
         <NavItem key={5} href={url}>Signed in as: {this.state.currentUser.username}</NavItem>
       ]
     } else {
-      startProjectUrl = <NavItem eventKey={2}><SignInForm text="Log in to Create Project"/></NavItem>
+      startProjectUrl = <NavItem key={2} eventKey={2} href="#">Start a Project</NavItem>
       signInSignOut = [
-        <NavItem key={4} eventKey={4}><SignUpForm /></NavItem>,
-        <NavItem key={5} eventKey={5}><SignInForm redirectToCategories={this.props.redirectToCategories} text="Log In" /></NavItem>
+        <NavItem key={4} eventKey={4}><SignInForm redirectToCategories={this.props.redirectToCategories} text="Log In" /></NavItem>
       ]
     }
     return(

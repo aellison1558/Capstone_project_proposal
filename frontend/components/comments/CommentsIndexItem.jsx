@@ -31,10 +31,12 @@ module.exports = React.createClass({
     }
 
     return(
-      <li>
-        {this.props.comment.body}
-        <br/>
+      <li className="comment">
         Comment by {user.username} at {time}
+        <br/>
+        <div className="comment-body">
+        {this.props.comment.body}
+        </div>
         {deleteButton}
       </li>
     )

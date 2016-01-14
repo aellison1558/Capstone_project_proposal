@@ -43663,8 +43663,8 @@ return jQuery;
 
 	  componentDidMount: function () {
 	    this.listeners.push(ProjectStore.addListener(this._updateState));
-	    this.listeners.push(SessionStore.addListener(this._updateState));
 	    this.listeners.push(SessionStore.addListener(this._ensureSignIn));
+	    this.listeners.push(SessionStore.addListener(this._updateState));
 	    ApiUtil.fetchProject(this.props.params.projectId);
 	    ApiUtil.fetchAllUsers();
 	  },
@@ -43732,11 +43732,7 @@ return jQuery;
 	    if (SessionStore.currentUser() && user.id) {
 	      var commentForm = React.createElement(CommentForm, { project: project });
 	    } else {
-	      commentForm = React.createElement(
-	        'div',
-	        null,
-	        React.createElement(SignInForm, { text: 'Log in to comment' })
-	      );
+	      commentForm = React.createElement('div', null);
 	    }
 
 	    var timeLeft = "";
@@ -43793,51 +43789,43 @@ return jQuery;
 	            { className: 'row' },
 	            React.createElement(
 	              'div',
-	              { className: 'col-xs-6' },
+	              { className: 'col-xs-3' },
 	              React.createElement(ProjectImage, { images: project.images }),
 	              uploadImage
 	            ),
 	            React.createElement(
 	              'div',
-	              { className: 'col-xs-6' },
+	              { className: 'col-xs-3' },
+	              React.createElement(
+	                'h5',
+	                null,
+	                'Project Summary:'
+	              ),
 	              React.createElement(
 	                'div',
-	                { className: 'row' },
-	                React.createElement(
-	                  'div',
-	                  { className: 'col-xs-4' },
-	                  React.createElement(
-	                    'h5',
-	                    null,
-	                    'Project Summary:'
-	                  ),
-	                  React.createElement(
-	                    'div',
-	                    null,
-	                    project.summary
-	                  )
-	                ),
-	                React.createElement(
-	                  'div',
-	                  { className: 'col-xs-4' },
-	                  React.createElement(Backings, { project: project, user: user })
-	                ),
-	                React.createElement(
-	                  'div',
-	                  { className: 'col-xs-4' },
-	                  React.createElement(
-	                    'h5',
-	                    null,
-	                    'Campaign:'
-	                  ),
-	                  React.createElement(
-	                    'h6',
-	                    null,
-	                    live
-	                  ),
-	                  timeLeft
-	                )
+	                null,
+	                project.summary
 	              )
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'col-xs-3' },
+	              React.createElement(Backings, { project: project, user: user })
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'col-xs-3' },
+	              React.createElement(
+	                'h5',
+	                null,
+	                'Campaign:'
+	              ),
+	              React.createElement(
+	                'h6',
+	                null,
+	                live
+	              ),
+	              timeLeft
 	            )
 	          )
 	        ),
@@ -61245,13 +61233,17 @@ return jQuery;
 
 	    return React.createElement(
 	      'li',
-	      null,
-	      this.props.comment.body,
-	      React.createElement('br', null),
+	      { className: 'comment' },
 	      'Comment by ',
 	      user.username,
 	      ' at ',
 	      time,
+	      React.createElement('br', null),
+	      React.createElement(
+	        'div',
+	        { className: 'comment-body' },
+	        this.props.comment.body
+	      ),
 	      deleteButton
 	    );
 	  }
@@ -61435,7 +61427,8 @@ return jQuery;
 	    ApiUtil = __webpack_require__(159),
 	    LinkStateMixin = __webpack_require__(256),
 	    Modal = __webpack_require__(260).Modal,
-	    History = __webpack_require__(189).History;
+	    History = __webpack_require__(189).History,
+	    SignUpForm = __webpack_require__(521);
 
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -61508,8 +61501,8 @@ return jQuery;
 	      'div',
 	      null,
 	      React.createElement(
-	        'button',
-	        { bsStyle: 'primary', bsSize: 'large', onClick: this.open },
+	        'div',
+	        { className: 'login', onClick: this.open },
 	        this.props.text
 	      ),
 	      React.createElement(
@@ -61558,9 +61551,23 @@ return jQuery;
 	            React.createElement('input', { type: 'submit', value: 'Log In' })
 	          ),
 	          React.createElement(
-	            'button',
-	            { onClick: this.guestSignIn },
-	            'Guest Log In'
+	            'p',
+	            null,
+	            React.createElement('br', null),
+	            'No account?',
+	            React.createElement(SignUpForm, null),
+	            React.createElement('br', null)
+	          ),
+	          React.createElement(
+	            'p',
+	            null,
+	            'Or use our',
+	            React.createElement('br', null),
+	            React.createElement(
+	              'button',
+	              { onClick: this.guestSignIn },
+	              'Guest Log In'
+	            )
 	          )
 	        ),
 	        React.createElement(
@@ -61748,11 +61755,7 @@ return jQuery;
 	        backingForm = React.createElement(BackingsForm, { project: project });
 	      }
 	    } else {
-	      backingForm = React.createElement(
-	        'div',
-	        null,
-	        React.createElement(SignInForm, { text: 'Log in to back' })
-	      );
+	      backingForm = React.createElement('div', null);
 	    }
 
 	    return React.createElement(
@@ -62172,12 +62175,6 @@ return jQuery;
 	          null,
 	          'Funding the common good of the Empire'
 	        ),
-	        React.createElement(
-	          'button',
-	          { onClick: this.discover },
-	          'Discover Projects'
-	        ),
-	        signin,
 	        React.createElement(
 	          'h6',
 	          null,
@@ -100468,16 +100465,12 @@ return jQuery;
 	    } else {
 	      startProjectUrl = React.createElement(
 	        NavItem,
-	        { eventKey: 2 },
-	        React.createElement(SignInForm, { text: 'Log in to Create Project' })
+	        { key: 2, eventKey: 2, href: '#' },
+	        'Start a Project'
 	      );
 	      signInSignOut = [React.createElement(
 	        NavItem,
 	        { key: 4, eventKey: 4 },
-	        React.createElement(SignUpForm, null)
-	      ), React.createElement(
-	        NavItem,
-	        { key: 5, eventKey: 5 },
 	        React.createElement(SignInForm, { redirectToCategories: this.props.redirectToCategories, text: 'Log In' })
 	      )];
 	    }

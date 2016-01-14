@@ -2,7 +2,8 @@ var React = require('react'),
     ApiUtil = require('../util/ApiUtil'),
     LinkStateMixin = require('react-addons-linked-state-mixin'),
     Modal = require('react-bootstrap').Modal,
-    History = require('react-router').History;
+    History = require('react-router').History,
+    SignUpForm = require('./SignUpForm');
 
 module.exports = React.createClass({
   mixins: [LinkStateMixin, History],
@@ -66,9 +67,9 @@ module.exports = React.createClass({
     return(
       <div>
 
-        <button bsStyle="primary" bsSize="large" onClick={this.open}>
+        <div className="login" onClick={this.open}>
             {this.props.text}
-        </button>
+        </div>
         <Modal show={this.state.showModal} onHide={this.close}>
 
             <Modal.Header closeButton>
@@ -93,7 +94,17 @@ module.exports = React.createClass({
 
                 <input type="submit" value='Log In'/>
             </form>
+            <p>
+            <br/>
+            No account?
+            <SignUpForm/>
+            <br/>
+            </p>
+            <p>
+            Or use our
+            <br/>
             <button onClick={this.guestSignIn}>Guest Log In</button>
+            </p>
 
             </Modal.Body>
 

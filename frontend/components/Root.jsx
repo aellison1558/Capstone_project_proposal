@@ -34,8 +34,6 @@ module.exports = React.createClass({
         <Jumbotron className='welcome'>
           <h1>Welcome to the DeathSTARter</h1>
           <p>Funding the common good of the Empire</p>
-          <button onClick={this.discover}>Discover Projects</button>
-          {signin}
           <h6>{disclaimer}</h6>
         </Jumbotron>
       </ReactCSSTransitionGroup>

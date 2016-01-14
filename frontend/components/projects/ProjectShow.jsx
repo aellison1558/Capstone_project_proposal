@@ -41,8 +41,8 @@ module.exports = React.createClass({
 
   componentDidMount: function() {
     this.listeners.push(ProjectStore.addListener(this._updateState));
-    this.listeners.push(SessionStore.addListener(this._updateState));
     this.listeners.push(SessionStore.addListener(this._ensureSignIn));
+    this.listeners.push(SessionStore.addListener(this._updateState));
     ApiUtil.fetchProject(this.props.params.projectId);
     ApiUtil.fetchAllUsers();
   },
@@ -114,7 +114,7 @@ module.exports = React.createClass({
     if (SessionStore.currentUser() && user.id) {
       var commentForm = <CommentForm project={project} />
     } else {
-      commentForm = <div><SignInForm text="Log in to comment"/></div>
+      commentForm = <div></div>
     }
 
     var timeLeft = "";
@@ -141,30 +141,28 @@ module.exports = React.createClass({
             By: <Link to={userUrl}>{user.username}</Link>
 
             <div className="row">
-              <div className="col-xs-6">
+              <div className="col-xs-3">
                 <ProjectImage  images={project.images} />
                 {uploadImage}
               </div>
 
-              <div className="col-xs-6">
-                <div className="row">
-                  <div className="col-xs-4">
+
+                  <div className="col-xs-3">
                     <h5>Project Summary:</h5>
                     <div>{project.summary}</div>
                   </div>
-                  <div className="col-xs-4">
+                  <div className="col-xs-3">
                     <Backings project={project} user={user}/>
                   </div>
 
-                  <div className="col-xs-4">
+                  <div className="col-xs-3">
                     <h5>Campaign:</h5>
                     <h6>{live}</h6>
                     {timeLeft}
                   </div>
 
 
-                </div>
-              </div>
+
             </div>
 
 
